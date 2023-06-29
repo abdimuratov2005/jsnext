@@ -1,0 +1,143 @@
+@layer utilities {
+
+    /* Fonts */
+
+    @font-face {
+        font-family: 'Grotesk_Heavy';
+        src: url(../fonts/grotesk/cy-grotesk-wide-heavy.ttf);
+    }
+
+    .font-grotesk-heavy {
+        font-family: 'Grotesk_Heavy', serif;
+    }
+
+    @font-face {
+        font-family: 'Grotesk_Bold';
+        src: url(../fonts/grotesk/cy-grotesk-wide-bold.ttf);
+    }
+
+    .font-grotesk-bold {
+        font-family: 'Grotesk_Bold', sans-serif;
+    }
+
+    @font-face {
+        font-family: 'Grotesk_Medium';
+        src: url(../fonts/grotesk/cy-grotesk-wide-medium.ttf);
+    }
+
+    .font-grotesk-medium {
+        font-family: 'Grotesk_Medium';
+    }
+
+    @font-face {
+        font-family: 'Grotesk_Regular';
+        src: url(../fonts/grotesk/cy-grotesk-wide-regular.ttf);
+    }
+
+    .font-grotesk-regular {
+        font-family: 'Grotesk_Regular';
+    }
+
+    @font-face {
+        font-family: 'Grotesk_Light';
+        src: url(../fonts/grotesk/cy-grotesk-wide-light.ttf);
+    }
+
+    .font-grotesk-light {
+        font-family: 'Grotesk_Light';
+    }
+
+
+    @font-face {
+        font-family: 'Grotesk';
+        src: url(../fonts/grotesk/cy-grotesk-wide-light.ttf);
+        font-weight: 300;
+    }
+
+    @font-face {
+        font-family: 'Grotesk';
+        src: url(../fonts/grotesk/cy-grotesk-wide-regular.ttf);
+        font-weight: 400;
+    }
+
+    @font-face {
+        font-family: 'Grotesk';
+        src: url(../fonts/grotesk/cy-grotesk-wide-medium.ttf);
+        font-weight: 500;
+    }
+
+    @font-face {
+        font-family: 'Grotesk';
+        src: url(../fonts/grotesk/cy-grotesk-wide-demi.ttf);
+        font-weight: 600;
+    }
+
+    @font-face {
+        font-family: 'Grotesk';
+        src: url(../fonts/grotesk/cy-grotesk-wide-bold.ttf);
+        font-weight: 700;
+    }
+
+    .font-grotesk {
+        font-family: 'Grotesk';
+    }
+
+
+    .bg-blurright-mapbiz {
+        background: linear-gradient(to right, #1E1E1E 0%, #1E1E1E 25%, #1E1E1E 75%, #1E1E1E 100%);
+        /* background: linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%); */
+        /* background: linear-gradient(to right, #1E1E1E 20%, transparent 100%); */
+        /* background: linear-gradient(to right, #1E1E1E 10%, transparent 20%, transparent 90%); */
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #1E1E1E 25%, #1E1E1E 75%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #1E1E1E 25%, #1E1E1E 75%, transparent 100%);
+    }
+
+    /* .bg-btnhover-mapbiz {
+        background: url(../images/home/btn-fone3.png);
+        box-shadow: 0px 0px 6px #00FFE5;
+        mix-blend-mode: color-dodge;
+    } */
+
+    /* @font-face {
+        font-family: 'Xolonium';
+        src: url(../fonts/xolonium/Xolonium-Regular.otf);
+    }
+
+    @font-face {
+        font-family: 'Xolonium bold';
+        src: url(../fonts/xolonium/Xolonium-Bold.otf);
+    }
+
+    .font-roboto {
+        font-family: 'Roboto';
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url(../fonts/roboto/Roboto_Light.ttf);
+    }
+
+    .font-xolonium {
+        font-family: 'Xolonium';
+    }
+
+    .bg-gradfone-mmcs {
+        background: linear-gradient(1.34deg, #1F496E 22.61%, #2B5881 49.59%, #214667 62.35%, #122B40 81.48%);
+    }
+
+    .bg-gradfone-popup {
+        background: linear-gradient(1.34deg, #1F496E 22.61%, #2B5881 49.59%, #214667 62.35%, #122B40 81.48%);
+    }
+
+    .bg-gradfone-about {
+        background: linear-gradient(180deg, #204A6F 11.13%, #204A6F 52.32%, #173853 100%);
+    }
+
+
+    .link-disabled {
+        background-color: transparent !important;
+        border-color: #C1C1C1 !important;
+        color: #C1C1C1 !important;
+    } */
+
+}

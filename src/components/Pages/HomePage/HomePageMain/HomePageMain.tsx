@@ -1,14 +1,26 @@
+'use client'
+import { motion } from 'framer-motion';
 import React from 'react';
 
 function HomePageMain(props) {
     return (
         <main className="intro-wrapper bg-darkgrey-mapbiz">
+
             <div className="max-w-screen-xl h-[100vh] mx-auto overflow-hidden">
                 <div id="intro-3d-scene"></div>
             </div>
-            <div className="intro max-w-screen-xl -mt-[100vh] mx-auto w-full 2xl:h-screen px-6 2xl:px-0 pt-20 2xl:pt-56 pb-12 2xl:pb-56 flex flex-nowrap justify-between 2xl:items-center">
-                <div className="intro-title header-change w-5/12 2xl:w-6/12 grid font-grotesk font-bold text-[15px] 2xl:text-[4.125rem] md:leading-[3.5rem] 2xl:leading-[6.25rem] font-bold text-white">
-                    <h1>Создание и продвижение сайтов</h1>
+            <div
+                className="intro max-w-screen-xl -mt-[100vh] mx-auto w-full 2xl:h-screen px-6 2xl:px-0 pt-20 2xl:pt-56 pb-12 2xl:pb-56 flex flex-nowrap justify-between 2xl:items-center">
+                <div
+                    className="intro-title header-change w-5/12 2xl:w-6/12 grid font-grotesk font-bold text-[15px] 2xl:text-[4.125rem] md:leading-[3.5rem] 2xl:leading-[6.25rem] font-bold text-white">
+                    <h1 className='font-Grotesk font-bold'>Создание и продвижение сайтов</h1>
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        Click me!
+                    </motion.button>
+
                 </div>
                 <div className="intro-3d w-7/12 2xl:w-4/12">
                     {/* <div id="intro-3d-scene" class="w-[600px] h-[300px]">
@@ -31,41 +43,42 @@ function HomePageMain(props) {
                         </svg>
                     </div>
                 </div>
-                <div className="intro-links hidden 2xl:block w-2/12 grid gap-y-8  ml-40 mt-8 md:mt-0 font-grotesk-light text-xs text-greywhite-mapbiz">
+                <div
+                    className="intro-links hidden 2xl:block w-2/12 grid gap-y-8  ml-40 mt-8 md:mt-0 font-grotesk-light text-xs text-greywhite-mapbiz">
                     <div className="title">Контакты</div>
                     <div className="socials grid gap-y-1">
                         <a
                             href="tel:89892400897"
                             className="mb-4 hover:text-white"
-                            target="__blank"
+                            target="_blank"
                         >
                             +7 989 240-0897
                         </a>
-                        <a href="#" className="hover:text-white" target="__blank">
+                        <a href="#" className="hover:text-white" target="_blank">
                             Telegram
                         </a>
                         <a
                             href="https://vk.com/id177191269"
                             className="hover:text-white"
-                            target="__blank"
+                            target="_blank"
                         >
                             Vkontakte
                         </a>
                         <a
                             href="https://www.behance.net/mapbiz"
                             className="hover:text-white"
-                            target="__blank"
+                            target="_blank"
                         >
                             Behance
                         </a>
                         <a
                             href="https://dribbble.com/mapbiz"
                             className="hover:text-white"
-                            target="__blank"
+                            target="_blank"
                         >
                             Dribbble
                         </a>
-                        <a href="#" className="hover:text-white" target="__blank">
+                        <a href="#" className="hover:text-white" target="_blank">
                             LinkedIn
                         </a>
                     </div>
@@ -74,7 +87,7 @@ function HomePageMain(props) {
                         <a
                             href="mailto:mapbiz@yandex.ru"
                             className="hover:text-white"
-                            target="__blank"
+                            target="_blank"
                         >
                             mapbiz@yandex.ru
                         </a>
