@@ -23,6 +23,7 @@ export default function Home() {
       try {
         const api = new API(ulr); // Замените URL на свой базовый URL API
         const response = await api.get('wp/v2/posts/39');
+        console.log(response.acf.links)
         setData(response.acf.links)
 
       } catch (error) {
