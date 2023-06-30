@@ -1,13 +1,14 @@
 
-
 import React from 'react';
 import Link from "next/link";
 
+
+
 function HomePageMain(props) {
     // const AnimatedLink = motion(Link);
+
     return (
         <main className="intro-wrapper bg-darkgrey-mapbiz">
-
             <div className="max-w-screen-xl h-[100vh] mx-auto overflow-hidden">
                 <div id="intro-3d-scene"></div>
             </div>
@@ -16,11 +17,9 @@ function HomePageMain(props) {
                 <div
                     className="intro-title header-change w-5/12 2xl:w-6/12 grid font-grotesk font-bold text-[15px] 2xl:text-[4.125rem] md:leading-[3.5rem] 2xl:leading-[6.25rem] font-bold text-white">
                     <h1 className='font-Grotesk font-bold'>Создание и продвижение сайтов</h1>
-
                     <Link href="/services">
                     Создание и продвижение сайтов
                     </Link>
-
                 </div>
                 <div className="intro-3d w-7/12 2xl:w-4/12">
                     {/* <div id="intro-3d-scene" class="w-[600px] h-[300px]">

@@ -1,4 +1,3 @@
-
 import HomePageMain from "@/components/Pages/HomePage/HomePageMain/HomePageMain";
 import Services from "@/components/Pages/HomePage/Services/Services";
 import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
@@ -8,10 +7,10 @@ import Team from "@/components/Pages/HomePage/Team/Team";
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import FeedBackForm from "@/components/Pages/HomePage/FeedBackForm/FeedBackForm";
 import InTouch from "@/components/InTouch/InTouch";
-
 import Link from "next/link";
 
-export default function Home() {
+
+export default function Page() {
   const ulr = 'https://прибыльный-сайт.рф/wp-json/'
   // const [data, setData] = useState([])
   //
@@ -34,6 +33,7 @@ export default function Home() {
   const textik = '                - Потребность - Эмоции - Страхи - Ожидания - Условия - Потребность - Эмоции\n' +
       '                - Страхи - Ожидания - Условия - Потребность - Эмоции - Страхи - Ожидания -\n' +
       '                Условия - Потребность - Эмоции - Страхи - Ожидания - Условия'
+
   return (
       <>
         <HomePageMain/>
@@ -54,9 +54,6 @@ export default function Home() {
                 '                проект - Давайте обсудим проект - Связаться с нами - Давайте обсудим проект'}/>
         <FeedBackForm/>
         <InTouch/>
-        <Link
-            className={`next h-screen bg-center bg-cover bg-no-repeat cursor-next-mapbiz`}
-            href={'/'}>12321321</Link>
 
       </>
   )

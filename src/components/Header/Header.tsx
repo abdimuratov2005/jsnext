@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.scss'
+import Link from "next/link";
 function Header(props) {
     return (
         <header className="fixed w-full z-20">
@@ -7,9 +8,9 @@ function Header(props) {
                 className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
                 <div
                     className="header-logo w-2/12 xl:w-5/12 font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
-                    <div className="header-logo-text  2xl:block overflow-hidden">
+                    <Link href={'/'} className="header-logo-text  2xl:block overflow-hidden">
                         MaPbiz Group
-                    </div>
+                    </Link>
                     <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">
                         <img
                             className="h-[45px] w-auto"
