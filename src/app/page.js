@@ -1,4 +1,4 @@
-'use client'
+
 import HomePageMain from "@/components/Pages/HomePage/HomePageMain/HomePageMain";
 import Services from "@/components/Pages/HomePage/Services/Services";
 import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
@@ -8,30 +8,27 @@ import Team from "@/components/Pages/HomePage/Team/Team";
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import FeedBackForm from "@/components/Pages/HomePage/FeedBackForm/FeedBackForm";
 import InTouch from "@/components/InTouch/InTouch";
-import Popup from "@/components/Popup/Popup";
-import Burger from "@/components/Burger/Burger";
-import {useEffect, useState} from "react";
-import API from '../Api/Api'
+
 import Link from "next/link";
 
 export default function Home() {
   const ulr = 'https://прибыльный-сайт.рф/wp-json/'
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const api = new API(ulr); // Замените URL на свой базовый URL API
-        const response = await api.get('wp/v2/posts/39');
-        console.log(response.acf.links)
-        setData(response.acf.links)
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchData()
-  }, [])
+  // const [data, setData] = useState([])
+  //
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const api = new API(ulr); // Замените URL на свой базовый URL API
+  //       const response = await api.get('wp/v2/posts/39');
+  //       console.log(response.acf.links)
+  //       setData(response.acf.links)
+  //
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   }
+  //   fetchData()
+  // }, [])
 
 
   const textik = '                - Потребность - Эмоции - Страхи - Ожидания - Условия - Потребность - Эмоции\n' +
