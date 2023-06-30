@@ -1,28 +1,31 @@
 import React from 'react';
 
+
 function Services(props) {
     return (
-        <section className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
-            <div className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white opacity-90">
+        <section
+            className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
+            <div
+                className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white opacity-90">
                 <div className="w-6/12 grid gap-y-1.5 2xl:gap-y-6">
-                    <a className="flex justify-between items-center" href="#">
+                    <a className="flex group justify-between items-center" href="#">
                         <span>Дизайн</span>
-                        <span ffcoder-svg-status="base">
-          <svg
-              className="w-2 2xl:w-[28px] h-2 2xl:h-[28px]"
-              width={28}
-              height={28}
-              viewBox="0 0 28 28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-                d="M13.6438 12.6794C10.6962 9.72513 7.74736 6.77228 4.79714 3.82087C4.2078 3.2339 3.57852 2.68594 2.94107 2.15288C2.83473 2.06565 2.70503 2.01311 2.56892 2.00215C2.43281 1.99119 2.29662 2.0223 2.17814 2.09143C1.98119 2.19497 1.9352 2.57949 2.10274 2.81345C2.2644 3.03973 2.40871 3.28182 2.59013 3.49044C3.7477 4.82123 4.87361 6.18381 6.08457 7.46253C8.57283 10.0894 11.0952 12.6829 13.6263 15.2663C16.0277 17.7181 18.4616 20.136 20.8715 22.5798C21.2583 22.9721 21.5953 23.4151 21.9468 23.8427C21.9661 23.8752 21.9771 23.9121 21.9787 23.95C21.9803 23.9879 21.9726 24.0256 21.9562 24.0597C21.9036 24.1273 21.7865 24.2118 21.7247 24.1932C20.5842 23.8497 19.4325 23.5368 18.3138 23.128C15.7129 22.1771 13.0327 21.5304 10.3502 20.8872C9.90939 20.7817 9.45292 20.6654 9.00805 20.8944C8.92722 20.9361 8.79177 21.0106 8.7969 21.0571C8.80305 21.236 8.85258 21.4106 8.94108 21.5653C9.05397 21.711 9.20433 21.822 9.37541 21.8859C9.97697 22.1163 10.5835 22.3358 11.1967 22.5318C15.5781 23.9332 19.9638 25.3205 24.3433 26.7281C25.9953 27.259 27.0594 27.2269 26.9974 24.6326C26.9796 23.8851 26.9573 23.1334 26.8674 22.3924C26.4508 18.9557 26.0185 15.5211 25.5705 12.0886C25.4963 11.6294 25.387 11.1769 25.2436 10.7351C25.1575 10.4394 24.9085 10.3092 24.6234 10.2684C24.3098 10.2235 23.8066 10.51 23.6959 10.7484C23.4501 11.2779 23.4421 11.8422 23.481 12.3998C23.6306 14.5469 23.7992 16.6927 23.969 18.8382C24.0797 20.2362 24.2076 21.6318 24.3158 23.0296C24.3211 23.0985 24.2253 23.1993 24.1531 23.2431C24.1182 23.2588 24.08 23.2657 24.0418 23.263C24.0037 23.2603 23.9668 23.2482 23.9343 23.2277C23.522 22.8591 23.1022 22.4977 22.717 22.1013C19.6792 18.9741 16.6455 15.8427 13.6158 12.7072L13.6438 12.6794Z"
-                fill="white"
-            />
-          </svg>
-        </span>
-                        <span className="hidden" ffcoder-svg-status="hover">
+                        <span className={'group-hover:hidden transition-all duration-300'} ffcoder-svg-status="base">
+                          <svg
+                              className="w-2 2xl:w-[28px] h-2 2xl:h-[28px]"
+                              width={28}
+                              height={28}
+                              viewBox="0 0 28 28"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                                d="M13.6438 12.6794C10.6962 9.72513 7.74736 6.77228 4.79714 3.82087C4.2078 3.2339 3.57852 2.68594 2.94107 2.15288C2.83473 2.06565 2.70503 2.01311 2.56892 2.00215C2.43281 1.99119 2.29662 2.0223 2.17814 2.09143C1.98119 2.19497 1.9352 2.57949 2.10274 2.81345C2.2644 3.03973 2.40871 3.28182 2.59013 3.49044C3.7477 4.82123 4.87361 6.18381 6.08457 7.46253C8.57283 10.0894 11.0952 12.6829 13.6263 15.2663C16.0277 17.7181 18.4616 20.136 20.8715 22.5798C21.2583 22.9721 21.5953 23.4151 21.9468 23.8427C21.9661 23.8752 21.9771 23.9121 21.9787 23.95C21.9803 23.9879 21.9726 24.0256 21.9562 24.0597C21.9036 24.1273 21.7865 24.2118 21.7247 24.1932C20.5842 23.8497 19.4325 23.5368 18.3138 23.128C15.7129 22.1771 13.0327 21.5304 10.3502 20.8872C9.90939 20.7817 9.45292 20.6654 9.00805 20.8944C8.92722 20.9361 8.79177 21.0106 8.7969 21.0571C8.80305 21.236 8.85258 21.4106 8.94108 21.5653C9.05397 21.711 9.20433 21.822 9.37541 21.8859C9.97697 22.1163 10.5835 22.3358 11.1967 22.5318C15.5781 23.9332 19.9638 25.3205 24.3433 26.7281C25.9953 27.259 27.0594 27.2269 26.9974 24.6326C26.9796 23.8851 26.9573 23.1334 26.8674 22.3924C26.4508 18.9557 26.0185 15.5211 25.5705 12.0886C25.4963 11.6294 25.387 11.1769 25.2436 10.7351C25.1575 10.4394 24.9085 10.3092 24.6234 10.2684C24.3098 10.2235 23.8066 10.51 23.6959 10.7484C23.4501 11.2779 23.4421 11.8422 23.481 12.3998C23.6306 14.5469 23.7992 16.6927 23.969 18.8382C24.0797 20.2362 24.2076 21.6318 24.3158 23.0296C24.3211 23.0985 24.2253 23.1993 24.1531 23.2431C24.1182 23.2588 24.08 23.2657 24.0418 23.263C24.0037 23.2603 23.9668 23.2482 23.9343 23.2277C23.522 22.8591 23.1022 22.4977 22.717 22.1013C19.6792 18.9741 16.6455 15.8427 13.6158 12.7072L13.6438 12.6794Z"
+                                fill="white"
+                            />
+                          </svg>
+                        </span>
+                        <span  className={'hidden group-hover:block transition-all duration-300'} ffcoder-svg-status="hover">
           <svg
               className="w-2 2xl:w-[44px] h-2 2xl:h-[44px]"
               width={44}
@@ -120,7 +123,8 @@ function Services(props) {
             </div>
             <div className="services-more flex justify-end font-grotesk font-light">
                 <div className="w-full 2xl:w-11/12 grid 2xl:grid-cols-2">
-                    <div className="services-more__about w-[76%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white">
+                    <div
+                        className="services-more__about w-[76%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white">
                         <p>
                             В нашей веб студии спецы и партнеры с разноплановым опытом и навыками.
                             Мы решали тысячи задач клиентов в совокупности...
@@ -131,7 +135,8 @@ function Services(props) {
                         </p>
                     </div>
                     <div className="services-more__nav text-[6.5px] 2xl:text-xs text-grey-mapbiz">
-                        <div className="services-more__wrapper flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
+                        <div
+                            className="services-more__wrapper flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
                             <a
                                 href="#"
                                 className="services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300"

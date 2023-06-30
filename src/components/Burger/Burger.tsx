@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-function Burger() {
+function Burger({isOpen, setIsOpen }) {
+
+
+
+    const handleClick = () => {
+        setIsOpen(false);
+    };
+
     return (
         <div
-            className="popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-50 overflow-hidden bg-center bg-cover bg-no-repeat"
+            className={`${isOpen ? '' : 'hidden'} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-50 overflow-hidden bg-center bg-cover bg-no-repeat`}
             style={{
-                backgroundImage: "url(assets/images/header/popup-menu-fone.png)",
-                transform: "translateX(-800%)"
+                background: "red",
             }}
         >
-            <div className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-end">
+            <div
+                className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-end">
                 <div
                     className="w-9/12 rounded-[10px] py-[3.6rem] pl-[3.3rem] pr-28"
                     style={{
@@ -18,7 +25,7 @@ function Burger() {
                         backdropFilter: "blur(10px)"
                     }}
                 >
-                    <a href="#" className="popup-menu-close absolute top-10 right-8">
+                    <button onClick={handleClick} className="popup-menu-close absolute top-10 right-8">
                         <svg
                             width={30}
                             height={30}
@@ -31,7 +38,7 @@ function Burger() {
                                 fill="#808080"
                             />
                         </svg>
-                    </a>
+                    </button>
                     <div className="popup-menu-header relative">
                         <div className="font-grotesk-bold text-3xl text-white">
                             MaPbiz Group
@@ -72,19 +79,21 @@ function Burger() {
                                         gradientUnits="userSpaceOnUse"
                                         gradientTransform="translate(33.4437 4.24465) rotate(65.5472) scale(62.3945 455.698)"
                                     >
-                                        <stop stopColor="#00FFE5" />
-                                        <stop offset={1} stopOpacity={0} />
+                                        <stop stopColor="#00FFE5"/>
+                                        <stop offset={1} stopOpacity={0}/>
                                     </radialGradient>
                                 </defs>
                             </svg>
-                            <div className="absolute top-0 left-0 right-0 bottom-0 m-auto text-center flex justify-center items-center font-grotesk-light text-xs text-white">
+                            <div
+                                className="absolute top-0 left-0 right-0 bottom-0 m-auto text-center flex justify-center items-center font-grotesk-light text-xs text-white">
                                 <span className="ru font-grotesk-bold">Ru</span>&nbsp;/&nbsp;
                                 <span className="eng">Eng</span>
                             </div>
                         </div>
                     </div>
                     <div className="popup-menu flex pt-28">
-                        <div className="popup-menu-nav w-4/12 grid gap-y-6 pr-10 font-grotesk text-[23px] text-white text-center">
+                        <div
+                            className="popup-menu-nav w-4/12 grid gap-y-6 pr-10 font-grotesk text-[23px] text-white text-center">
                             <a
                                 href="https://mapbiz-group.com/"
                                 className="popup-menu-nav__el h-[50px] group cursor-pointer relative overflow-hidden"
@@ -99,7 +108,8 @@ function Burger() {
                                     src="assets/images/header/popup-menu-nav-active.svg"
                                     alt=""
                                 />
-                                <div className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
+                                <div
+                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
                                     Главная
                                 </div>
                             </a>
@@ -117,7 +127,8 @@ function Burger() {
                                     src="assets/images/header/popup-menu-nav-active.svg"
                                     alt=""
                                 />
-                                <div className="w-full h-full absolute bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
+                                <div
+                                    className="w-full h-full absolute bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
                                     Услуги
                                 </div>
                             </a>
@@ -135,7 +146,8 @@ function Burger() {
                                     src="assets/images/header/popup-menu-nav-active.svg"
                                     alt=""
                                 />
-                                <div className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
+                                <div
+                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
                                     Портфолио
                                 </div>
                             </a>
@@ -153,14 +165,16 @@ function Burger() {
                                     src="assets/images/header/popup-menu-nav-active.svg"
                                     alt=""
                                 />
-                                <div className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
+                                <div
+                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
                                     Контакты
                                 </div>
                             </a>
                         </div>
                         <div className="popup-menu-services w-8/12 pl-10">
                             <div className="relative py-4">
-                                <div className="popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none">
+                                <div
+                                    className="popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none">
                                     <img
                                         className="w-full h-auto cursor-default"
                                         src="assets/images/header/popup-menu-services-header.svg"
@@ -207,16 +221,16 @@ function Burger() {
                                                 filterUnits="userSpaceOnUse"
                                                 colorInterpolationFilters="sRGB"
                                             >
-                                                <feFlood floodOpacity={0} result="BackgroundImageFix" />
+                                                <feFlood floodOpacity={0} result="BackgroundImageFix"/>
                                                 <feColorMatrix
                                                     in="SourceAlpha"
                                                     type="matrix"
                                                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                                                     result="hardAlpha"
                                                 />
-                                                <feOffset />
-                                                <feGaussianBlur stdDeviation={3} />
-                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feOffset/>
+                                                <feGaussianBlur stdDeviation={3}/>
+                                                <feComposite in2="hardAlpha" operator="out"/>
                                                 <feColorMatrix
                                                     type="matrix"
                                                     values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
@@ -273,16 +287,16 @@ function Burger() {
                                                 filterUnits="userSpaceOnUse"
                                                 colorInterpolationFilters="sRGB"
                                             >
-                                                <feFlood floodOpacity={0} result="BackgroundImageFix" />
+                                                <feFlood floodOpacity={0} result="BackgroundImageFix"/>
                                                 <feColorMatrix
                                                     in="SourceAlpha"
                                                     type="matrix"
                                                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                                                     result="hardAlpha"
                                                 />
-                                                <feOffset />
-                                                <feGaussianBlur stdDeviation={3} />
-                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feOffset/>
+                                                <feGaussianBlur stdDeviation={3}/>
+                                                <feComposite in2="hardAlpha" operator="out"/>
                                                 <feColorMatrix
                                                     type="matrix"
                                                     values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
@@ -302,12 +316,14 @@ function Burger() {
                                         </defs>
                                     </svg>
                                 </div>
-                                <div className="popup-menu-services__wrapper h-[17rem] relative overflow-x-hidden overflow-y-auto px-9 py-5">
+                                <div
+                                    className="popup-menu-services__wrapper h-[17rem] relative overflow-x-hidden overflow-y-auto px-9 py-5">
                                     <div
                                         className="popup-menu-services__el"
                                         ffcoder-develop-el="develop"
                                     >
-                                        <div className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                        <div
+                                            className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                             <img
                                                 className="w-full h-auto"
                                                 src="assets/images/header/popup-menu-link.svg"
@@ -317,7 +333,8 @@ function Burger() {
                                                 Разработка
                                             </div>
                                         </div>
-                                        <div className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
+                                        <div
+                                            className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
                                             <a
                                                 href="/develop.html"
                                                 className="popup-menu-services__link relative"
@@ -394,7 +411,8 @@ function Burger() {
                                         className="popup-menu-services__el mt-4"
                                         ffcoder-develop-el="design"
                                     >
-                                        <div className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                        <div
+                                            className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                             <img
                                                 className="w-full h-auto"
                                                 src="assets/images/header/popup-menu-link.svg"
@@ -404,7 +422,8 @@ function Burger() {
                                                 Дизайн
                                             </div>
                                         </div>
-                                        <div className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
+                                        <div
+                                            className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
                                             <a
                                                 href="/develop.html"
                                                 className="popup-menu-services__link relative"
@@ -481,7 +500,8 @@ function Burger() {
                                         className="popup-menu-services__el mt-4"
                                         ffcoder-develop-el="market"
                                     >
-                                        <div className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                        <div
+                                            className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                             <img
                                                 className="w-full h-auto"
                                                 src="assets/images/header/popup-menu-link.svg"
@@ -491,7 +511,8 @@ function Burger() {
                                                 Маркетинг
                                             </div>
                                         </div>
-                                        <div className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
+                                        <div
+                                            className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
                                             <a
                                                 href="/develop.html"
                                                 className="popup-menu-services__link relative"
@@ -555,7 +576,8 @@ function Burger() {
                         </div>
                     </div>
                     <div className="popup-menu-footer flex justify-end mt-12">
-                        <div className="w-[50%] flex justify-between items-end font-grotesk font-light text-[0.68rem] text-white">
+                        <div
+                            className="w-[50%] flex justify-between items-end font-grotesk font-light text-[0.68rem] text-white">
                             <div className="grid">
                                 <span>Телефон</span>
                                 <a href="tel:89892400997">+7 (989) 240-09-97</a>
