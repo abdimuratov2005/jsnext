@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import styles from './Burger.module.scss'
 function Burger({isOpen, setIsOpen }) {
 
 
@@ -10,13 +10,9 @@ function Burger({isOpen, setIsOpen }) {
 
     return (
         <div
-            className={`${isOpen ? '' : 'hidden'} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-50 overflow-hidden bg-center bg-cover bg-no-repeat`}
-            style={{
-                background: "red",
-            }}
-        >
+            className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-50 overflow-hidden bg-center bg-cover bg-no-repeat`}>
             <div
-                className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-end">
+                className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                 <div
                     className="w-9/12 rounded-[10px] py-[3.6rem] pl-[3.3rem] pr-28"
                     style={{
@@ -41,7 +37,7 @@ function Burger({isOpen, setIsOpen }) {
                     </button>
                     <div className="popup-menu-header relative">
                         <div className="font-grotesk-bold text-3xl text-white">
-                            MaPbiz Group
+                            MapBiz
                         </div>
                         <div className="popup-menu-lang absolute right-6 top-4">
                             <svg

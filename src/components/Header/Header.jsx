@@ -10,9 +10,8 @@ function Header(props) {
        setOpenBurger(false)
     }
     return (
-
         <>
-            <header className="fixed w-full z-20">
+            <header  className={`${styles.header} fixed w-full z-20`}>
                 <div
                     className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
                     <div
@@ -98,7 +97,7 @@ function Header(props) {
                         <button onClick={() => {
                             setOpenBurger(!openBurger)
                         }}
-                                className={`${styles.test} header-burger hidden 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
+                                className={`${styles.burger} header-burger hidden 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
                         ></button>
                         <div className="header-btn  hidden 2xl:inline-block cursor-pointer select-none">
                             <div className="w-auto">
