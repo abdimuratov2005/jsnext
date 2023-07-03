@@ -1,8 +1,40 @@
+'use client'
 import React, {useState} from 'react';
 import styles from './Burger.module.scss'
-function Burger({isOpen, setIsOpen }) {
+import Link from "next/link";
+import {usePathname} from 'next/navigation';
 
 
+function Burger({isOpen, setIsOpen}) {
+    const currentRoute = usePathname();
+    const navLink = [
+        {
+
+            name: 'Главная',
+            href: "/",
+            className: "",
+        },
+        {
+
+            name: 'Услуги',
+            href: "/services",
+            className: "",
+        },
+        {
+
+            name: 'Портфолио',
+            href: "/1",
+            className: "",
+        },
+        {
+
+            name: 'Контакты',
+            href: "/2",
+            className: "",
+        },
+    ]
+
+    console.log(currentRoute)
 
     const handleClick = () => {
         setIsOpen(false);
@@ -88,92 +120,27 @@ function Burger({isOpen, setIsOpen }) {
                         </div>
                     </div>
                     <div className="popup-menu flex pt-28">
-                        <div
+                        <nav
                             className="popup-menu-nav w-4/12 grid gap-y-6 pr-10 font-grotesk text-[23px] text-white text-center">
-                            <a
-                                href="https://mapbiz-group.com/"
-                                className="popup-menu-nav__el h-[50px] group cursor-pointer relative overflow-hidden"
-                            >
-                                <img
-                                    className="w-full h-auto group-hover:-translate-y-[200%] transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="w-full h-auto -translate-y-[200%] group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav-active.svg"
-                                    alt=""
-                                />
-                                <div
-                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
-                                    Главная
-                                </div>
-                            </a>
-                            <a
-                                href="https://mapbiz-group.com/services.html"
-                                className="popup-menu-nav__el h-[50px] group cursor-pointer relative overflow-hidden"
-                            >
-                                <img
-                                    className="w-full h-auto -translate-y-[200%] transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="w-full h-auto translate-y-0 transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav-active.svg"
-                                    alt=""
-                                />
-                                <div
-                                    className="w-full h-full absolute bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
-                                    Услуги
-                                </div>
-                            </a>
-                            <a
-                                href="https://mapbiz-group.com/portfolio.html"
-                                className="popup-menu-nav__el h-[50px] group cursor-pointer relative overflow-hidden"
-                            >
-                                <img
-                                    className="w-full h-auto group-hover:-translate-y-[200%] transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="w-full h-auto -translate-y-[200%] group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav-active.svg"
-                                    alt=""
-                                />
-                                <div
-                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
-                                    Портфолио
-                                </div>
-                            </a>
-                            <a
-                                href="https://mapbiz-group.com/contacts.html"
-                                className="popup-menu-nav__el h-[50px] group cursor-pointer relative overflow-hidden"
-                            >
-                                <img
-                                    className="w-full h-auto group-hover:-translate-y-[200%] transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav.svg"
-                                    alt=""
-                                />
-                                <img
-                                    className="w-full h-auto -translate-y-[200%] group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-0"
-                                    src="assets/images/header/popup-menu-nav-active.svg"
-                                    alt=""
-                                />
-                                <div
-                                    className="w-full h-full absolute bottom-1 group-hover:bottom-0 left-0 transition-all duration-300 flex justify-center items-center">
-                                    Контакты
-                                </div>
-                            </a>
-                        </div>
+                            {navLink.map(item => {
+                                return (
+                                    <Link
+                                        onClick={handleClick}
+                                        href={item.href}
+                                        className={`${item.className} ${currentRoute === item.href ? styles.active : styles.active__noactive}`}>
+                                        {item.name}
+                                    </Link>
+                                )
+
+                            })}
+                        </nav>
                         <div className="popup-menu-services w-8/12 pl-10">
                             <div className="relative py-4">
                                 <div
                                     className="popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none">
                                     <img
                                         className="w-full h-auto cursor-default"
-                                        src="assets/images/header/popup-menu-services-header.svg"
+                                        src="popup-menu-nav.svg"
                                         alt=""
                                     />
                                     <div className="absolute w-full h-full left-16 top-2.5">

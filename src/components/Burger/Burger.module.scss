@@ -1,3 +1,21 @@
 .overlay {
   background-image: url(../../img/Menu/bacgroundBurger.jpg);
 }
+
+.active {
+  width: 247px;
+  height: 50px;
+  padding: 5px;
+  box-sizing: content-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("popup-menu-nav-active.svg");
+  &__noactive {
+    width: 247px;
+    height: 50px;
+    padding: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("popup-menu-nav.svg");
+  }
+}

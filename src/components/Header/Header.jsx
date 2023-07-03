@@ -1,22 +1,40 @@
 'use client'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import Burger from "../Burger/Burger";
+import {motion, useMotionValueEvent, useScroll} from "framer-motion"
+import {log} from "next/dist/server/typescript/utils";
 
 function Header(props) {
-   const [openBurger, setOpenBurger] = useState(false)
-    function handleOpen () {
-       setOpenBurger(false)
+    const [openBurger, setOpenBurger] = useState(false)
+    const [isScroll, setIsScroll] = useState(false)
+
+    function handleOpen() {
+        setOpenBurger(false)
     }
+
+    const {scrollY} = useScroll()
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        console.log(latest)
+        if (latest >= 100) {
+            setIsScroll(true)
+        } else {
+            setIsScroll(false)
+        }
+    })
+
+
     return (
         <>
-            <header  className={`${styles.header} fixed w-full z-20`}>
+            <header className={`${isScroll ? styles.headerActive : ''} fixed w-full z-20`}>
                 <div
                     className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
                     <div
                         className="header-logo w-2/12 xl:w-5/12 font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
-                        <Link href={'/'} className="header-logo-text  2xl:block overflow-hidden">
+                        <Link href={'/'}
+                              className={`header-logo-text ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
                             MaPbiz Group
                         </Link>
                         <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">
@@ -91,28 +109,24 @@ function Header(props) {
                             </svg>
                         </div>
                         <div className="header-lang mr-4 2xl:mr-0 2xl:my-auto" ffcoder-lang="ru">
-                            <span className="ru select-none font-bold text-white">Ru</span> /{" "}
-                            <span className="en cursor-pointer select-none">Eng</span>
+                            <button className={`${isScroll ? styles.buttons__language : ''} select-none font-bold text-white`}>Ru</button>
+                            <span> / </span>
+                            <button className="cursor-pointer">Eng</button>
                         </div>
                         <button onClick={() => {
                             setOpenBurger(!openBurger)
                         }}
-                                className={`${styles.burger} header-burger hidden 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
+                                className={`${isScroll ? styles.burger__white : ''} ${styles.burger} header-burger hidden 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
                         ></button>
-                        <div className="header-btn  hidden 2xl:inline-block cursor-pointer select-none">
-                            <div className="w-auto">
-                                <a
-                                    className="btn block py-3 px-8 border border-white rounded-[24px] text-white bg-center bg-cover bg-no-repeat"
-                                    href="#"
+                                <button
+                                    className={`${styles.header__callback} btn block py-3 px-8 border border-white rounded-[24px] text-white bg-center bg-cover bg-no-repeat`}
+                                    onClick={() => {
+                                        alert('открыл попап')
+                                    }}
                                 >
                                     Заказать проект
-                                </a>
-                            </div>
-                            <div
-                                className="header-btn-white hidden py-3 px-8 border border-darkgrey-mapbiz text-darkgrey-mapbiz rounded-[24px] hover:bg-darkgrey-mapbiz hover:text-white">
-                                Заказать проект
-                            </div>
-                        </div>
+                                </button>
+
                     </div>
                 </div>
             </header>

@@ -1,3 +1,20 @@
 .burger {
   background-image: url('../../img/header/burger.png');
+  &__white {
+    background-image: url('../../img/header/burger-black.png');
+  }
+}
+.header {
+  &__text {
+    color: black;
+  }
+  &__callback {
+    background: #1E1E1E;
+  }
+}
+.headerActive {
+  background-color: #F5F9FF;
+}
+.buttons__language {
+
 }
