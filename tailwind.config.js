@@ -47,6 +47,7 @@ module.exports = {
         'greyborder-mapbiz': '#606060',
         'neon-mapbiz': '#00FFE5',
         'darkfone-mapbiz': '#18181880',
+
       },
       screens: {
         '3xl': '1706px',
