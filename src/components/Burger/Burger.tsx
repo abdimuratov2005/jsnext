@@ -122,9 +122,10 @@ function Burger({isOpen, setIsOpen}) {
                     <div className="popup-menu flex pt-28">
                         <nav
                             className="popup-menu-nav w-4/12 grid gap-y-6 pr-10 font-grotesk text-[23px] text-white text-center">
-                            {navLink.map(item => {
+                            {navLink.map((item, index) => {
                                 return (
                                     <Link
+                                        key={index}
                                         onClick={handleClick}
                                         href={item.href}
                                         className={`${item.className} ${currentRoute === item.href ? styles.active : styles.active__noactive}`}>

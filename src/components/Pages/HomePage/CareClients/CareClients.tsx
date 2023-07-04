@@ -98,10 +98,10 @@ function CareClients(props) {
                                 className={`${styles.image} foryou-toggle__base w-full 2xl:w-[90%] h-full bg-center bg-cover bg-no-repeat`}
                             />
                         }
-                        {links.map((item) => {
+                        {links.map((item,index) => {
                             if (item.id === selectButton) {
                                 return (
-                                    <div
+                                    <div key={index}
                                         className={`${styles.image__slider} foryou-el flex flex-col justify-center p-8 box-border`}>
                                         <h2 className="text-whitelink-mapbiz foryou-el__title font-medium text-[11px] 2xl:text-2xl leading-7 ">
                                             {item.subtitle}
