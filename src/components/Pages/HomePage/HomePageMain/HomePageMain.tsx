@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import Link from "next/link";
+import Image from "next/image";
+import pidar from '../../../../img/Menu/burger-black.png'
 
 
 
 function HomePageMain(props) {
-    // const AnimatedLink = motion(Link);
 
     return (
         <main className="intro-wrapper bg-darkgrey-mapbiz">
@@ -18,9 +19,6 @@ function HomePageMain(props) {
                     <h1 className='font-Grotesk font-bold'>Создание и продвижение сайтов</h1>
                 </div>
                 <div className="intro-3d w-7/12 2xl:w-4/12">
-                    {/* <div id="intro-3d-scene" class="w-[600px] h-[300px]">
-
-          </div> */}
                     <div className="2xl:hidden mt-8">
                         <svg
                             className="w-full h-auto -ml-8"
@@ -38,6 +36,10 @@ function HomePageMain(props) {
                         </svg>
                     </div>
                 </div>
+
+                <Image  width={500}
+                        height={500}
+                        src='/img/burger.png' alt='123' />
                 <div
                     className="intro-links hidden 2xl:block w-2/12 grid gap-y-8  ml-40 mt-8 md:mt-0 font-grotesk-light text-xs text-greywhite-mapbiz">
                     <div className="title">Контакты</div>
