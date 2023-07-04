@@ -97,9 +97,9 @@ function Services(props) {
             <div
                 className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white opacity-90">
                 <div className="w-6/12 grid gap-y-1.5 2xl:gap-y-6">
-                    {links.map((item) => {
+                    {links.map((item,index) => {
                         return (
-                            <Link className="flex group justify-between items-center" href={item.href}>
+                            <Link key={index} className="flex group justify-between items-center" href={item.href}>
                                 <p>{item.title}</p>
                                 <svg
                                     className="group-hover:hidden w-2 2xl:w-[28px] h-2 2xl:h-[28px]"
@@ -152,8 +152,8 @@ function Services(props) {
                     <div className="services-more__nav text-[6.5px] 2xl:text-xs text-grey-mapbiz">
                         <div
                             className="services-more__wrapper flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
-                            {subLinks.map((item) => {
-                                return <Link className={item.className} href={item.href}>{item.title}</Link>
+                            {subLinks.map((item, index) => {
+                                return <Link key={index} className={item.className} href={item.href}>{item.title}</Link>
                             })}
                         </div>
                     </div>
