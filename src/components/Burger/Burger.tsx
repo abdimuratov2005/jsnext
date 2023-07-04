@@ -115,7 +115,7 @@ function Burger({isOpen, setIsOpen}) {
                             <div
                                 className="absolute top-0 left-0 right-0 bottom-0 m-auto text-center flex justify-center items-center font-grotesk-light text-xs text-white">
                                 <span className="ru font-grotesk-bold">Ru</span>&nbsp;/&nbsp;
-                                <span className="eng">EnG</span>
+                                <span className="eng">Eng</span>
                             </div>
                         </div>
                     </div>

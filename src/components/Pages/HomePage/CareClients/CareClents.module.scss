@@ -10,6 +10,10 @@
   }
 }
 .buttons {
+  padding: 32px;
+  width: 100%;
+  position: absolute;
+  bottom: 25px;
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
