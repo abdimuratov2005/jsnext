@@ -6,12 +6,10 @@ import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import AboutUs from "@/components/Pages/HomePage/AboutUs/AboutUs";
 import Team from "@/components/Pages/HomePage/Team/Team";
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
-import FeedBackForm from "@/components/Pages/HomePage/FeedBackForm/FeedBackForm";
 import InTouch from "@/components/InTouch/InTouch";
-import Link from "next/link";
 import {useEffect, useState} from "react";
 import API from "@/Api/Api";
-import Burger from "@/components/Burger/Burger";
+import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm'
 
 
 export default function Page() {

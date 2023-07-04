@@ -109,9 +109,9 @@ function CareClients(props) {
                                         <p className="text-whitelink-mapbiz foryou-el__content mt-2 2xl:mt-6 text-[11px] 2xl:text-xl">
                                             {item.description}
                                         </p>
-                                        {selectButton ? <div>
-                                            {selectButton >= 2 ? <button onClick={prevSlide}>Назад</button> : ''}
-                                            {selectButton < links.length ? <button onClick={nextSlide}>Вперед</button> : ''}
+                                        {selectButton ? <div className={styles.buttons}>
+                                            {selectButton >= 2 ? <button className={styles.button__slider} onClick={prevSlide}></button> : ''}
+                                            {selectButton < links.length ? <button className={styles.button__slider_right} onClick={nextSlide}></button> : ''}
 
                                         </div> : ''}
                                     </div>
