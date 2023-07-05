@@ -34,7 +34,7 @@ function Burger({isOpen, setIsOpen}) {
         },
     ]
 
-    console.log(currentRoute)
+
 
     const handleClick = () => {
         setIsOpen(false);

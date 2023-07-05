@@ -88,7 +88,7 @@ function CareClients(props) {
                             {links.map((item) => {
                                 return <button key={item.id} onClick={() => setSelectButton(item.id)}
                                                className={`foryou-nav__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] ${selectButton === item.id ? 'bg-white shadow-white-mapbiz transition duration-300' : ''} `}
-                                               href={item.href}>{item.title}</button>
+                                               >{item.title}</button>
                             })}
                         </div>
                     </div>

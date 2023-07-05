@@ -18,7 +18,7 @@ function Header(props) {
     const {scrollY} = useScroll()
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-        console.log(latest)
+
         if (latest >= 100) {
             setIsScroll(true)
         } else {

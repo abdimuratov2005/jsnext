@@ -1,9 +1,5 @@
 import React, {useRef, useState} from 'react';
-import Link from "next/link";
 import Image from "next/image";
-import pidar from '../../../../img/Menu/burger-black.png'
-
-
 
 function HomePageMain(props) {
 
@@ -36,10 +32,6 @@ function HomePageMain(props) {
                         </svg>
                     </div>
                 </div>
-
-                <Image  width={500}
-                        height={500}
-                        src='/img/burger.png' alt='123' />
                 <div
                     className="intro-links hidden 2xl:block w-2/12 grid gap-y-8  ml-40 mt-8 md:mt-0 font-grotesk-light text-xs text-greywhite-mapbiz">
                     <div className="title">Контакты</div>

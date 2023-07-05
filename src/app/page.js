@@ -5,11 +5,12 @@ import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
 import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import AboutUs from "@/components/Pages/HomePage/AboutUs/AboutUs";
 import Team from "@/components/Pages/HomePage/Team/Team";
-import Clients from "@/components/Pages/HomePage/Clients/Clients";
+
 import InTouch from "@/components/InTouch/InTouch";
 import {useEffect, useState} from "react";
 import API from "@/Api/Api";
 import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm'
+import Clients from "@/components/Pages/HomePage/Clients/Clients";
 
 
 export default function Page() {
@@ -30,7 +31,7 @@ export default function Page() {
         fetchData()
     }, [])
 
-    console.log(data)
+
     const textik = '                - Потребность - Эмоции - Страхи - Ожидания - Условия - Потребность - Эмоции\n' +
         '                - Страхи - Ожидания - Условия - Потребность - Эмоции - Страхи - Ожидания -\n' +
         '                Условия - Потребность - Эмоции - Страхи - Ожидания - Условия'
@@ -49,7 +50,7 @@ export default function Page() {
                     '                предлагают? - Кто исполнитель? - Как они это сделают?'}/>
             <AboutUs/>
             <Team/>
-            <Clients/>
+            <Clients />
             <RunTimeLine
                 text={'  - Давайте обсудим проект - Связаться с нами - Давайте обсудим проект - Давайте обсудим проект -\n' +
                     '                Связаться с нами - Давайте обсудим проект - Давайте обсудим проект - Связаться с нами - Давайте обсудим\n' +

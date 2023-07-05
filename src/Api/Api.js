@@ -11,7 +11,7 @@ class API {
             const response = await axios.get(url);
             return response.data;
         } catch (error) {
-            console.log(error)
+
             console.error(`Error fetching data from ${url}:`, error);
             throw error;
         }
