@@ -71,6 +71,7 @@ export default function Clients({posts}) {
                 </div>
                 <div className='gap-y-6 bg-white py-6 relative bg-blurright-mapbiz'>
                     <div>
+
                         {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0 ? ''
                             :
                             <>
