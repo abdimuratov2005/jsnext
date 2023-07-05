@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
+import styles from './Clients.css'
 import Image from "next/image";
 import {Autoplay, Navigation, Pagination} from "swiper/modules";
 
@@ -69,24 +70,25 @@ export default function Clients({posts}) {
                         Наши клиенты
                     </h2>
                 </div>
-                <div className='gap-y-6 bg-white py-6 relative bg-blurright-mapbiz'>
+                <div className={styles.govno}>
                     <div>
 
                         {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0 ? ''
                             :
                             <>
                                 <Swiper
+
                                     freeMode={true}
-                                    speed={500}
+                                    speed={5000}
                                     loop={true}
                                     slidesPerView={4}
                                     spaceBetween={50}
                                     autoplay={{
                                         disableOnInteraction: false,
-                                        delay: 500
+                                        delay: 1
                                     }}
                                     modules={[Autoplay]}
-                                    className="">
+                                    className="swiper-linear">
                                     {imagesOne.map((item) => {
                                         return (
                                             <SwiperSlide
@@ -101,17 +103,17 @@ export default function Clients({posts}) {
                                 </Swiper>
                                 <Swiper
                                     freeMode={true}
-                                    speed={500}
+                                    speed={5000}
                                     loop={true}
                                     slidesPerView={4}
                                     spaceBetween={50}
                                     autoplay={{
                                         reverseDirection: true,
                                         disableOnInteraction: false,
-                                        delay: 500
+                                        delay: 1
                                     }}
                                     modules={[Autoplay]}
-                                    className="">
+                                    className="swiper-linear">
                                     {imagesTwo.map((item) => {
                                         return (
                                             <SwiperSlide
@@ -126,16 +128,16 @@ export default function Clients({posts}) {
                                 </Swiper>
                                 <Swiper
                                     freeMode={true}
-                                    speed={500}
+                                    speed={5000}
                                     loop={true}
                                     slidesPerView={4}
                                     spaceBetween={50}
                                     autoplay={{
                                         disableOnInteraction: false,
-                                        delay: 500
+                                        delay: 1
                                     }}
                                     modules={[Autoplay]}
-                                    className="">
+                                    className="swiper-linear">
                                     {imagesThree.map((item) => {
                                         return (
                                             <SwiperSlide
