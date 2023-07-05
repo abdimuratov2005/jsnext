@@ -15,7 +15,7 @@ export default function Clients({posts}) {
 
     useEffect(() => {
 // Функция для получения ссылок на изображения
-        function getImageUrls(numberCarousel, useState) {
+        function getImageUrls(numberCarousel, nameState) {
             // Выполнение запроса к REST API WordPress для получения данных постов
             axios.get(`${url}/wp-json/wp/v2/posts/46`)
                 .then(response => {
@@ -38,7 +38,7 @@ export default function Clients({posts}) {
                         return {link: item.source_url, alt: item.alt_text, id: item.id}
                     })
                 }).then(res => {
-                    useState(res)
+                    nameState(res)
                 })
             })
         }
