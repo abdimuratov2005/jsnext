@@ -97,8 +97,7 @@ export default function Clients({posts}) {
                                                 </div>
                                             </SwiperSlide>)
                                     })}
-
-
+                                </Swiper>
                                 <Swiper
                                     freeMode={true}
                                     speed={500}
