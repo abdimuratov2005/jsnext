@@ -3,8 +3,10 @@ import React, {useEffect, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import Burger from "../Burger/Burger";
+import dynamic from 'next/dynamic'
 import {motion, useMotionValueEvent, useScroll} from "framer-motion"
 import {log} from "next/dist/server/typescript/utils";
+
 
 function Header(props) {
     const [openBurger, setOpenBurger] = useState(false)
@@ -115,8 +117,8 @@ function Header(props) {
 
                     </div>
                 </div>
+                <Burger setIsOpen={handleOpen} isOpen={openBurger}/>
             </header>
-            <Burger setIsOpen={handleOpen} isOpen={openBurger}/>
         </>
     );
 }

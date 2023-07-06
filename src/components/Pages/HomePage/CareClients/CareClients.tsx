@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import styles from './CareClents.module.scss'
 import Link from "next/link";
+import {AnimatePresence, motion} from "framer-motion";
 
 function CareClients(props) {
     const [data, setData] = useState()
@@ -101,7 +102,8 @@ function CareClients(props) {
                         {links.map((item,index) => {
                             if (item.id === selectButton) {
                                 return (
-                                    <div style={{position: "relative"}} key={index}
+                                    <div
+                                        style={{position: "relative"}} key={index}
                                         className={`${styles.image__slider} foryou-el flex flex-col justify-center box-border`}>
                                         <h2  className="px-8 text-whitelink-mapbiz foryou-el__title font-medium text-[11px] 2xl:text-2xl leading-7 ">
                                             {item.subtitle}

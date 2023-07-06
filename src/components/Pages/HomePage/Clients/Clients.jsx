@@ -74,12 +74,10 @@ export default function Clients({posts}) {
                 </div>
                 <div className={styles.govno}>
                     <div>
-
-                        {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0 ? ''
+                        {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0  && imagesFour.length === 0 ? ''
                             :
                             <>
                                 <Swiper
-
                                     freeMode={true}
                                     speed={5000}
                                     loop={true}
