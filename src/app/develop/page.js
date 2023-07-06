@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Develop(props) {
+function Page(props) {
     return (
-        <div><h1>ААА DEVELOPffff</h1></div>
+        <div>21321312</div>
     );
 }
 
-export default Develop;
+export default Page;
