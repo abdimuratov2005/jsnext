@@ -12,6 +12,7 @@ export default function Clients({posts}) {
     const [imagesOne, setImagesOne] = useState([])
     const [imagesTwo, setImagesTwo] = useState([])
     const [imagesThree, setImagesThree] = useState([])
+    const [imagesFour, setImagesFour] = useState([])
     const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai'
 
     useEffect(() => {
@@ -47,6 +48,7 @@ export default function Clients({posts}) {
         getImageUrls('carousel_first', setImagesOne);
         getImageUrls('carousel_second', setImagesTwo);
         getImageUrls('carousel_third', setImagesThree);
+        getImageUrls('carousel_fourth', setImagesFour);
     }, [])
     const swiperRef = useRef(null);
 
@@ -139,6 +141,31 @@ export default function Clients({posts}) {
                                     modules={[Autoplay]}
                                     className="swiper-linear">
                                     {imagesThree.map((item) => {
+                                        return (
+                                            <SwiperSlide
+                                                key={item.id}
+                                                className="">
+                                                <div className="client">
+                                                    <img src={item.link}
+                                                         alt={item.alt}/>
+                                                </div>
+                                            </SwiperSlide>)
+                                    })}
+                                </Swiper>
+                                <Swiper
+                                    freeMode={true}
+                                    speed={5000}
+                                    loop={true}
+                                    slidesPerView={4}
+                                    spaceBetween={50}
+                                    autoplay={{
+                                        reverseDirection: true,
+                                        disableOnInteraction: false,
+                                        delay: 1
+                                    }}
+                                    modules={[Autoplay]}
+                                    className="swiper-linear">
+                                    {imagesFour.map((item) => {
                                         return (
                                             <SwiperSlide
                                                 key={item.id}
