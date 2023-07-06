@@ -6,14 +6,13 @@ export const getStaticPaths = async () => {
     try {
         const res = await axios.get(url);
         const data = res.data.fields.routes;
-
         const paths = data.map((item) => ({
             params: { slug: item.route },
         }));
-
+        console.log(paths)
         return {
             paths,
-            fallback: true,
+            fallback: false,
         };
     } catch (error) {
         console.log(error);
@@ -25,26 +24,26 @@ export const getStaticPaths = async () => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-    // const { slug } = params;
-    // const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai';
-    //
-    // try {
-    //     const response = await fetch(`${url}/wp-json/mapbiz/v1/${slug}`);
-    //     const post = await response.json();
-    //
-    //     return {
-    //         props: {
-    //             post,
-    //         },
-    //     };
-    // } catch (error) {
-    //     console.error(error);
-    //     return {
-    //         props: {
-    //             post: null,
-    //         },
-    //     };
-    // }
+    const { slug } = params;
+    const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai';
+
+    try {
+        const response = await fetch(`${url}/wp-json/mapbiz/v1/${slug}`);
+        const post = await response.json();
+
+        return {
+            props: {
+                post,
+            },
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            props: {
+                post: null,
+            },
+        };
+    }
     return {
         props: {
             post: '1'
