@@ -20,73 +20,59 @@ const links = [
 const subLinks = [
     {
         href: '/',
-        title: 'Корпоративный сайт',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Корпоративный сайт'
     },
     {
         href: '/',
-        title: 'Интернет магазин',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Интернет магазин'
     },
     {
         href: '/',
-        title: 'Лэндинг',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Лэндинг'
     },
     {
         href: '/',
-        title: 'Реклама',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Для агентств недвижимости'
     },
     {
         href: '/',
-        title: 'Для отелей',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Для отелей'
     },
     {
         href: '/',
-        title: 'Web design',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Web design'
     },
     {
         href: '/',
-        title: 'Продвижение',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Реклама'
     },
     {
         href: '/',
-        title: 'Реклама',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'SEO'
     },
     {
         href: '/',
-        title: 'Продвижение',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Видео'
     },
     {
         href: '/',
-        title: 'Графика',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Брендбук'
     },
     {
         href: '/',
-        title: '3d design',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Графика'
     },
     {
         href: '/',
-        title: 'Видео',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: '3D-design'
     },
     {
         href: '/',
-        title: 'SEO',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Performance-маркетинг'
     },
     {
         href: '/',
-        title: 'Брендбук',
-        className: "services-more__el px-2.5 leading-[0.5rem] 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300",
+        title: 'Продвижение'
     },
 ]
 
@@ -136,10 +122,10 @@ function Services(props) {
                     })}
                 </div>
             </div>
-            <div className="services-more flex justify-end font-grotesk font-light">
+            <div className="services-more flex justify-end font-grotesk">
                 <div className="w-full 2xl:w-11/12 grid 2xl:grid-cols-2">
                     <div
-                        className="services-more__about w-[76%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white">
+                        className="services-more__about w-[76%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white-text-new-mapbiz">
                         <p>
                             В нашей веб студии спецы и партнеры с разноплановым опытом и навыками.
                             Мы решали тысячи задач клиентов в совокупности...
@@ -149,11 +135,11 @@ function Services(props) {
                             Есть задача в WEB? - Обращайтесь.
                         </p>
                     </div>
-                    <div className="services-more__nav text-[6.5px] 2xl:text-xs text-grey-mapbiz">
+                    <div className="services-more__nav font-light text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
                         <div
                             className="services-more__wrapper flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
                             {subLinks.map((item, index) => {
-                                return <Link key={index} className={item.className} href={item.href}>{item.title}</Link>
+                                return <Link key={index} className="services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={item.href}>{item.title}</Link>
                             })}
                         </div>
                     </div>
