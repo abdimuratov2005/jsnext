@@ -8,64 +8,73 @@ function Page(props) {
     const [buttonsMenu, setButtonsMenu] = useState(1)
     const [descriptionButton, setDescriptionButton] = useState([])
     const [currentDescriptionButton, setCurrentDescriptionButton] = useState(1)
-    const [descriptionContent, setDescriptionContent] = useState()
+    const [descriptionContent, setDescriptionContent] = useState({})
     const [currentContent, setCurrentContent] = useState([])
 
 
     // массивы кнопок
     const contentSiteButtons = [
-        { id: 1, label: 'Корпоративный сайт' },
-        { id: 2, label: 'Интернет магазин' },
-        { id: 3, label: 'Лендинг' },
-        { id: 4, label: 'Для агентств недвижимости' },
-        { id: 5, label: 'Для отелей' },
+        {id: 1, label: 'Корпоративный сайт'},
+        {id: 2, label: 'Интернет магазин'},
+        {id: 3, label: 'Лендинг'},
+        {id: 4, label: 'Для агентств недвижимости'},
+        {id: 5, label: 'Для отелей'},
     ];
 
     const contentDesingButtons = [
-        { id: 6, label: 'Видео' },
-        { id: 7, label: 'Web design' },
-        { id: 8, label: 'Брендбук' },
-        { id: 9, label: 'Графика' },
-        { id: 10, label: '3d design' },
+        {id: 6, label: 'Видео'},
+        {id: 7, label: 'Web design'},
+        {id: 8, label: 'Брендбук'},
+        {id: 9, label: 'Графика'},
+        {id: 10, label: '3d design'},
     ];
 
     const contentMarketingButtons = [
-        { id: 11, label: 'Реклама' },
-        { id: 12, label: 'Продвижение' },
-        { id: 13, label: 'SEO оптимизация' },
-        { id: 14, label: 'Performance-маркетинг' },
+        {id: 11, label: 'Реклама'},
+        {id: 12, label: 'Продвижение'},
+        {id: 13, label: 'SEO оптимизация'},
+        {id: 14, label: 'Performance-маркетинг'},
     ];
 
-
     // контент
-    const contentCorparativeSite = 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.'
-    const contentLandingPage = 'Landing'
-    const contentDesing = 'Desing'
+    const contentCreateSite = {
+        title: 'Создание сайтов',
+        description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.'
+    }
+    const contentCreateDesing = {
+        title: 'Дизайн',
+        description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой'
+    }
+    const contentCreateMarketing = {
+        title: 'Маркетинг',
+        description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.'
+    }
+
 
     // контент
 
     useEffect(() => {
         switch (buttonsMenu) {
             case 1:
-                if(currentDescriptionButton > 5) {
+                if (currentDescriptionButton > 5) {
                     setCurrentDescriptionButton(1)
                 }
-                setDescriptionContent(contentCorparativeSite)
+                setDescriptionContent(contentCreateSite)
                 setDescriptionButton(contentSiteButtons)
                 break;
             case 2:
-                if(currentDescriptionButton < 6 || currentDescriptionButton > 10) {
+                if (currentDescriptionButton < 6 || currentDescriptionButton > 10) {
                     setCurrentDescriptionButton(6)
                 }
                 setDescriptionButton(contentDesingButtons)
-                setDescriptionContent(contentLandingPage)
+                setDescriptionContent(contentCreateDesing)
                 break;
             case 3:
-                if(currentDescriptionButton < 11) {
+                if (currentDescriptionButton < 11) {
                     setCurrentDescriptionButton(11)
                 }
                 setDescriptionButton(contentMarketingButtons)
-                setDescriptionContent(contentDesing)
+                setDescriptionContent(contentCreateMarketing)
                 break;
             default:
 
@@ -268,12 +277,12 @@ function Page(props) {
                 <div className="w-full flex justify-end">
                     <div className="w-11/12 grid gap-y-24">
                         <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
-                            Создание сайтов
+                            {descriptionContent.title}
                         </h2>
                         <div className="foryou-grid grid grid-cols-2">
                             <div className="">
                                 <div className="w-[85%] text-2xl leading-9 text-white opacity-90">
-                                    {descriptionContent}
+                                    {descriptionContent.description}
                                 </div>
                                 <div
                                     className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-sm text-grey-mapbiz uppercase">
@@ -291,7 +300,6 @@ function Page(props) {
                                             </button>
                                         )
                                     })}
-
                                 </div>
                             </div>
                             <div className="foryou-toggle flex justify-end h-[530px]">
