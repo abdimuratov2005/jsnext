@@ -122,7 +122,7 @@ function Page(props) {
 
 
     return (
-        <section className='pt-[200px]'>
+        <section className=' pt-44 pb-40 w-full'>
             <div>
                 <svg
                     className="w-full h-auto"
@@ -175,6 +175,7 @@ function Page(props) {
                     </defs>
                 </svg>
             </div>
+
             <div
                 className="develop-nav max-w-screen-xl mx-auto grid grid-cols-3 font-grotesk-light text-2xl text-whitetext-mapbiz -mt-16">
                 {block.map((item) => {
@@ -261,7 +262,9 @@ function Page(props) {
                     )
                 })}
             </div>
-            <div>
+
+
+            <div className="max-w-screen-xl mx-auto pt-28 pb-40 font-grotesk-light">
                 <div className="w-full flex justify-end">
                     <div className="w-11/12 grid gap-y-24">
                         <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
@@ -273,7 +276,7 @@ function Page(props) {
                                     {descriptionContent}
                                 </div>
                                 <div
-                                    className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-xs text-grey-mapbiz uppercase">
+                                    className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-sm text-grey-mapbiz uppercase">
                                     {descriptionButton.map((item) => {
                                         console.log(item.id)
                                         return (
@@ -295,7 +298,7 @@ function Page(props) {
                                 <div
                                     className="foryou-toggle__base w-[90%] h-full bg-center bg-cover bg-no-repeat"
                                     style={{
-                                        backgroundImage: "url(assets/images/develop/develop-fone.png)"
+                                        backgroundImage: "url(/img/develop/develop-fone.webp)"
                                     }}
                                 />
                                 <div
@@ -529,6 +532,8 @@ function Page(props) {
                     </div>
                 </div>
             </div>
+
+
         </section>
     );
 }
