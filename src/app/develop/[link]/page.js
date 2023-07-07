@@ -13,7 +13,7 @@ export const getStaticPaths = async () => {
     };
 };
 
-export async function getStaticProps(link) {
+export async function getDate(link) {
     const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/develop/${link}`
     const res = await axios.get(`${url}`)
     const data = res.data
@@ -26,7 +26,7 @@ export async function getStaticProps(link) {
 
 
 export default async function Page({params}) {
-   const data =  await getStaticProps(params.link).then(res => {
+   const data =  await getDate(params.link).then(res => {
        return res
    })
 
