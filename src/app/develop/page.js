@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Develop.module.scss'
 
+
 function Page(props) {
     // стейт менеджеры контента
     const [buttonsMenu, setButtonsMenu] = useState(1)
@@ -99,7 +100,6 @@ function Page(props) {
             case 14:
                 break;
             default:
-
         }
 
     }, [buttonsMenu, currentDescriptionButton])
@@ -132,6 +132,7 @@ function Page(props) {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
+
                     <g filter="url(#filter0_d_460_881)">
                         <path d="M7 73L166 7H1289L1447 73" stroke="white"/>
                     </g>
@@ -260,8 +261,7 @@ function Page(props) {
                     )
                 })}
             </div>
-            <div
-            >
+            <div>
                 <div className="w-full flex justify-end">
                     <div className="w-11/12 grid gap-y-24">
                         <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
