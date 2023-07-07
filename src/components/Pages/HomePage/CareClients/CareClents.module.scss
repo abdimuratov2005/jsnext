@@ -1,12 +1,12 @@
 .image {
-  background-image: url(../../../../../public/img/home/first.png);
+  //background-image: url(../../../../../public/img/home/first.png);
   &__slider {
     
     height: 528px;
     width: 528px;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url(../../../../../public/img/home/img.png);
+    //background-image: url(../../../../../public/img/home/img.png);
   }
 }
 .buttons {
@@ -16,7 +16,7 @@
   bottom: 25px;
   margin-top: 50px;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
 }
 .button__slider {
   background-size: contain;

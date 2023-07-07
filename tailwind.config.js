@@ -35,10 +35,11 @@ module.exports = {
         'redlight-mapbiz': '#47000087',
         'redbright-mapbiz': '#E0124A',
         'greywhite-mapbiz': '#FFFFFFB2',
+        'white-text-new-mapbiz': '#ffffffe6', // rgba(255, 255, 255, 0.90)
         'whitetype-mapbiz': '#FFFFFF0D',
         'whiteline-mapbiz': '#FFFFFF4D',
         'whitetext-mapbiz': '#FFFFFFE5',
-        'whitelink-mapbiz': '#FFFFFFCC',
+        'whitelink-mapbiz': '#FFFFFFCC', // rgba(255, 255, 255, 0.80)
         'whitefone-mapbiz': '#E8E8E8',
         'whitetext-more-mapbiz': '#FFFFFF99',
         'greytransparent-mapbiz': '#808080CC',
