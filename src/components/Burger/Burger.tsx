@@ -1,5 +1,4 @@
-'use client'
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './Burger.module.scss'
 import Link from "next/link";
 import {usePathname} from 'next/navigation';
@@ -568,7 +567,6 @@ function Burger({isOpen, setIsOpen}) {
                     </div>
                 </div>
             </motion.div>}
-
         </AnimatePresence>
     );
 }
