@@ -34,7 +34,7 @@ function HomePageMain(props) {
                 </div>
                 <div
                     className="intro-links hidden 2xl:block w-2/12 grid gap-y-8  ml-40 mt-8 md:mt-0 font-grotesk-light text-sm text-white-text-new-mapbiz">
-                    <div className="title">Контакты</div>
+                    <div className="title">Контакты </div>
                     <div className="socials mt-8 grid gap-y-1">
                         <a
                             href="tel:89892400897"
