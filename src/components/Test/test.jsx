@@ -1,21 +1,11 @@
-'use client'
-import React from 'react';
-
 function Test({data}) {
+    const title = data.data.fields.title
+    const description = data.data.fields.content
+
     return (
         <>
-            <div onClick={() => console.log(data)}>
-                21321321312
-            </div>
-            <div onClick={() => console.log(data)}>
-                21321321312
-            </div>
-            <div onClick={() => console.log(data)}>
-                21321321312
-            </div>
-            <div onClick={() => console.log(data)}>
-                21321321312
-            </div>
+            <p>{title}</p>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
         </>
 
 
