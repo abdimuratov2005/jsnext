@@ -13,6 +13,7 @@ export default function Clients({posts}) {
     const [imagesTwo, setImagesTwo] = useState([])
     const [imagesThree, setImagesThree] = useState([])
     const [imagesFour, setImagesFour] = useState([])
+    const [hoverBtn, setHoverBtn] = useState(false)
     const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai'
 
     useEffect(() => {
@@ -64,6 +65,8 @@ export default function Clients({posts}) {
         }
     };
 
+    const hoverBtnChange = () => setHoverBtn(!hoverBtn);
+
     return (
         <div className="clients max-w-screen-xl mx-auto pt-64 pb-52 flex justify-end font-grotesk-light">
             <div className="w-full gap-y-12">
@@ -72,7 +75,7 @@ export default function Clients({posts}) {
                         Наши клиенты
                     </h2>
                 </div>
-                <div className={styles.govno}>
+                <div className="clients-wrapper mt-28">
                     <div>
                         {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0  && imagesFour.length === 0 ? ''
                             :
@@ -82,7 +85,7 @@ export default function Clients({posts}) {
                                     speed={5000}
                                     loop={true}
                                     slidesPerView={4}
-                                    spaceBetween={50}
+                                    spaceBetween={85}
                                     autoplay={{
                                         disableOnInteraction: false,
                                         delay: 1
@@ -106,14 +109,14 @@ export default function Clients({posts}) {
                                     speed={5000}
                                     loop={true}
                                     slidesPerView={4}
-                                    spaceBetween={50}
+                                    spaceBetween={85}
                                     autoplay={{
                                         reverseDirection: true,
                                         disableOnInteraction: false,
                                         delay: 1
                                     }}
                                     modules={[Autoplay]}
-                                    className="swiper-linear">
+                                    className="swiper-linear mt-8">
                                     {imagesTwo.map((item) => {
                                         return (
                                             <SwiperSlide
@@ -131,13 +134,13 @@ export default function Clients({posts}) {
                                     speed={5000}
                                     loop={true}
                                     slidesPerView={4}
-                                    spaceBetween={50}
+                                    spaceBetween={85}
                                     autoplay={{
                                         disableOnInteraction: false,
                                         delay: 1
                                     }}
                                     modules={[Autoplay]}
-                                    className="swiper-linear">
+                                    className="swiper-linear mt-8">
                                     {imagesThree.map((item) => {
                                         return (
                                             <SwiperSlide
@@ -181,11 +184,21 @@ export default function Clients({posts}) {
                     </div>
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex justify-end text-sm">
                     <div className="inline-block w-auto mt-24">
                         <a
-                            className="py-3 px-10 border border-white rounded-[24px] text-white"
+                            className="py-3 px-10 text-white underline hover:no-underline"
                             href="#"
+                        >
+                            Весь список работ
+                        </a>
+                    </div>
+                    <div className="inline-block w-auto mt-24">
+                        <a
+                            className={`py-3 px-10 border ${ hoverBtn ? 'bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}
+                            href="#"
+                            onMouseEnter={hoverBtnChange}
+                            onMouseLeave={hoverBtnChange}
                         >
                             Смотреть портфолио
                         </a>

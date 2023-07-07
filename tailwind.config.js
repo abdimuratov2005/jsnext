@@ -31,6 +31,7 @@ module.exports = {
       },
       colors: {
         'crimson-mapbiz': '#E0124A',
+        'crimsondark-mapbiz': '#ABFFF6',
         'darkgrey-mapbiz': '#1E1E1E',
         'redlight-mapbiz': '#47000087',
         'redbright-mapbiz': '#E0124A',

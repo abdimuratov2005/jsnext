@@ -78,13 +78,13 @@ function CareClients(props) {
         <div
             className="foryou max-w-screen-xl mx-auto pl-6 2xl:pl-0 pr-4 2xl:pr-0 pt-4 2xl:pt-24 2xl:pb-56 flex justify-end font-grotesk">
             <div className="w-full 2xl:w-11/12 grid gap-y-4 2xl:gap-y-24">
-                <h2 className="text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white opacity-90">
+                <h2 className="text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white-text-new-mapbiz">
                     Забота о клиенте
                 </h2>
                 <div className="foryou-grid grid 2xl:grid-cols-2">
                     <div className="">
                         <div
-                            className="w-full 2xl:w-[85%] text-[11px] 2xl:text-2xl 2xl:leading-9 text-white opacity-90 font-light">
+                            className="w-full 2xl:w-[85%] text-[11px] 2xl:text-2xl 2xl:leading-9 text-white-text-new-mapbiz">
                             Уважая ваше время, для тех кому нужны нюансы ниже сделали сноски, кому
                             это пока не интересно удобно проскролить 1 экран)
                         </div>
@@ -95,7 +95,7 @@ function CareClients(props) {
                                                     setSelectButton(item.id)
                                                     setShowInfo(true)
                                                 }}
-                                               className={`foryou-nav__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px]  transition duration-300 ${selectButton === item.id ? 'bg-white shadow-white-mapbiz' : ''} `}
+                                               className={`foryou-nav__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px]  transition duration-300 hover:bg-white hover:shadow-white-mapbiz ${selectButton === item.id ? 'bg-white shadow-white-mapbiz' : ''} `}
                                                >{item.title}</button>
                             })}
                         </div>

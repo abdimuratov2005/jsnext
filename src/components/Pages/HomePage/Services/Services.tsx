@@ -81,7 +81,7 @@ function Services(props) {
         <section
             className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
             <div
-                className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white opacity-90">
+                className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white-text-new-mapbiz">
                 <div className="w-6/12 grid gap-y-1.5 2xl:gap-y-6">
                     {links.map((item,index) => {
                         return (
@@ -125,7 +125,7 @@ function Services(props) {
             <div className="services-more flex justify-end font-grotesk">
                 <div className="w-full 2xl:w-11/12 grid 2xl:grid-cols-2">
                     <div
-                        className="services-more__about w-[76%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white-text-new-mapbiz">
+                        className="services-more__about w-[79%] hidden 2xl:grid gap-y-10 text-2xl leading-9 text-white-text-new-mapbiz">
                         <p>
                             В нашей веб студии спецы и партнеры с разноплановым опытом и навыками.
                             Мы решали тысячи задач клиентов в совокупности...
@@ -135,9 +135,9 @@ function Services(props) {
                             Есть задача в WEB? - Обращайтесь.
                         </p>
                     </div>
-                    <div className="services-more__nav font-light text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
+                    <div className="services-more__nav font-light flex flex-col items-end text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
                         <div
-                            className="services-more__wrapper flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
+                            className="services-more__wrapper w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
                             {subLinks.map((item, index) => {
                                 return <Link key={index} className="services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={item.href}>{item.title}</Link>
                             })}

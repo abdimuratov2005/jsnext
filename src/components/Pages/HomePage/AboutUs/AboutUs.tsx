@@ -2,10 +2,10 @@ import React from 'react';
 
 function AboutUs(props) {
     return (
-        <div className="about max-w-screen-xl mx-auto pt-24 pb-24 flex justify-end font-grotesk-light">
+        <div className="about max-w-screen-xl mx-auto pt-24 pb-24 flex justify-end font-grotesk-light text-white-text-new-mapbiz">
             <div className="w-full 2xl:w-11/12 grid gap-y-36">
-                <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">О нас</h2>
-                <div className="grid gap-y-16 text-2xl leading-9 text-white opacity-90">
+                <h2 className="text-6xl leading-[5.5rem]">О нас</h2>
+                <div className="grid gap-y-16 text-2xl leading-9">
                     <div className="w-[80%]">
                         <p>
                             MaPbiz — IT компания с экспертизой в области цифрового маркетинга и

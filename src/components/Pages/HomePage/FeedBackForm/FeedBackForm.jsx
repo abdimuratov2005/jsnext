@@ -5,17 +5,17 @@ function FeedBackForm(props) {
     const [selectedServices, setSelectedServices] = useState([
         {
             id: 'comparative',
-            content: 'корпаративный сайт',
+            content: 'корпоративный сайт',
             checked: false
         },
         {
             id: 'landing',
-            content: 'корпаративный сайт',
+            content: 'корпоративный сайт',
             checked: false
         },
         {
             id: 'commerce-shop',
-            content: 'корпаративный сайт',
+            content: 'корпоративный сайт',
             checked: false
         },
     ])

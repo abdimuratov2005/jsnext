@@ -1,4 +1,4 @@
-.govno {
+.clients-wrapper {
   background: linear-gradient(to right, #1E1E1E 0%, #1E1E1E 25%, #1E1E1E 75%, #1E1E1E 100%);
   /* background: linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%); */
   /* background: linear-gradient(to right, #1E1E1E 20%, transparent 100%); */
@@ -6,8 +6,23 @@
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #1E1E1E 25%, #1E1E1E 75%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, #1E1E1E 25%, #1E1E1E 75%, transparent 100%);
 }
+
 .swiper-linear .swiper-wrapper {
   -webkit-transition-timing-function:linear!important;
   -o-transition-timing-function:linear!important;
   transition-timing-function:linear!important;
+}
+
+.bg-btn-fone {
+  background: url(/img/home/btn-fone.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bg-btn-fone-hover {
+  background: url(/img/home/btn-fone-hover.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
