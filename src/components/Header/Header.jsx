@@ -8,7 +8,7 @@ import {useMotionValueEvent, useScroll} from "framer-motion"
 import dynamic from 'next/dynamic';
 
 // Загрузка компонента Burger динамически
-const DynamicBurger = dynamic(() => import('../Burger/Burger'), { ssr: true });
+const DynamicBurger = dynamic(() => import('../Burger/Burger'), {  loading: () => <p>...</p>  });
 
 function Header(props) {
     const [openBurger, setOpenBurger] = useState(false)
