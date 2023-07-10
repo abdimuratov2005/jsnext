@@ -9,7 +9,7 @@ import localFont from 'next/font/local'
 const cygrotesk = localFont({
     src: [
         {
-            path: '../../public/fonts/cy-grotesk-wide-bold.ttf',
+            path: '../../public/fonts/cy-grotesk-wide-light.ttf',
             weight: '300'
         },
         {
