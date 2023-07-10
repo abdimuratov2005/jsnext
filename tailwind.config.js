@@ -60,7 +60,7 @@ module.exports = {
         '8xl': '4607px',
       },
       fontFamily: {
-        'Grotesk': ['Grotesk'],
+        sans: ['var(--font-cygrotesk)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
