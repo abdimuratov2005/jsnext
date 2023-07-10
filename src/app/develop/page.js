@@ -2,12 +2,14 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Develop.module.scss'
 import axios from "axios";
-
+import {AnimatePresence, motion} from "framer-motion";
+import {Swiper, SwiperSlide} from "swiper/react";
 
 function Page(props) {
     // стейт менеджеры контента
     const [buttonsMenu, setButtonsMenu] = useState('develop')
     const [isShow, setIsShow] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const [currentDescriptionButton, setCurrentDescriptionButton] = useState(0)
 
@@ -73,7 +75,7 @@ function Page(props) {
                         description: 'Сайт, который имеет четкую цель, его логика, содержание и дизайн соответствуют целевой аудитории и задаче.\n' +
                             '\n' +
                             'Все успешные веб студии знают “секретный состав работ” для создания сайта - лидера ниши.',
-                        request: '/develop/create-company-more'
+                        request: '/develop/create-landing-more'
                     }
                 },
                 {
@@ -84,7 +86,7 @@ function Page(props) {
                         description: 'Разработка требует понимания специфических потребностей агентств - облегчение их рабочих процессов и контроля.\n' +
                             '\n' +
                             'Наши решения помогут вам развивать продажи в сети. Экспертность приобретена из опыта партнерских отношений с агенствами недвижимости',
-                        request: '/develop/create-company-more'
+                        request: '/develop/create-agency-more'
                     }
                 },
                 {
@@ -101,7 +103,7 @@ function Page(props) {
                             'Это на словах все просто а по факту удается далеко не каждому реализовать.\n' +
                             '\n' +
                             'Оцените наши успешные кейсы и решения.',
-                        request: '/develop/create-company-more'
+                        request: '/develop/create-hotel-more'
                     }
                 },
             ]
@@ -248,10 +250,12 @@ function Page(props) {
 
 
     async function getData(link) {
+        setIsLoading(true)
         const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1${link}`
         await axios.get(`${url}`).then(res => {
             const data = res.data.fields.blocks
             setDataPopup(data)
+            setIsLoading(false)
         }).catch(err => {
             console.log(err)
         })
@@ -523,47 +527,56 @@ function Page(props) {
                     </div>
                 </div>
             </div>
-            {dataPopup.length !== 0 &&
-                <div style={{backdropFilter: 'blur(5px)'}} className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
-                    <div className='z-40 w-[1024px] mx-auto absolute top-0 left-0 right-0 w-screen h-screen '>
-                        <button className='text-amber-50' onClick={() => setDataPopup([])}>Закрыть</button>
-                        {dataPopup.map((item, index) => {
-                            return (
-                                <div key={index} className="develop-step py-20">
-                                    <div
-                                        className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative shadow-step-mapbiz">
-                                        <h2 className="develop-step-title font-medium text-2xl">
-                                            {item.title}
-                                        </h2>
-                                        <div dangerouslySetInnerHTML={{__html: item.text}}
-                                             className="develop-step-content text-[1.2rem]">
+            <AnimatePresence>
+                {dataPopup.length !== 0 &&
+                    (!isLoading ? <motion.div
+                        initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                        animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
+                        exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                        transition={{duration: 0.5}}
+                        style={{backdropFilter: 'blur(5px)'}}
+                        className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
+                        <div className='z-40 w-[1024px] mx-auto absolute top-0 left-0 right-0  h-screen '>
+                            <button className='text-amber-50' onClick={() => setDataPopup([])}>Закрыть</button>
+                            <Swiper>
+                                {dataPopup.map((item, index) => {
+                                    return (
+                                        <SwiperSlide effect="cards"  key={index} className="develop-step py-20">
+                                            <div
+                                                className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative shadow-step-mapbiz">
+                                                <h2 className="develop-step-title font-medium text-2xl">
+                                                    {item.title}
+                                                </h2>
+                                                <div dangerouslySetInnerHTML={{__html: item.text}}
+                                                     className="develop-step-content text-[1.2rem]">
 
-                                        </div>
-                                        <div className="develop-step-gallery grid grid-cols-3 gap-8">
-                                            {item.media && item.media.map((image) => {
-                                                return (
-                                                    image.imgs.map((item, index) => {
+                                                </div>
+                                                <div className="develop-step-gallery grid grid-cols-3 gap-8">
+                                                    {item.media && item.media.map((image) => {
                                                         return (
-                                                            <div
-                                                                key={index}
-                                                                className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
-                                                                style={{
-                                                                    backgroundImage: `url(${item.img})`
-                                                                }}
-                                                            >
-                                                            </div>)
-                                                    })
-                                                )
-                                            })}
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            )
-                        })}</div>
-                </div>
-            }
+                                                            image.imgs && image.imgs.map((item, index) => {
+                                                                return (
+                                                                    <div
+                                                                        key={index}
+                                                                        className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
+                                                                        style={{
+                                                                            backgroundImage: `url(${item.img})`
+                                                                        }}
+                                                                    >
+                                                                    </div>)
+                                                            })
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
+                        </div>
+                    </motion.div> : '')
+                }
+            </AnimatePresence>
         </section>
 
     );
