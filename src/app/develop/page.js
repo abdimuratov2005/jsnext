@@ -5,7 +5,8 @@ import styles from './Develop.module.scss'
 
 function Page(props) {
     // стейт менеджеры контента
-    const [buttonsMenu, setButtonsMenu] = useState(1)
+    const [buttonsMenu, setButtonsMenu] = useState('develop')
+    const [elShow, setElShow] = useState(false)
     const [descriptionButton, setDescriptionButton] = useState([])
     const [currentDescriptionButton, setCurrentDescriptionButton] = useState(1)
     const [descriptionContent, setDescriptionContent] = useState({})
@@ -13,121 +14,237 @@ function Page(props) {
 
 
     // массивы кнопок
-    const contentSiteButtons = [
-        {id: 1, label: 'Корпоративный сайт'},
-        {id: 2, label: 'Интернет магазин'},
-        {id: 3, label: 'Лендинг'},
-        {id: 4, label: 'Для агентств недвижимости'},
-        {id: 5, label: 'Для отелей'},
-    ];
+    // const contentSiteButtons = [
+    //     {id: 1, label: 'Корпоративный сайт'},
+    //     {id: 2, label: 'Интернет магазин'},
+    //     {id: 3, label: 'Лендинг'},
+    //     {id: 4, label: 'Для агентств недвижимости'},
+    //     {id: 5, label: 'Для отелей'},
+    // ];
+    //
+    // const contentDesingButtons = [
+    //     {id: 6, label: 'Видео'},
+    //     {id: 7, label: 'Web design'},
+    //     {id: 8, label: 'Брендбук'},
+    //     {id: 9, label: 'Графика'},
+    //     {id: 10, label: '3d design'},
+    // ];
+    //
+    // const contentMarketingButtons = [
+    //     {id: 11, label: 'Реклама'},
+    //     {id: 12, label: 'Продвижение'},
+    //     {id: 13, label: 'SEO оптимизация'},
+    //     {id: 14, label: 'Performance-маркетинг'},
+    // ];
+    //
+    // // контент
+    // const contentCreateSite = {
+    //     title: 'Создание сайтов',
+    //     description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.'
+    // }
+    // const contentCreateDesing = {
+    //     title: 'Дизайн',
+    //     description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой'
+    // }
+    // const contentCreateMarketing = {
+    //     title: 'Маркетинг',
+    //     description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.'
+    // }
+    //
+    const block = [
+        {
+            id: 1,
+            el: 'develop',
+            title: 'Разработка сайтов'
 
-    const contentDesingButtons = [
-        {id: 6, label: 'Видео'},
-        {id: 7, label: 'Web design'},
-        {id: 8, label: 'Брендбук'},
-        {id: 9, label: 'Графика'},
-        {id: 10, label: '3d design'},
-    ];
+        },
+        {
+            id: 2,
+            el: 'design',
+            title: 'Дизайн'
 
-    const contentMarketingButtons = [
-        {id: 11, label: 'Реклама'},
-        {id: 12, label: 'Продвижение'},
-        {id: 13, label: 'SEO оптимизация'},
-        {id: 14, label: 'Performance-маркетинг'},
-    ];
+        },
+        {
+            id: 3,
+            el: 'market',
+            title: 'Маркетинг'
 
-    // контент
-    const contentCreateSite = {
-        title: 'Создание сайтов',
-        description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.'
+        },
+    ]
+
+    const content = {
+
+        develop: {
+            title: 'Создание сайтов',
+            description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.',
+            els: [
+                {
+                    id: 1,
+                    label: 'Корпоративный сайт',
+                    content: {
+                        title: 'Корпоративный',
+                        description: 'Так называют многостраничный сайт со статичными страницами.\n' +
+                            '\n' +
+                            'В нашей компетенции разработка сайтов для компаний совершенно разного уровня и типа.\n' +
+                            '\n' +
+                            'Все успешные веб-студии знают “секретный состав работ” для создания сайта - лидера ниши.',
+                        request: '/develop/create-company-more'
+                    }
+                },
+                {
+                    id: 2,
+                    label: 'Интернет магазин',
+                    content: {
+                        title: 'Магазин / каталог',
+                        description: 'От того как собран E-comerce сайт зависит не только продажи и перспиктивы, но и удобства его администрирования.\n' +
+                            '\n' +
+                            'Перспективы роста в поисковых выдачах и возможность развиваться с течением времени, внедрять новый функционал.\n' +
+                            '\n' +
+                            'Выполняя разные задачи клиентов мы научились делать реально современные сайты',
+                        request: '/develop/create-shop-more'
+                    }
+                },
+                {
+                    id: 3,
+                    label: 'Лендинг',
+                    content: {
+                        title: 'Одностраничный сайт',
+                        description: 'Сайт, который имеет четкую цель, его логика, содержание и дизайн соответствуют целевой аудитории и задаче.\n' +
+                            '\n' +
+                            'Все успешные веб студии знают “секретный состав работ” для создания сайта - лидера ниши.',
+                        request: '/develop/create-company-more'
+                    }
+                },
+                {
+                    id: 4,
+                    label: 'Для агентств недвижимости',
+                    content: {
+                        title: 'Для агентств недвижимости',
+                        description: 'Разработка требует понимания специфических потребностей агентств - облегчение их рабочих процессов и контроля.\n' +
+                            '\n' +
+                            'Наши решения помогут вам развивать продажи в сети. Экспертность приобретена из опыта партнерских отношений с агенствами недвижимости',
+                        request: '/develop/create-company-more'
+                    }
+                },
+                {
+                    id: 5,
+                    label: 'Для отелей',
+                    content: {
+                        title: 'Для гостиниц и отелей',
+                        description: 'Вызвать эмоции и выделиться среди конкурентов.\n' +
+                            '\n' +
+                            'Легко оформить и оплатить бронь.\n' +
+                            '\n' +
+                            'Удобно управлять бронированием, легко продвигаться в поиске.\n' +
+                            '\n' +
+                            'Это на словах все просто а по факту удается далеко не каждому реализовать.\n' +
+                            '\n' +
+                            'Оцените наши успешные кейсы и решения.',
+                        request: '/develop/create-company-more'
+                    }
+                },
+            ]
+        },
+        design: {
+            title: 'Дизайн',
+            description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой',
+            els: [
+                {id: 6, label: 'Видео'},
+                {id: 7, label: 'Web design'},
+                {id: 8, label: 'Брендбук'},
+                {id: 9, label: 'Графика'},
+                {id: 10, label: '3d design'},
+            ]
+        },
+        market: {
+            title: 'Маркетинг',
+            description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.',
+            els: [
+                {id: 11, label: 'Реклама'},
+                {id: 12, label: 'Продвижение'},
+                {id: 13, label: 'SEO оптимизация'},
+                {id: 14, label: 'Performance-маркетинг'},
+            ]
+        }
     }
-    const contentCreateDesing = {
-        title: 'Дизайн',
-        description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой'
-    }
-    const contentCreateMarketing = {
-        title: 'Маркетинг',
-        description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.'
-    }
 
+    const CurrentDescriptionChange = (el) => {
+        setCurrentDescriptionButton(el)
+        setElShow(true)
+    }
 
     // контент
 
     useEffect(() => {
-        switch (buttonsMenu) {
-            case 1:
-                if (currentDescriptionButton > 5) {
-                    setCurrentDescriptionButton(1)
-                }
-                setDescriptionContent(contentCreateSite)
-                setDescriptionButton(contentSiteButtons)
-                break;
-            case 2:
-                if (currentDescriptionButton < 6 || currentDescriptionButton > 10) {
-                    setCurrentDescriptionButton(6)
-                }
-                setDescriptionButton(contentDesingButtons)
-                setDescriptionContent(contentCreateDesing)
-                break;
-            case 3:
-                if (currentDescriptionButton < 11) {
-                    setCurrentDescriptionButton(11)
-                }
-                setDescriptionButton(contentMarketingButtons)
-                setDescriptionContent(contentCreateMarketing)
-                break;
-            default:
 
-        }
-        switch (currentDescriptionButton) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
-            case 14:
-                break;
-            default:
-        }
+
+
+
+
+
+
+
+        // switch (buttonsMenu) {
+        //     case 1:
+        //         if (currentDescriptionButton > 5) {
+        //             setCurrentDescriptionButton(1)
+        //         }
+        //         setDescriptionContent(contentCreateSite)
+        //         setDescriptionButton(contentSiteButtons)
+        //         break;
+        //     case 2:
+        //         if (currentDescriptionButton < 6 || currentDescriptionButton > 10) {
+        //             setCurrentDescriptionButton(6)
+        //         }
+        //         setDescriptionButton(contentDesingButtons)
+        //         setDescriptionContent(contentCreateDesing)
+        //         break;
+        //     case 3:
+        //         if (currentDescriptionButton < 11) {
+        //             setCurrentDescriptionButton(11)
+        //         }
+        //         setDescriptionButton(contentMarketingButtons)
+        //         setDescriptionContent(contentCreateMarketing)
+        //         break;
+        //     default:
+        //
+        // }
+        // switch (currentDescriptionButton) {
+        //     case 1:
+        //         break;
+        //     case 2:
+        //         break;
+        //     case 3:
+        //         break;
+        //     case 4:
+        //         break;
+        //     case 5:
+        //         break;
+        //     case 6:
+        //         break;
+        //     case 7:
+        //         break;
+        //     case 8:
+        //         break;
+        //     case 9:
+        //         break;
+        //     case 10:
+        //         break;
+        //     case 11:
+        //         break;
+        //     case 12:
+        //         break;
+        //     case 13:
+        //         break;
+        //     case 14:
+        //         break;
+        //     default:
+        // }
 
     }, [buttonsMenu, currentDescriptionButton])
 
 
-    const block = [
-        {
-            title: 'Разработка сайтов',
-            id: 1
-        },
-        {
-            title: 'Дизайн',
-            id: 2
-        },
-        {
-            title: 'Маркетинг',
-            id: 3,
-        },
-    ]
+
 
 
     return (
@@ -190,7 +307,7 @@ function Page(props) {
                 {block.map((item) => {
                     return (
                         <button
-                            onClick={() => setButtonsMenu(item.id)}
+                            onClick={() => setButtonsMenu(item.el)}
                             key={item.id}
                             className={`${buttonsMenu === item.id ? 'bg-red-100' : ''} develop-nav-el w-full mx-auto flex justify-center items-center gap-x-6 py-4 relative hover:text-neon-mapbiz cursor-pointer select-none`}
                         >
@@ -273,24 +390,24 @@ function Page(props) {
             </div>
 
 
-            <div className="max-w-screen-xl mx-auto pt-28 pb-40 font-grotesk-light">
+            <div className="max-w-screen-xl mx-auto pt-28 pb-40 font-grotesk font-light">
                 <div className="w-full flex justify-end">
                     <div className="w-11/12 grid gap-y-24">
                         <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
-                            {descriptionContent.title}
+                            { content[buttonsMenu]['title'] }
                         </h2>
                         <div className="foryou-grid grid grid-cols-2">
                             <div className="">
                                 <div className="w-[85%] text-2xl leading-9 text-white opacity-90">
-                                    {descriptionContent.description}
+                                    { content[buttonsMenu]['description'] }
                                 </div>
                                 <div
                                     className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-sm text-grey-mapbiz uppercase">
-                                    {descriptionButton.map((item) => {
+                                    {content[buttonsMenu]['els'].map((item) => {
                                         console.log(item.id)
                                         return (
                                             <button
-                                                onClick={() => setCurrentDescriptionButton(item.id)}
+                                                onClick={() => CurrentDescriptionChange(item.id)}
                                                 key={item.id}
                                                 href="#"
                                                 ffcoder-foryou-el={1}
@@ -332,7 +449,7 @@ function Page(props) {
                                         </svg>
                                     </div>
                                     <div className="foryou-els relative z-10 px-9 py-20 text-white opacity-90">
-                                        <div className="foryou-el" ffcoder-foryou-el={1}>
+                                        <div className="foryou-el">
                                             <h3 className="foryou-el__title font-grotesk-medium text-2xl leading-7">
 
                                             </h3>
