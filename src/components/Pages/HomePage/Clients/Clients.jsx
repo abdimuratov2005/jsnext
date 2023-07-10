@@ -1,9 +1,8 @@
+'use client'
 import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
-import styles from './Clients.css'
-import Image from "next/image";
 import {Autoplay, Navigation, Pagination} from "swiper/modules";
 
 
