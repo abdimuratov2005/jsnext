@@ -1,9 +1,8 @@
 import './globals.css';
-
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import localFont from 'next/font/local'
-
+import Head from 'next/head';
 
 
 const cygrotesk = localFont({
@@ -47,8 +46,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="ru">
-      <body className={`${cygrotesk.variable} font-sans`}>
+      <html className={`${cygrotesk.variable} font-sans`} lang="ru">
+      <body>
       <Header />
       {children}
       <Footer />

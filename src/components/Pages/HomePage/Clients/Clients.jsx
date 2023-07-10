@@ -4,7 +4,7 @@ import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
 import {Autoplay, Navigation, Pagination} from "swiper/modules";
-
+import './Clients.css'
 
 export default function Clients({posts}) {
 
@@ -76,7 +76,7 @@ export default function Clients({posts}) {
                 </div>
                 <div className="clients-wrapper mt-28">
                     <div>
-                        {imagesOne.length === 0 && imagesTwo.length === 0 && imagesThree.length === 0  && imagesFour.length === 0 ? ''
+                        {imagesOne.length === 0 || imagesTwo.length === 0 || imagesThree.length === 0  || imagesFour.length === 0 ? ''
                             :
                             <>
                                 <Swiper
