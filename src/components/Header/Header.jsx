@@ -2,11 +2,13 @@
 import React, {useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
-import Burger from "../Burger/Burger";
 
 import {useMotionValueEvent, useScroll} from "framer-motion"
 
+import dynamic from 'next/dynamic';
 
+// Загрузка компонента Burger динамически
+const DynamicBurger = dynamic(() => import('../Burger/Burger'), { ssr: true });
 
 function Header(props) {
     const [openBurger, setOpenBurger] = useState(false)
@@ -117,7 +119,7 @@ function Header(props) {
 
                     </div>
                 </div>
-                <Burger setIsOpen={handleOpen} isOpen={openBurger}/>
+                <DynamicBurger setIsOpen={handleOpen} isOpen={openBurger}/>
             </header>
         </>
     );

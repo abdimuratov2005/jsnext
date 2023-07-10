@@ -76,7 +76,6 @@ export default function Team(props) {
             <div className="w-full">
                 <h2 className="text-6xl max-w-screen-xl mx-auto leading-[5.5rem] text-white opacity-90">Команда</h2>
                 <div className="team__els w-full h-[600px] mt-28">
-
                     <Swiper
                         freeMode={true}
                         speed={5000}
@@ -102,7 +101,6 @@ export default function Team(props) {
                                 </SwiperSlide>)
                         })}
                     </Swiper>
-
                 </div>
             </div>
         </div>

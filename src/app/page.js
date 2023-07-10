@@ -4,13 +4,14 @@ import Services from "@/components/Pages/HomePage/Services/Services";
 import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
 import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import AboutUs from "@/components/Pages/HomePage/AboutUs/AboutUs";
-import Team from "@/components/Pages/HomePage/Team/Team";
+
 
 import InTouch from "@/components/InTouch/InTouch";
 import {useEffect, useState} from "react";
 import API from "@/Api/Api";
 import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm'
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
+import Team from "@/components/Pages/HomePage/Team/Team";
 
 
 export default function Page() {
