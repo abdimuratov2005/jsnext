@@ -5,6 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import localFont from 'next/font/local'
 
 
+
 const cygrotesk = localFont({
     src: [
         {
