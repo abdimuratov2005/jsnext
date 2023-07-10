@@ -4,12 +4,10 @@ import Link from "next/link";
 import {usePathname} from 'next/navigation';
 import {AnimatePresence, motion} from "framer-motion";
 
-
 function Burger({isOpen, setIsOpen}) {
     const currentRoute = usePathname();
     const navLink = [
         {
-
             name: 'Главная',
             href: "/",
             className: "",
@@ -144,12 +142,7 @@ function Burger({isOpen, setIsOpen}) {
                                 <div className="relative py-4">
                                     <div
                                         className="popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none">
-                                        <img
-                                            className="w-full h-auto cursor-default"
-                                            src="popup-menu-nav.svg"
-                                            alt=""
-                                        />
-                                        <div className="absolute w-full h-full left-16 top-2.5">
+                                        <div className={`${styles.header__titleTop} absolute w-full h-full left-16 top-2.5`}>
                                             Услуги Web студии
                                         </div>
                                     </div>

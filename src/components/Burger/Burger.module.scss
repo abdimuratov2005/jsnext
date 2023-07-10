@@ -19,3 +19,13 @@
     background-image: url("popup-menu-nav.svg");
   }
 }
+
+.header {
+  &__titleTop {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+    z-index: 1;
+    background-image: url(../../../public/img/header/header-navTop.svg);
+  }
+}

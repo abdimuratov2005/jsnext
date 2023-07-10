@@ -24,7 +24,6 @@ async function getData () {
 
 export default async function Page() {
     const data = await getData();
-    console.log(data)
     const textik = '                - Потребность - Эмоции - Страхи - Ожидания - Условия - Потребность - Эмоции\n' +
         '                - Страхи - Ожидания - Условия - Потребность - Эмоции - Страхи - Ожидания -\n' +
         '                Условия - Потребность - Эмоции - Страхи - Ожидания - Условия'

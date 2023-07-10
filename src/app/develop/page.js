@@ -1,56 +1,16 @@
 'use client'
 import React, {useEffect, useState} from 'react';
 import styles from './Develop.module.scss'
+import axios from "axios";
 
 
 function Page(props) {
     // стейт менеджеры контента
     const [buttonsMenu, setButtonsMenu] = useState('develop')
     const [isShow, setIsShow] = useState(false)
-    const [descriptionButton, setDescriptionButton] = useState([])
+
     const [currentDescriptionButton, setCurrentDescriptionButton] = useState(0)
-    const [descriptionContent, setDescriptionContent] = useState({})
-    const [currentContent, setCurrentContent] = useState([])
 
-
-    // массивы кнопок
-    // const contentSiteButtons = [
-    //     {id: 1, label: 'Корпоративный сайт'},
-    //     {id: 2, label: 'Интернет магазин'},
-    //     {id: 3, label: 'Лендинг'},
-    //     {id: 4, label: 'Для агентств недвижимости'},
-    //     {id: 5, label: 'Для отелей'},
-    // ];
-    //
-    // const contentDesingButtons = [
-    //     {id: 6, label: 'Видео'},
-    //     {id: 7, label: 'Web design'},
-    //     {id: 8, label: 'Брендбук'},
-    //     {id: 9, label: 'Графика'},
-    //     {id: 10, label: '3d design'},
-    // ];
-    //
-    // const contentMarketingButtons = [
-    //     {id: 11, label: 'Реклама'},
-    //     {id: 12, label: 'Продвижение'},
-    //     {id: 13, label: 'SEO оптимизация'},
-    //     {id: 14, label: 'Performance-маркетинг'},
-    // ];
-    //
-    // // контент
-    // const contentCreateSite = {
-    //     title: 'Создание сайтов',
-    //     description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.'
-    // }
-    // const contentCreateDesing = {
-    //     title: 'Дизайн',
-    //     description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой'
-    // }
-    // const contentCreateMarketing = {
-    //     title: 'Маркетинг',
-    //     description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.'
-    // }
-    //
     const block = [
         {
             id: 1,
@@ -71,6 +31,7 @@ function Page(props) {
 
         },
     ]
+
 
     const content = {
 
@@ -282,78 +243,19 @@ function Page(props) {
         setCurrentDescriptionButton(0)
     }
 
-    // контент
 
-    useEffect(() => {
-
+    const [dataPopup, setDataPopup] = useState([])
 
 
-
-
-
-
-
-        // switch (buttonsMenu) {
-        //     case 1:
-        //         if (currentDescriptionButton > 5) {
-        //             setCurrentDescriptionButton(1)
-        //         }
-        //         setDescriptionContent(contentCreateSite)
-        //         setDescriptionButton(contentSiteButtons)
-        //         break;
-        //     case 2:
-        //         if (currentDescriptionButton < 6 || currentDescriptionButton > 10) {
-        //             setCurrentDescriptionButton(6)
-        //         }
-        //         setDescriptionButton(contentDesingButtons)
-        //         setDescriptionContent(contentCreateDesing)
-        //         break;
-        //     case 3:
-        //         if (currentDescriptionButton < 11) {
-        //             setCurrentDescriptionButton(11)
-        //         }
-        //         setDescriptionButton(contentMarketingButtons)
-        //         setDescriptionContent(contentCreateMarketing)
-        //         break;
-        //     default:
-        //
-        // }
-        // switch (currentDescriptionButton) {
-        //     case 1:
-        //         break;
-        //     case 2:
-        //         break;
-        //     case 3:
-        //         break;
-        //     case 4:
-        //         break;
-        //     case 5:
-        //         break;
-        //     case 6:
-        //         break;
-        //     case 7:
-        //         break;
-        //     case 8:
-        //         break;
-        //     case 9:
-        //         break;
-        //     case 10:
-        //         break;
-        //     case 11:
-        //         break;
-        //     case 12:
-        //         break;
-        //     case 13:
-        //         break;
-        //     case 14:
-        //         break;
-        //     default:
-        // }
-
-    }, [buttonsMenu, currentDescriptionButton])
-
-
-
+    async function getData(link) {
+        const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1${link}`
+        await axios.get(`${url}`).then(res => {
+            const data = res.data.fields.blocks
+            setDataPopup(data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
 
     return (
@@ -503,23 +405,23 @@ function Page(props) {
                 <div className="w-full flex justify-end">
                     <div className="w-11/12 grid gap-y-24">
                         <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
-                            { content[buttonsMenu]['title'] }
+                            {content[buttonsMenu]['title']}
                         </h2>
                         <div className="foryou-grid grid grid-cols-2">
                             <div className="">
                                 <div className="w-[85%] text-2xl leading-9 text-white opacity-90">
-                                    { content[buttonsMenu]['description'] }
+                                    {content[buttonsMenu]['description']}
                                 </div>
                                 <div
                                     className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-sm text-grey-mapbiz uppercase">
                                     {content[buttonsMenu]['els'].map((item) => {
-                                        console.log(item.id)
+
                                         return (
                                             <button
                                                 onClick={() => CurrentDescriptionChange(item.id)}
                                                 key={item.id}
                                                 href="#"
-                                                className={`${item.id === currentDescriptionButton && 'bg-white' } foryou-nav__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300`}
+                                                className={`${item.id === currentDescriptionButton && 'bg-white'} foryou-nav__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300`}
                                             >
                                                 {item.label}
                                             </button>
@@ -529,9 +431,9 @@ function Page(props) {
                             </div>
 
                             <div className="foryou-toggle flex justify-end h-[530px]">
-                                { isShow ?
+                                {isShow ?
                                     <div
-                                    className="foryou-toggle__active w-[90%] h-full bg-center bg-cover bg-no-repeat relative">
+                                        className="foryou-toggle__active w-[90%] h-full bg-center bg-cover bg-no-repeat relative">
                                         <img
                                             className="w-full h-full absolute left-0 top-0"
                                             src="/img/home/img.png"
@@ -559,7 +461,7 @@ function Page(props) {
                                                 <h3 className="foryou-el__title font-grotesk-medium text-2xl leading-7">
                                                     {
                                                         content[buttonsMenu]['els'].map((item) => {
-                                                            if( item.id === currentDescriptionButton ){
+                                                            if (item.id === currentDescriptionButton) {
                                                                 return item.content.title
                                                             }
                                                         })
@@ -569,7 +471,7 @@ function Page(props) {
                                                     <p>
                                                         {
                                                             content[buttonsMenu]['els'].map((item) => {
-                                                                if( item.id === currentDescriptionButton ){
+                                                                if (item.id === currentDescriptionButton) {
                                                                     return item.content.description
                                                                 }
                                                             })
@@ -580,50 +482,90 @@ function Page(props) {
                                         </div>
                                         <div
                                             className="foryou-nav absolute z-20 w-full bottom-8 flex justify-end px-6 text-whitelink-mapbiz font-grotesk-medium text-lg">
-                                            <a
-                                                className="foryou-nav-more hidden"
-                                                href="#"
-                                            >
-                                                <div className="flex items-center gap-4">
-                                                    <span>смотреть состав работ</span>
-                                                    <svg
-                                                        width={41}
-                                                        height={20}
-                                                        viewBox="0 0 41 20"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            d="M18.7324 9.93514C13.8433 9.90013 8.95418 9.87207 4.06505 9.82476C3.09057 9.81514 2.11468 9.74748 1.14412 9.66311C0.983558 9.64768 0.831987 9.58974 0.70925 9.49689C0.586513 9.40404 0.498316 9.2806 0.456192 9.1427C0.376487 8.92192 0.653585 8.60874 0.984532 8.56269C1.30549 8.51806 1.62483 8.44882 1.9474 8.43164C4.00743 8.32125 6.0673 8.16498 8.1293 8.13202C12.3656 8.06469 16.6032 8.04765 20.8404 8.0434C24.8605 8.0393 28.8807 8.08376 32.9007 8.09196C33.5462 8.09338 34.1921 8.02147 34.8365 7.97053C34.8792 7.96121 34.9186 7.94252 34.9511 7.91621C34.9836 7.8899 35.008 7.8568 35.0223 7.81994C35.0339 7.73194 35.0044 7.58338 34.9383 7.55184C33.7029 6.95795 32.4828 6.33315 31.2125 5.80313C28.2573 4.57009 25.4851 3.05808 22.7148 1.54103C22.2596 1.29171 21.7824 1.03845 21.5988 0.543749C21.5654 0.453703 21.5134 0.299476 21.5558 0.269356C21.7078 0.144017 21.8925 0.0539037 22.0934 0.00709057C22.3074 -0.0152477 22.5242 0.0154373 22.7197 0.0957187C23.4119 0.372952 24.0991 0.662338 24.7726 0.973318C29.586 3.19591 34.398 5.42098 39.2085 7.64852C41.0255 8.48432 41.8889 9.29473 39.7078 11.1324C39.0794 11.6621 38.4437 12.191 37.7604 12.6621C34.5915 14.8488 31.4109 17.0222 28.2188 19.1822C27.7799 19.4608 27.3171 19.7086 26.8346 19.9234C26.5198 20.0745 26.2048 19.9849 25.933 19.8037C25.634 19.6042 25.4484 19.0244 25.5514 18.7694C25.7805 18.2032 26.237 17.7879 26.7272 17.4118C28.6147 15.9638 30.5122 14.5262 32.4198 13.099C33.6594 12.1664 34.9121 11.2475 36.1497 10.313C36.2109 10.2669 36.2139 10.1237 36.1892 10.0376C36.1729 10.0004 36.1466 9.96717 36.1127 9.94086C36.0787 9.91454 36.038 9.89591 35.9941 9.88657C35.3472 9.84904 34.6992 9.80126 34.0517 9.80426C28.9451 9.82812 23.8385 9.85786 18.7319 9.8935L18.7324 9.93514Z"
-                                                            fill="white"
-                                                            fillOpacity="0.8"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </a>
+                                            {
+                                                content[buttonsMenu]['els'].map((item, index) => {
+                                                    if (item.id === currentDescriptionButton) {
+                                                        return (
+                                                            <button key={index} className="foryou-nav-more ">
+                                                                <div className="flex items-center gap-4">
+                                                                    <span onClick={() => getData(item.content.request)}>смотреть состав работ</span>
+                                                                    <svg
+                                                                        width={41}
+                                                                        height={20}
+                                                                        viewBox="0 0 41 20"
+                                                                        fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <path
+                                                                            d="M18.7324 9.93514C13.8433 9.90013 8.95418 9.87207 4.06505 9.82476C3.09057 9.81514 2.11468 9.74748 1.14412 9.66311C0.983558 9.64768 0.831987 9.58974 0.70925 9.49689C0.586513 9.40404 0.498316 9.2806 0.456192 9.1427C0.376487 8.92192 0.653585 8.60874 0.984532 8.56269C1.30549 8.51806 1.62483 8.44882 1.9474 8.43164C4.00743 8.32125 6.0673 8.16498 8.1293 8.13202C12.3656 8.06469 16.6032 8.04765 20.8404 8.0434C24.8605 8.0393 28.8807 8.08376 32.9007 8.09196C33.5462 8.09338 34.1921 8.02147 34.8365 7.97053C34.8792 7.96121 34.9186 7.94252 34.9511 7.91621C34.9836 7.8899 35.008 7.8568 35.0223 7.81994C35.0339 7.73194 35.0044 7.58338 34.9383 7.55184C33.7029 6.95795 32.4828 6.33315 31.2125 5.80313C28.2573 4.57009 25.4851 3.05808 22.7148 1.54103C22.2596 1.29171 21.7824 1.03845 21.5988 0.543749C21.5654 0.453703 21.5134 0.299476 21.5558 0.269356C21.7078 0.144017 21.8925 0.0539037 22.0934 0.00709057C22.3074 -0.0152477 22.5242 0.0154373 22.7197 0.0957187C23.4119 0.372952 24.0991 0.662338 24.7726 0.973318C29.586 3.19591 34.398 5.42098 39.2085 7.64852C41.0255 8.48432 41.8889 9.29473 39.7078 11.1324C39.0794 11.6621 38.4437 12.191 37.7604 12.6621C34.5915 14.8488 31.4109 17.0222 28.2188 19.1822C27.7799 19.4608 27.3171 19.7086 26.8346 19.9234C26.5198 20.0745 26.2048 19.9849 25.933 19.8037C25.634 19.6042 25.4484 19.0244 25.5514 18.7694C25.7805 18.2032 26.237 17.7879 26.7272 17.4118C28.6147 15.9638 30.5122 14.5262 32.4198 13.099C33.6594 12.1664 34.9121 11.2475 36.1497 10.313C36.2109 10.2669 36.2139 10.1237 36.1892 10.0376C36.1729 10.0004 36.1466 9.96717 36.1127 9.94086C36.0787 9.91454 36.038 9.89591 35.9941 9.88657C35.3472 9.84904 34.6992 9.80126 34.0517 9.80426C28.9451 9.82812 23.8385 9.85786 18.7319 9.8935L18.7324 9.93514Z"
+                                                                            fill="white"
+                                                                            fillOpacity="0.8"
+                                                                        />
+                                                                    </svg>
+                                                                </div>
+                                                            </button>
+                                                        )
+                                                    }
+                                                })
+                                            }
                                         </div>
-                                </div>
+                                    </div>
                                     :
                                     <div
-                                    className="foryou-toggle__base w-[90%] h-full bg-center bg-cover bg-no-repeat"
-                                    style={{
-                                        backgroundImage: "url(/img/develop/develop-fone.webp)"
-                                    }}
-                                />
+                                        className="foryou-toggle__base w-[90%] h-full bg-center bg-cover bg-no-repeat"
+                                        style={{
+                                            backgroundImage: "url(/img/develop/develop-fone.webp)"
+                                        }}
+                                    />
                                 }
-
-
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {dataPopup.length !== 0 &&
+                <div style={{backdropFilter: 'blur(5px)'}} className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
+                    <div className='z-40 w-[1024px] mx-auto absolute top-0 left-0 right-0 w-screen h-screen '>
+                        <button className='text-amber-50' onClick={() => setDataPopup([])}>Закрыть</button>
+                        {dataPopup.map((item, index) => {
+                            return (
+                                <div key={index} className="develop-step py-20">
+                                    <div
+                                        className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative shadow-step-mapbiz">
+                                        <h2 className="develop-step-title font-medium text-2xl">
+                                            {item.title}
+                                        </h2>
+                                        <div dangerouslySetInnerHTML={{__html: item.text}}
+                                             className="develop-step-content text-[1.2rem]">
 
+                                        </div>
+                                        <div className="develop-step-gallery grid grid-cols-3 gap-8">
+                                            {item.media && item.media.map((image) => {
+                                                return (
+                                                    image.imgs.map((item, index) => {
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
+                                                                style={{
+                                                                    backgroundImage: `url(${item.img})`
+                                                                }}
+                                                            >
+                                                            </div>)
+                                                    })
+                                                )
+                                            })}
 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            )
+                        })}</div>
+                </div>
+            }
         </section>
+
     );
 }
 
