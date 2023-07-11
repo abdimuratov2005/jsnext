@@ -1,5 +1,6 @@
 'use client'
 import React, {useState} from 'react';
+import {Field, Formik} from "formik";
 
 
 function FeedBackForm(props) {
@@ -53,7 +54,7 @@ function FeedBackForm(props) {
 
 
     return (
-        <>
+        <Formik initialValues={{name: '', email: '', phone: '', services: [], social: []}}>
             <form onSubmit={handleSubmit}
                   className="feedback max-w-screen-xl mx-auto pt-32 pb-32 flex justify-end font-grotesk-light">
                 <div className="w-full 2xl:w-11/12 grid gap-y-24">
@@ -81,22 +82,10 @@ function FeedBackForm(props) {
                                 </label>
                                 <div
                                     className="feedback-form-grid mt-6 flex flex-wrap gap-x-4 gap-y-4 text-xs text-grey-mapbiz uppercase">
-                                    {selectedServices.map((item) => {
-                                        return (
-                                            <>
-                                                <label htmlFor={item.id}>{item.content}</label>
-                                                <input
-                                                    id={item.id}
-                                                    className="feedback-form-services__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300"
-                                                    type='radio' checked={item.checked}
-                                                    onChange={() => handleCheckboxChange(item.id)}/>
-                                            </>
-
-                                        )
-                                    })}
                                     <a
                                         href="#"
                                         ffcoder-feedback-el={1}
+                                        className="feedback-form-services__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300"
 
                                     >
                                         Корпоративный сайт
@@ -210,6 +199,20 @@ function FeedBackForm(props) {
                                 <label className="text-white" htmlFor="feedback-form-social">
                                     При номере есть:
                                 </label>
+                                <div role="group" aria-labelledby="checkbox-group">
+                                    <label>
+                                        <Field type="checkbox" name="checked" value="One" />
+                                        WhatsApp
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="checked" value="Two" />
+                                        Telegram
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="checked" value="Three" />
+                                        Viber
+                                    </label>
+                                </div>
                                 <div className="feedback-form-grid flex gap-7 text-whiteline-mapbiz">
                                     <div
                                         className="feedback-form-social__el flex flex-wrap items-center gap-2 cursor-pointer">
@@ -265,7 +268,7 @@ function FeedBackForm(props) {
                     </div>
                 </div>
             </form>
-        </>
+        </Formik>
     );
 }
 
