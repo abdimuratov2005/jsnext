@@ -1,27 +1,42 @@
 'use client'
+import './develop.css'
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {AnimatePresence, motion} from "framer-motion";
-
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 
 
 // import required modules
-import {EffectCards} from 'swiper/modules';
+import {EffectCards, Mousewheel} from 'swiper/modules';
+import Loader from "@/components/Loader/Loader";
 
 function Page(props) {
 
+
     // стейт менеджеры контента
+    const [dataPopup, setDataPopup] = useState([])
     const [buttonsMenu, setButtonsMenu] = useState('develop')
     const [isShow, setIsShow] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
+
     const [currentDescriptionButton, setCurrentDescriptionButton] = useState(0)
+
+    useEffect(() => {
+        hiddenScrollBody()
+    }, [dataPopup])
+
+    function hiddenScrollBody() {
+        if (dataPopup.length <= 0) {
+            document.body.style.overflow = 'auto'
+        } else {
+            document.body.style.overflow = 'hidden'
+        }
+    }
 
     const block = [
         {
@@ -254,9 +269,6 @@ function Page(props) {
         setIsShow(false)
         setCurrentDescriptionButton(0)
     }
-
-
-    const [dataPopup, setDataPopup] = useState([])
 
 
     async function getData(link) {
@@ -546,20 +558,39 @@ function Page(props) {
                         transition={{duration: 0.5}}
                         style={{backdropFilter: 'blur(5px)'}}
                         className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
-                        <div className='z-40 w-[1024px] mx-auto absolute top-0 left-0 right-0  h-screen '>
-                            <button className='text-amber-50' onClick={() => setDataPopup([])}>Закрыть</button>
+                        <div className='z-40 w-[1024px] m-auto absolute top-0 left-0 right-0 bottom-0  h-[50vh]'>
+                            <button className='text-amber-50 right-[30px] absolute top-[-80px]' onClick={() => {
+                                setDataPopup([])
+                            }}>
+                                <svg
+                                    width={30}
+                                    height={30}
+                                    viewBox="0 0 30 30"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M14.3226 17.9674C11.7133 20.3402 9.16172 22.6385 6.63565 24.9654C5.17224 26.3134 3.76123 27.7199 2.30123 29.0716C1.91237 29.4408 1.46552 29.7409 0.979126 29.9595C0.739275 30.0618 0.221335 29.9595 0.103217 29.7722C-0.0530674 29.5234 -0.00686019 29.082 0.0779113 28.7574C0.139582 28.5207 0.390682 28.3248 0.580112 28.1348C4.18256 24.5318 7.78667 20.9312 11.3923 17.3329C11.7969 16.9293 12.2131 16.538 12.6779 16.0898C11.1022 14.316 9.52409 12.6043 8.01749 10.829C5.61295 7.99437 3.25666 5.11755 0.880452 2.25835C0.794073 2.15444 0.71977 2.04071 0.632588 1.9368C0.216766 1.43749 -0.0763915 0.899327 0.397083 0.293654C0.751637 -0.159833 1.59922 -0.0921009 2.18941 0.524822C3.65925 2.06079 5.09106 3.63397 6.51089 5.21923C9.10345 8.11218 11.6758 11.024 14.2591 13.9255C14.3697 14.031 14.4873 14.1287 14.611 14.2178C16.6086 12.2784 18.584 10.3454 20.5759 8.42901C22.8861 6.2076 25.2043 3.99493 27.5306 1.79097C28.4033 0.962547 29.103 0.813227 29.6385 1.29658C30.1935 1.79732 30.1418 2.6339 29.2568 3.53085C26.8639 5.9562 24.4132 8.32265 21.9648 10.6917C20.0997 12.4971 18.2047 14.2714 16.2196 16.1571C17.8327 17.8518 19.3755 19.541 20.993 21.152C22.5466 22.6994 24.187 24.1571 25.7712 25.6726C26.3905 26.2429 26.9704 26.856 27.5069 27.5076C27.9396 28.0543 28.0035 28.733 27.4716 29.2722C26.9475 29.8041 26.3406 29.6161 25.835 29.2136C24.8679 28.4836 23.9408 27.7001 23.058 26.8667C20.3556 24.1783 17.7008 21.4406 15.0287 18.7207C14.8174 18.506 14.6154 18.2806 14.3226 17.9674Z"
+                                        fill="white"
+                                        fillOpacity="0.8"
+                                    />
+                                </svg>
+                            </button>
                             <Swiper
                                 effect={'cards'}
+                                mousewheel={true}
                                 grabCursor={true}
-                                modules={[EffectCards]}
+                                modules={[EffectCards, Mousewheel]}
                                 className="mySwiper">
                                 {dataPopup && dataPopup.map((item, index) => {
+
+                                    console.log(index + 'index')
                                     return (
                                         <SwiperSlide
                                             key={index}
                                             className="bg-transparent">
                                             <div
-                                                className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative ">
+                                                className="overflow-auto h-[600px] develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative ">
                                                 <h2 className="develop-step-title font-medium text-2xl">
                                                     {item.title}
                                                 </h2>
@@ -567,31 +598,58 @@ function Page(props) {
                                                      className="develop-step-content text-[1.2rem]">
 
                                                 </div>
-                                                <div className="develop-step-gallery grid grid-cols-3 gap-8">
+                                                <div className="">
                                                     {item.media && item.media.map((image) => {
-                                                        return (
-                                                            image.imgs && image.imgs.map((item, index) => {
-                                                                return (
-                                                                    <div
-                                                                        key={index}
-                                                                        className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
-                                                                        style={{
-                                                                            backgroundImage: `url(${item.img})`
-                                                                        }}
-                                                                    >
-                                                                    </div>)
-                                                            })
-                                                        )
+                                                        console.log(image)
+                                                        if (image.imgs) {
+                                                            return (
+                                                                <div
+                                                                    className={'develop-step-gallery grid grid-cols-3 gap-8'}>{image.imgs.map((item, index) => {
+                                                                    return (
+                                                                        <div
+                                                                            key={index}
+                                                                            className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
+                                                                            style={{
+                                                                                backgroundImage: `url(${item.img})`
+                                                                            }}
+                                                                        >
+                                                                        </div>)
+                                                                })}</div>
+                                                            )
+                                                        } else if (image.frame) {
+                                                            return (
+                                                                <div dangerouslySetInnerHTML={{__html: image.frame}}
+                                                                     className="h-[600x] develop-step-content text-[1.2rem]">
+                                                                </div>
+                                                            )
+                                                        }
+
                                                     })}
                                                 </div>
+
+                                                {dataPopup.length === index + 1 && <div
+                                                    className="develop-step-btns flex justify-end gap-6 font-grotesk font-light text-xs"
+                                                >
+                                                    <a
+                                                        href="#"
+                                                        className="develop-step-portfolio btn-white px-8 py-3 text-darkgrey-mapbiz rounded-[24px] border border-darkgrey-mapbiz"
+                                                    >
+                                                        Смотрите портфолио
+                                                    </a>
+                                                    <a
+                                                        href="#"
+                                                        className="develop-step-talk btn-white px-8 py-3 rounded-[24px] bg-darkgrey-mapbiz text-white shadow-interface-mapbiz"
+                                                    >
+                                                        Обсудить проект
+                                                    </a>
+                                                </div>}
                                             </div>
                                         </SwiperSlide>
                                     )
                                 })}
                             </Swiper>
                         </div>
-                    </motion.div> : '')
-                }
+                    </motion.div> : '')}
             </AnimatePresence>
         </section>
 
