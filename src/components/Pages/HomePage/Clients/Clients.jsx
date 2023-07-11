@@ -1,9 +1,9 @@
 'use client'
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
-import {Autoplay, Navigation, Pagination} from "swiper/modules";
+import {Autoplay} from "swiper/modules";
 import './Clients.css'
 
 export default function Clients({posts}) {
@@ -50,19 +50,7 @@ export default function Clients({posts}) {
         getImageUrls('carousel_third', setImagesThree);
         getImageUrls('carousel_fourth', setImagesFour);
     }, [])
-    const swiperRef = useRef(null);
 
-    const handleMouseEnter = () => {
-        if (swiperRef.current && swiperRef.current.swiper.autoplay.running) {
-            swiperRef.current.swiper.autoplay.stop();
-        }
-    };
-
-    const handleMouseLeave = () => {
-        if (swiperRef.current && !swiperRef.current.swiper.autoplay.running) {
-            swiperRef.current.swiper.autoplay.start();
-        }
-    };
 
     const hoverBtnChange = () => setHoverBtn(!hoverBtn);
 

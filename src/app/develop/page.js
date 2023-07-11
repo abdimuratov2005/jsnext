@@ -1,11 +1,21 @@
 'use client'
 import React, {useEffect, useState} from 'react';
-import styles from './Develop.module.scss'
 import axios from "axios";
 import {AnimatePresence, motion} from "framer-motion";
-import {Swiper, SwiperSlide} from "swiper/react";
+
+// Import Swiper React components
+import {Swiper, SwiperSlide} from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+
+
+// import required modules
+import {EffectCards} from 'swiper/modules';
 
 function Page(props) {
+
     // стейт менеджеры контента
     const [buttonsMenu, setButtonsMenu] = useState('develop')
     const [isShow, setIsShow] = useState(false)
@@ -538,12 +548,18 @@ function Page(props) {
                         className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
                         <div className='z-40 w-[1024px] mx-auto absolute top-0 left-0 right-0  h-screen '>
                             <button className='text-amber-50' onClick={() => setDataPopup([])}>Закрыть</button>
-                            <Swiper>
-                                {dataPopup.map((item, index) => {
+                            <Swiper
+                                effect={'cards'}
+                                grabCursor={true}
+                                modules={[EffectCards]}
+                                className="mySwiper">
+                                {dataPopup && dataPopup.map((item, index) => {
                                     return (
-                                        <SwiperSlide effect="cards"  key={index} className="develop-step py-20">
+                                        <SwiperSlide
+                                            key={index}
+                                            className="bg-transparent">
                                             <div
-                                                className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative shadow-step-mapbiz">
+                                                className="develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative ">
                                                 <h2 className="develop-step-title font-medium text-2xl">
                                                     {item.title}
                                                 </h2>
