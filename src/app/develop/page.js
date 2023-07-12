@@ -600,10 +600,11 @@ function Page(props) {
                                                 </div>
                                                 <div className="">
                                                     {item.media && item.media.map((image) => {
-                                                        console.log(image)
+                                                        console.log(image, index)
                                                         if (image.imgs) {
                                                             return (
                                                                 <div
+                                                                    key={index}
                                                                     className={'develop-step-gallery grid grid-cols-3 gap-8'}>{image.imgs.map((item, index) => {
                                                                     return (
                                                                         <div
@@ -618,7 +619,7 @@ function Page(props) {
                                                             )
                                                         } else if (image.frame) {
                                                             return (
-                                                                <div dangerouslySetInnerHTML={{__html: image.frame}}
+                                                                <div key={index} dangerouslySetInnerHTML={{__html: image.frame}}
                                                                      className="h-[600x] develop-step-content text-[1.2rem]">
                                                                 </div>
                                                             )
