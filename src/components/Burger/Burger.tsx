@@ -21,7 +21,7 @@ function Burger({isOpen, setIsOpen}) {
         {
 
             name: 'Портфолио',
-            href: "/1",
+            href: "/portfolio",
             className: "",
         },
         {

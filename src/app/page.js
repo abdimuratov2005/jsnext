@@ -8,6 +8,7 @@ import API from "@/Api/Api";
 import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm'
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import Team from "@/components/Pages/HomePage/Team/Team";
+import Video from "@/components/Video/Video";
 
 async function getData () {
     const ulr = 'https://прибыльный-сайт.рф/wp-json/'
@@ -32,6 +33,7 @@ export default async function Page() {
     return (
         <>
             <HomePageMain/>
+            <Video></Video>
             <Services/>
             <RunTimeLine
                 text={textik}/>

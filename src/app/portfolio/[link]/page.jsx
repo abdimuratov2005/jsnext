@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 export const getStaticPaths = async () => {
@@ -31,10 +30,15 @@ export default async function portFolioPageCurrent({params}) {
     }
 
     const data = await getData(params.link); // Добавляем await для ожидания завершения асинхронной функции
-
-    console.log(data);
+    console.log(data.fields.content[0])
+    const {title, client, descr, task} = data.fields.content[0]
 
     return (
-        <div>{params.link}</div>
+        <>
+            <h1 className={'text-white'}>{title}</h1>
+            <p className={'text-white'}>{descr}</p>
+            <p className={'text-white'}>{task}</p>
+            <p className={'text-white'}>{client}</p>
+        </>
     );
 }

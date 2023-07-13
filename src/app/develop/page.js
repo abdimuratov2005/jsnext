@@ -145,7 +145,7 @@ function Page(props) {
                         description: 'Разработка концепции будущего веб-ресурса строится на на основе анализа, прототипирования и пользловательского сценария. После, вырабатывается стилистика, с её учетом полученный прототип обрастает содержимым, графикой, анимациями и “чувствами”.\n' +
                             '\n' +
                             'Это и называется “Дизайн проект”.',
-                        request: '/develop/'
+                        request: '/design/web-more'
                     }
                 },
                 {
@@ -277,6 +277,7 @@ function Page(props) {
         await axios.get(`${url}`).then(res => {
             const data = res.data.fields.blocks
             setDataPopup(data)
+            console.log(data)
             setIsLoading(false)
         }).catch(err => {
             console.log(err)
@@ -583,7 +584,6 @@ function Page(props) {
                                 modules={[EffectCards, Mousewheel]}
                                 className="mySwiper">
                                 {dataPopup && dataPopup.map((item, index) => {
-
                                     console.log(index + 'index')
                                     return (
                                         <SwiperSlide
