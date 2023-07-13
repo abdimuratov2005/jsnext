@@ -1,20 +1,22 @@
 import axios from "axios";
 
-export const getStaticPaths = async () => {
-    const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/porfolio/';
-    const res = await axios.get(url).then(res => {
-        return res.data.fields.content[0].els.map((link) => {
-            return link.link
-        })
-    });
-    const paths = res.map((item) => ({
-        params: {link: item},
-    }));
-    return {
-        paths,
-        fallback: false,
-    };
-};
+// тут ошибка ебаная
+
+// export const getStaticPaths = async () => {
+//     const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/porfolio/';
+//     const res = await axios.get(url).then(res => {
+//         return res.data.fields.content[0].els.map((link) => {
+//             return link.link
+//         })
+//     });
+//     const paths = res.map((item) => ({
+//         params: {link: item},
+//     }));
+//     return {
+//         paths,
+//         fallback: false,
+//     };
+// };
 
 
 export default async function portFolioPageCurrent({params}) {
