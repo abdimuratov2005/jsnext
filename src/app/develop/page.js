@@ -1,4 +1,3 @@
-'use client'
 import './develop.css'
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
@@ -578,11 +577,12 @@ function Page(props) {
                                 </svg>
                             </button>
                             <Swiper
+
                                 effect={'cards'}
                                 mousewheel={true}
                                 grabCursor={true}
                                 modules={[EffectCards, Mousewheel]}
-                                className="mySwiper">
+                                className="mySwiper overflow-hidden">
                                 {dataPopup && dataPopup.map((item, index) => {
                                     console.log(index + 'index')
                                     return (
