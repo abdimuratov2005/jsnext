@@ -1,3 +1,4 @@
+'use client'
 import './develop.css'
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
@@ -14,7 +15,6 @@ import {EffectCards, Mousewheel} from 'swiper/modules';
 import Loader from "@/components/Loader/Loader";
 
 function Page(props) {
-
 
     // стейт менеджеры контента
     const [dataPopup, setDataPopup] = useState([])
