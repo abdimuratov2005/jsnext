@@ -1,4 +1,5 @@
 import axios from "axios";
+import NextPage from "@/components/NextPage/NextPage";
 
 // тут ошибка ебаная
 
@@ -35,14 +36,15 @@ export default async function portFolioPageCurrent({params}) {
 
     const data = await getData(params.link); // Добавляем await для ожидания завершения асинхронной функции
 
-    const {title, client, descr, task} = data.fields.content[0]
-
+    const {title, client, descr, task, next_link} = data.fields.content[0]
+    const {link, img} = next_link
     return (
         <>
             <h1 className={'text-white'}>{title}</h1>
             <p className={'text-white'}>{descr}</p>
             <p className={'text-white'}>{task}</p>
             <p className={'text-white'}>{client}</p>
+            <NextPage url={link} image={img}></NextPage>
         </>
     );
 }
