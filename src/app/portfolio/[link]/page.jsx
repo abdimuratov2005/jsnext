@@ -39,12 +39,17 @@ export default async function portFolioPageCurrent({params}) {
     const {title, client, descr, task, next_link} = data.fields.content[0]
     const {link, img} = next_link
     return (
-        <>
-            <h1 className={'text-white'}>{title}</h1>
-            <p className={'text-white'}>{descr}</p>
-            <p className={'text-white'}>{task}</p>
-            <p className={'text-white'}>{client}</p>
-            <NextPage url={link} image={img}></NextPage>
-        </>
+        <section style={{backgroundImage: `url(/img/portfolio/bg.jpg)`}} className='bg-no-repeat bg-cover bg-no-repeat h-screen flex justify-center pt-[240px]'>
+            <div className='max-w-[1280px] relative w-full  h-[875px]'>
+                <div className={`absolute right-auto top-auto bg-cover bg-no-repeat bg-center w-full h-[875px]`} style={{backgroundImage: `url(/img/portfolio/kpk.png)`}} >
+                    <h1 className={'text-white'}>{title}</h1>
+                    <p className={'text-white'}>{descr}</p>
+                    <p className={'text-white'}>{task}</p>
+                    <p className={'text-white'}>{client}</p>
+                </div>
+
+            </div>
+
+        </section>
     );
 }

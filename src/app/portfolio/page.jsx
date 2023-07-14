@@ -27,90 +27,36 @@ export default async function Portfolio() {
                 data-type-transition=""
                 aria-hidden="true"
             >
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
+                <div className="type__line select-none">развиваемся, приносим пользу, вызываем</div>
+                <div className="type__line select-none">интерес, делаем интернет красивее,</div>
+                <div className="type__line select-none">дизайн вызывающий эмоции, работаем,</div>
+                <div className="type__line select-none">кайфуем, творим, достигаем, развиваемся,</div>
+                <div className="type__line select-none">приносим пользу, вызываем интерес,</div>
+                <div className="type__line select-none">делаем интернет красивее, дизайн</div>
+                <div className="type__line select-none">вызывающий эмоции, работаем, кайфуем,</div>
+                <div className="type__line select-none">творим, пользу, вызываем интерес, делаем</div>
+                <div className="type__line select-none">интернет красивее, дизайн вызывающий</div>
+                <div className="type__line select-none">интернет красивее, дизайн вызывающий</div>
+                <div className="type__line select-none">эмоции, работаем, кайфуем, творим,</div>
+                <div className="type__line select-none">достигаем, развиваемся, приносим пользу,</div>
+                <div className="type__line select-none">вызываем интерес, делаем интернет</div>
+                <div className="type__line select-none">красивее, дизайн вызывающий эмоции,</div>
+                <div className="type__line select-none">могём, хотим</div>
 
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
-                <div className="type__line select-none">
-                    работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
-                </div>
             </div>
             <div className={styles.wrapper}>
                 <h1 className={styles.portfolio__title}>Портфолио</h1>
                 <div className='flex justify-center'>
                     <div className={`${styles.portfolio} justify-center`}>{data.map((item) => {
                         return (
-                            <div className={styles.portfolio__item} key={item.link}>
+                            <Link href={`/portfolio/${item.link}`} className={styles.portfolio__item} key={item.link}>
                                 <img className={styles.portfolio__image} src={item.img} alt=""/>
                                 <h2 className={styles.portfolio__text}>{item.title}</h2>
                                 <div className='flex justify-end'>
-                                    <Link className={styles.portfolio__link} href={`/portfolio/${item.link}`}>Посмотреть</Link>
+                                    <button className={styles.portfolio__link} >Посмотреть</button>
                                 </div>
 
-                            </div>
+                            </Link>
 
                         )
 
@@ -118,7 +64,7 @@ export default async function Portfolio() {
                     < /div>
                 </div>
             </div>
-            <NextPage></NextPage>
+            <NextPage url={'/contact'}></NextPage>
         </section>
     );
 }

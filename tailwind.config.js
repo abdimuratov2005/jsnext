@@ -8,9 +8,6 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
-        cursor: {
-          'next-mapbiz': 'url(assets/images/home/next.svg), pointer',
-        },
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
@@ -18,6 +15,9 @@ module.exports = {
         blink_ffcoder: {
           '50%': { opacity: '0.2' },
         },
+      },
+      cursor: {
+        'next-mapbiz': 'url(/img/cursor.svg), pointer',
       },
       animation: {
         'marquee-base-mapbiz': 'marquee 13.5s infinite linear',
