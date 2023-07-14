@@ -57,6 +57,7 @@ export default async function Portfolio() {
                 <div className="type__line select-none">
                     работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
                 </div>
+
                 <div className="type__line select-none">
                     работаем, кайфуем, творим, достигаем, развиваемся, приносим пользу
                 </div>
