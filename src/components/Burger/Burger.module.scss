@@ -1,3 +1,4 @@
+
 .overlay {
   background-image: url(../../../public/img/Menu/bacgroundBurger.jpg);
 }
@@ -21,11 +22,18 @@
 }
 
 .header {
-  &__titleTop {
+  &__title {
+    position: relative;
+    text-align: center;
+    background-position: top;
+    background-image: url("topHeading.svg");
     background-repeat: no-repeat;
-    background-size: cover;
-    height: 100px;
-    z-index: 1;
-    background-image: url(../../../public/img/header/header-navTop.svg);
+    background-size: contain;
+    height: 50px;
+  }
+  &__titleTop {
+    padding-top: 10px;
+    text-align: center;
+
   }
 }

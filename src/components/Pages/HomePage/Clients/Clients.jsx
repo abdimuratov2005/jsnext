@@ -5,6 +5,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import 'swiper/css'
 import {Autoplay} from "swiper/modules";
 import './Clients.css'
+import Link from "next/link";
 
 export default function Clients({posts}) {
 
@@ -181,14 +182,14 @@ export default function Clients({posts}) {
                         </a>
                     </div>
                     <div className="inline-block w-auto mt-24">
-                        <a
+                        <Link
                             className={`py-3 px-10 border ${ hoverBtn ? 'bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}
                             href="#"
                             onMouseEnter={hoverBtnChange}
                             onMouseLeave={hoverBtnChange}
                         >
                             Смотреть портфолио
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -141,10 +141,10 @@ function Burger({isOpen, setIsOpen}) {
                             <div className="popup-menu-services w-8/12 pl-10">
                                 <div className="relative py-4">
                                     <div
-                                        className="popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none">
-                                        <div className={`${styles.header__titleTop} absolute w-full h-full left-16 top-2.5`}>
+                                        className={`${styles.header__title} popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none`}>
+                                        <p className={`${styles.header__titleTop}`}>
                                             Услуги Web студии
-                                        </div>
+                                        </p>
                                     </div>
                                     <div className="popup-menu-services__left h-full absolute left-0 top-0">
                                         <svg

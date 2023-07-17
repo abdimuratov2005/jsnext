@@ -1,16 +1,16 @@
 'use client'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
-
 import {useMotionValueEvent, useScroll} from "framer-motion"
+import Burger from "@/components/Burger/Burger";
 
-import dynamic from 'next/dynamic';
 
 // Загрузка компонента Burger динамически
-const DynamicBurger = dynamic(() => import('../Burger/Burger'), {  loading: () => <p>...</p>  });
+
 
 function Header(props) {
+
     const [openBurger, setOpenBurger] = useState(false)
     const [isScroll, setIsScroll] = useState(false)
     const [isMuted, setIsMuted] = useState(false)
@@ -119,7 +119,7 @@ function Header(props) {
 
                     </div>
                 </div>
-                <DynamicBurger setIsOpen={handleOpen} isOpen={openBurger}/>
+                <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
             </header>
         </>
     );

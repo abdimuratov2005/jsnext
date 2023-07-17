@@ -77,11 +77,12 @@ const socialPhone = [
 
 
 function FeedBackForm(props) {
+    const [hoverBtn, setHoverBtn] = useState(false)
     const {register, handleSubmit, watch, reset, formState: {errors, isSubmitSuccessful}} = useForm();
     const onSubmit = (data) => {
         console.log(data)
     };
-
+    const hoverBtnChange = () => setHoverBtn(!hoverBtn);
     useEffect(() => {
         const clearChecked = stateCheckBox.map((item) => {
             return item.name
@@ -115,21 +116,21 @@ function FeedBackForm(props) {
 
 
     return (
-        <div className='w-[1024px] m-auto'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='w-[1024px] m-auto mt-[150px]'>
+            <form className={`max-w-[550px]`} onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="name" className='text-white flex flex-col'>
                     Начнем знакомство*
                     <input
-                        className='max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-white'
+                        className='text-[20px] text-[#808080] max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080]'
                         name='name' placeholder='Ваше Имя' defaultValue="" {...register("name", {required: true})} />
                 </label>
-                <div>
-                    <label className='text-white flex flex-col'>Какие услуги вам нужны?</label>
+                <label className='text-white flex flex-col mb-[16px] mt-[40px]'>Какие услуги вам нужны?</label>
+                <div className={`flex flex-wrap gap-[8px]`}>
                     {stateCheckBox.map((item) => {
                         const isChecked = checkedItems.includes(item.name);
                         const labelClass = isChecked ? 'checkbox-btn checkbox-btn_active' : 'checkbox-btn';
                         return (
-                            <label key={item.name} className={`${labelClass} px-4 py-2 rounded-[24px] text-[#808080]`}>
+                            <label key={item.name} className={`${labelClass} px-[16px] py-[8px] text-[14px]  rounded-[24px] text-[#808080]`}>
                                 <input
                                     {...register(`${item.name}`)}
                                     type="checkbox"
@@ -142,35 +143,35 @@ function FeedBackForm(props) {
                     })}
                 </div>
 
-                <label className='text-white flex flex-col'>
+                <label className='text-white flex flex-col mt-[40px] mb-[8px]'>
                     Как с вами связаться? *
-                    <InputMask mask="+7 (999)-999-99-99" type='phone'
-                               className={'max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-white'} {...register("telephone", {required: true})} />
+                    <InputMask mask="+7 (999)-999-99-99" type='phone' placeholder='+7 (999)-999-99-99'
+                               className={'max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080] text-[#808080]' } {...register("telephone", {required: true})} />
                 </label>
 
 
                 <div>
-                    <label className='text-white flex flex-col'>Какие услуги вам нужны?</label>
+                    <label className='text-white flex flex-col mt-[40px] mb-[40px]'>При номере есть:</label>
                     {socialPhone.map((item) => {
                         return (
-                            <label key={item.social} className={`px-4 py-2 rounded-[24px] text-[#808080]`}>
+                            <label key={item.social} className={`custom-social px-4 py-2 rounded-[24px] text-[#808080] text-[20px]`}>
                                 <input
+                                    className={`text-[20px]`}
                                     {...register(`${item.social}`)}
                                     type="checkbox"
                                     name={item.social}
                                     onChange={handleCheckboxChange}
                                 />
+                                <span className="checkmark"></span>
                                 {item.social}
                             </label>
                         )
                     })}
                 </div>
-
-
                 {/* errors will return when field validation fails  */}
                 {errors.exampleRequired && <span>This field is required</span>}
-
-                <input type="submit"/>
+                <button   onMouseEnter={hoverBtnChange}
+                          onMouseLeave={hoverBtnChange} type="submit"   className={`py-3 px-10 border mt-[40px] ${ hoverBtn ? ' bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}>Начать общение</button>
             </form>
         </div>
         // <form onSubmit={handleSubmit}

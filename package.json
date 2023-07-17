@@ -10,6 +10,8 @@
     "export": "next export"
   },
   "dependencies": {
+    "@react-spring/parallax": "^9.7.3",
+    "@react-spring/web": "^9.7.3",
     "@react-three/fiber": "^8.13.4",
     "@types/three": "^0.152.1",
     "autoprefixer": "10.4.14",

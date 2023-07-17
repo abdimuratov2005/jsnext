@@ -10,7 +10,8 @@ import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import Team from "@/components/Pages/HomePage/Team/Team";
 import Video from "@/components/Video/Video";
 
-async function getData () {
+async function getData() {
+
     const ulr = 'https://прибыльный-сайт.рф/wp-json/'
     return async () => {
         try {
@@ -33,7 +34,7 @@ export default async function Page() {
     return (
         <>
             <HomePageMain/>
-            <Video></Video>
+            {/*<Video></Video>*/}
             <Services/>
             <RunTimeLine
                 text={textik}/>

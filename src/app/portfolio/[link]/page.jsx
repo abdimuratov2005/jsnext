@@ -47,9 +47,7 @@ export default async function portFolioPageCurrent({params}) {
                     <p className={'text-white'}>{task}</p>
                     <p className={'text-white'}>{client}</p>
                 </div>
-
             </div>
-
         </section>
     );
 }
