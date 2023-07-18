@@ -6,7 +6,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = (props: FooterProps) => {
     return (
-        <footer className="bg-darkgrey-mapbiz">
+        <footer className=" bg-darkgrey-mapbiz">
             <div
                 className="footer-wrapper max-w-screen-xl mx-auto py-5 flex items-center flex-wrap lg:flex-nowrap font-grotesk-light text-xs text-greywhite-mapbiz">
                 <div className="footer-grid grid 2xl:grid-cols-3">

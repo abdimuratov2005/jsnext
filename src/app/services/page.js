@@ -2,20 +2,30 @@
 import ServicesMain from "@/components/Pages/Services/ServicesMain";
 import ServicesList from "@/components/Pages/Services/ServicesList/ServicesList";
 import Link from "next/link";
-import {Parallax} from "@react-spring/parallax";
+import {Parallax, ParallaxLayer} from "@react-spring/parallax";
+import Footer from "@/components/Footer/Footer";
 
 
 export default function Services() {
 
     return (
-        <>
-            <ServicesMain/>
+        <div className={''}>
+            <Parallax className={`flex flex-col`} pages={3}>
+                <ParallaxLayer offset={0} speed={0.5}>
+                    <ServicesMain/>
+                </ParallaxLayer>
+                <ParallaxLayer offset={1} speed={1}>
                     <ServicesList/>
-            <Link href={'/'}>
-                <div className="next h-[120vh] bg-center bg-cover bg-no-repeat cursor-next-mapbiz">
-                </div>
-            </Link>
-        </>
+                </ParallaxLayer>
+                <ParallaxLayer  offset={2} speed={1.5}>
+                    <Link href={'/'}>
+                        <div className="next h-full  bg-amber-300 bg-center bg-cover bg-no-repeat cursor-next-mapbiz">
+                        </div>
+                    </Link>
+                </ParallaxLayer>
+            </Parallax>
+        </div>
+
 
 
     )

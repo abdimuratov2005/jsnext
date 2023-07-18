@@ -1,0 +1,17 @@
+.slick-dots img {
+    max-width: 800px;
+    width: 72px !important;   /* Измените ширину иконки */
+    height: 67px !important;  /* Измените высоту иконки */
+}
+.mycustom  li {
+    width: 72px;
+    height: 69px;
+    justify-content: center;
+
+}
+.slider__div {
+    max-height: 500px;
+}
+.slider__img {
+    max-height: 500px;
+}

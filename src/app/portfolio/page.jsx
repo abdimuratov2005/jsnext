@@ -53,11 +53,9 @@ export default async function Portfolio() {
                                 <img className={styles.portfolio__image} src={item.img} alt=""/>
                                 <h2 className={styles.portfolio__text}>{item.title}</h2>
                                 <div className='flex justify-end'>
-                                    <button className={styles.portfolio__link} >Посмотреть</button>
+                                    <button className={styles.portfolio__link}>Посмотреть</button>
                                 </div>
-
                             </Link>
-
                         )
 
                     })}

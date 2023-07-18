@@ -3,12 +3,11 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 export default function ServicesList() {
     return (
-        <section className="h-[1250px]  relative h-full services  max-w-screen-xl mx-auto pt-48 pb-56  ">
-            <Parallax pages={1.1}>
-                <ParallaxLayer  speed={1.5} >
+        <section className=" relative h-full services  max-w-screen-xl mx-auto pt-48 pb-56  ">
+                <ParallaxLayer offset={0}  speed={1.3} >
                     <img  src="/paralax.jpg" alt="" />
                 </ParallaxLayer>
-                <ParallaxLayer speed={4.5} className="services-fone">
+                <ParallaxLayer offset={0} speed={1.6} className="services-fone">
                     <div className="flex justify-end font-grotesk-light text-6xl leading-[5.5rem] text-white opacity-90">
                         <div className="services-nav w-6/12
                          gap-y-6 mt-80">
@@ -165,7 +164,6 @@ export default function ServicesList() {
                         </div>
                     </div>
                 </ParallaxLayer>
-            </Parallax>
 
         </section>
     )

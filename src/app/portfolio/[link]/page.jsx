@@ -1,5 +1,8 @@
+
 import axios from "axios";
-import NextPage from "@/components/NextPage/NextPage";
+import VerticalMode from "@/components/Slider/Slider";
+import React from "react";
+
 
 // тут ошибка ебаная
 
@@ -35,19 +38,26 @@ export default async function portFolioPageCurrent({params}) {
     }
 
     const data = await getData(params.link); // Добавляем await для ожидания завершения асинхронной функции
-
-    const {title, client, descr, task, next_link} = data.fields.content[0]
+    const {title, client, descr, task, next_link, imgs} = data.fields.content[0]
     const {link, img} = next_link
     return (
-        <section style={{backgroundImage: `url(/img/portfolio/bg.jpg)`}} className='bg-no-repeat bg-cover bg-no-repeat h-screen flex justify-center pt-[240px]'>
-            <div className='max-w-[1280px] relative w-full  h-[875px]'>
-                <div className={`absolute right-auto top-auto bg-cover bg-no-repeat bg-center w-full h-[875px]`} style={{backgroundImage: `url(/img/portfolio/kpk.png)`}} >
-                    <h1 className={'text-white'}>{title}</h1>
-                    <p className={'text-white'}>{descr}</p>
-                    <p className={'text-white'}>{task}</p>
-                    <p className={'text-white'}>{client}</p>
+            <section style={{backgroundImage: `url(/img/portfolio/bg.jpg)`}} className='bg-no-repeat bg-cover bg-no-repeat h-screen flex justify-center items-center relative'>
+                <div className={`absolute items-center justify-start px-[135px] h-full max-h-[875px] gap-[15px] flex top-auto bottom-auto pt-[50px] pb-[50px] w-full bg-no-repeat bg-cover max-w-[1280px]`} style={{backgroundImage: `url(/img/portfolio/kpk.png)`}} >
+                    <div>
+                        <h1 className={'text-white text-[23px]'}>{title}</h1>
+                        <VerticalMode data={imgs}/>
+                    </div>
+
+                    <div >
+                        <div dangerouslySetInnerHTML={{__html: descr}}
+                             className="text-[14px] max-w-[440px] text-white develop-step-content text-[1.2rem] ">
+
+                        </div>
+
+                        {/*<p className={'text-white'}>{task}</p>*/}
+                        {/*<p className={'text-white'}>{client}</p>*/}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
     );
 }
