@@ -1,9 +1,11 @@
 'use client'
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './slider.css'
-import React from "react";
+import React, {Suspense} from "react";
 import Slider from "react-slick";
+import Loading from "@/app/loading";
 
 
 const VerticalMode = ({data}) => {
@@ -29,17 +31,16 @@ const VerticalMode = ({data}) => {
     };
 
     return (
-        <Slider className={'max-w-[500px] h-full z-10'} {...settings}>
-            {data.map((image, index) => {
-                return <div key={index} className={'slider__div'}>
-                    <img
-                        className={'slider__img'}
-                        src={`${image.img}`}
-                        alt={''}/>
-                </div>
-            })}
-        </Slider>
-
+            <Slider className={'max-w-[500px] w-[50%] h-full z-10 w-full'} {...settings}>
+                {data.map((image, index) => {
+                    return <div key={index} className={'slider__div'}>
+                        <img
+                            className={'slider__img'}
+                            src={`${image.img}`}
+                            alt={''}/>
+                    </div>
+                })}
+            </Slider>
     );
 };
 

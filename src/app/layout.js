@@ -2,8 +2,8 @@ import './globals.css';
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import localFont from 'next/font/local'
-import Head from 'next/head';
-
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 const cygrotesk = localFont({
     src: [
@@ -44,12 +44,14 @@ export const metadata = {
 
 
 
+
 export default function RootLayout({ children }) {
   return (
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>
       <Header />
-      {children}
+      <Suspense children={children} fallback={<Loading />}>
+      </Suspense>
       <Footer/>
       </body>
       </html>

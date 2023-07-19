@@ -42,14 +42,14 @@ export default async function portFolioPageCurrent({params}) {
     const {link, img} = next_link
 
     return (
-        <section style={{backgroundImage: `url(/img/portfolio/bg.jpg)`}}
+        <section style={{backgroundImage: `url(/img/portfolio/bg.jpg)`,}}
                  className='bg-no-repeat bg-cover bg-no-repeat h-screen flex justify-center items-center relative'>
             <div
-                className={`justify-center absolute gap-4 px-[135px] h-full max-h-[875px] gap-[15px] flex flex-col top-auto bottom-auto pt-[50px] pb-[50px] w-full bg-no-repeat bg-cover max-w-[1280px]`}
-                style={{backgroundImage: `url(/img/portfolio/kpk.png)`}}>
+                className={`justify-center absolute gap-4 px-[135px] h-full max-h-[875px] gap-[15px] flex flex-col top-auto bottom-auto pt-[50px] pb-[50px] w-full bg-no-repeat bg-contain mx-auto max-w-[1280px] bg-center`}
+                style={{backgroundImage: `url(/img/portfolio/kpk.png)`,  aspectRatio: '16/9'}}>
                 <h1 className={'text-white text-[23px]'}>{title}</h1>
                 <div className={'flex gap-[15px]'}>
-                    <div className={'flex-col flex '}>
+                    <div className={'flex-col flex  max-w-[500px]'}>
                         <VerticalMode data={imgs}/>
                     </div>
                     <Tabs descr={descr} pages={pages}  task={task} client={client}/>

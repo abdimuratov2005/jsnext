@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion"
