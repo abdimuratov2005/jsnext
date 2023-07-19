@@ -30,6 +30,7 @@ module.exports = {
         'step-mapbiz': '0px -3px 6px rgba(0, 0, 0, 0.25)',
       },
       colors: {
+        'tabs': 'rgba(255, 255, 255, 0.60)',
         'crimson-mapbiz': '#E0124A',
         'crimsondark-mapbiz': '#ABFFF6',
         'darkgrey-mapbiz': '#1E1E1E',

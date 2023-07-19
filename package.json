@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.1",
     "react-input-mask": "^2.0.4",
+    "react-modal-image": "^2.6.0",
     "react-slick": "^0.29.0",
     "sass": "^1.63.6",
     "slick-carousel": "^1.8.1",

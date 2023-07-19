@@ -6,10 +6,10 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = (props: FooterProps) => {
     return (
-        <footer className=" bg-darkgrey-mapbiz">
+        <footer className="bg-darkgrey-mapbiz  w-full justify-center align-middle">
             <div
-                className="footer-wrapper max-w-screen-xl mx-auto py-5 flex items-center flex-wrap lg:flex-nowrap font-grotesk-light text-xs text-greywhite-mapbiz">
-                <div className="footer-grid grid 2xl:grid-cols-3">
+                className="footer-wrapper w-full max-w-screen-xl mx-auto py-5 flex items-center justify-center flex-wrap lg:flex-nowrap font-grotesk-light text-xs text-greywhite-mapbiz">
+                <div className="flex justify-between w-full">
                     <div className="text-left">Копирование любой информации с сайта запрещено</div>
                     <div className="text-center">Copyright @ 2023</div>
                     <a href="#" className="text-right">Политика конфиденциальности</a>

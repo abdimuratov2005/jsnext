@@ -7,6 +7,7 @@ import Slider from "react-slick";
 
 
 const VerticalMode = ({data}) => {
+
     const test = data.map((item) => {
         return item.img
     })
@@ -28,8 +29,7 @@ const VerticalMode = ({data}) => {
     };
 
     return (
-
-        <Slider className={'max-w-[500px] z-10'} {...settings}>
+        <Slider className={'max-w-[500px] h-full z-10'} {...settings}>
             {data.map((image, index) => {
                 return <div key={index} className={'slider__div'}>
                     <img

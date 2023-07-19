@@ -3,14 +3,11 @@ import ServicesMain from "@/components/Pages/Services/ServicesMain";
 import ServicesList from "@/components/Pages/Services/ServicesList/ServicesList";
 import Link from "next/link";
 import {Parallax, ParallaxLayer} from "@react-spring/parallax";
-import Footer from "@/components/Footer/Footer";
 
 
 export default function Services() {
-
     return (
-        <div className={''}>
-            <Parallax className={`flex flex-col`} pages={3}>
+            <Parallax  className={`  `} pages={3}>
                 <ParallaxLayer offset={0} speed={0.5}>
                     <ServicesMain/>
                 </ParallaxLayer>
@@ -24,10 +21,6 @@ export default function Services() {
                     </Link>
                 </ParallaxLayer>
             </Parallax>
-        </div>
-
-
-
     )
 }
 

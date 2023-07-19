@@ -4,10 +4,15 @@
     height: 67px !important;  /* Измените высоту иконки */
 }
 .mycustom  li {
+    position: relative !important;
     width: 72px;
     height: 69px;
     justify-content: center;
 
+}
+.slick-dots {
+    bottom: -13px;
+    position: relative;
 }
 .slider__div {
     max-height: 500px;
