@@ -50,7 +50,8 @@ export default function RootLayout({ children }) {
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>
       <Header />
-      <Suspense children={children} fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
+          {children}
       </Suspense>
       <Footer/>
       </body>
