@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './slider.css'
 import React, {Suspense} from "react";
 import Slider from "react-slick";
-import Loading from "@/app/loading";
+
 
 
 const VerticalMode = ({data}) => {

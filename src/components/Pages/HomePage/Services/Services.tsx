@@ -8,7 +8,7 @@ const links = [
         title: 'Дизайн'
     },
     {
-        href: '/services',
+        href: '/develop',
         title: 'Разработка'
     },
     {

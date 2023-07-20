@@ -40,7 +40,7 @@ function Burger({isOpen, setIsOpen}) {
     };
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode={"wait"} >
             {isOpen &&  <motion.div
                 initial={{ opacity: 0, clipPath: 'circle(0% at 50% 50%)' }}
                 animate={{ opacity: 1, clipPath: 'circle(100% at 50% 50%)' }}
