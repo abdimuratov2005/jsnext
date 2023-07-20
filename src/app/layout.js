@@ -52,9 +52,7 @@ export default function RootLayout({ children }) {
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>
       <Header />
-        <PageTransition>
             {children}
-        </PageTransition>
       <Footer />
       </body>
       </html>
