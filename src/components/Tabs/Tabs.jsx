@@ -35,7 +35,7 @@ function Tabs({descr, task, client, pages}) {
             </div>
             <div className={`flex justify-between items-center`}>
                 <Link href={`/portfolio/${next}`}>{arrowTab}</Link>
-                <Link className={'flex  items-center'} href={`/portfolio/${prev}`}><span className={'max-w-[100px] text-center text-[14px] text-white font-light'}>Следующий проект</span> {ArrowTabNext}</Link>
+                <Link className={'flex  items-center'} href={`/portfolio/${prev}`}><span className={'max-w-[100px] text-center text-[14px] text-white font-light mr-3'}>Следующий проект</span> {ArrowTabNext}</Link>
             </div>
 
         </div>

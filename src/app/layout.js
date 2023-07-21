@@ -5,7 +5,6 @@ import localFont from 'next/font/local'
 
 import PageTransition from "@/components/PageTransition/PageTranstition";
 
-
 const cygrotesk = localFont({
     src: [
         {
@@ -34,20 +33,13 @@ const cygrotesk = localFont({
 })
 
 
-
-
-
-
 export const metadata = {
     title: 'MapBiz - создание сайтов в Анапе',
     description: 'Главная',
 }
 
 
-
-
 export default function RootLayout({ children }) {
-
   return (
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>

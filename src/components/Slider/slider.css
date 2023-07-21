@@ -20,3 +20,7 @@
 .slider__img {
     max-height: 500px;
 }
+.slick-track {
+    display: flex;
+    gap: 10px;
+}

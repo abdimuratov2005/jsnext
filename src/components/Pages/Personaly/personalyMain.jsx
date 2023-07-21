@@ -1,7 +1,6 @@
-import React from 'react';
-import Image from "next/image";
 
-function PersonalyMain(props) {
+
+export default function PersonalyMain(props) {
     return (
         <section className="flex justify-center items-center bg-darkgrey-mapbiz">
             <div className="intro max-w-screen-xl w-full pt-60 pb-36 font-grotesk text-white">
@@ -33,7 +32,7 @@ function PersonalyMain(props) {
                         </p>
                     </div>
                     <div className="w-[45%] ml-10">
-                        <div className="h-[600px] bg-center bg-cover bg-no-repeat" style={{backgroundImage: 'url(/img/personaly/personaly.webp)'}}>
+                        <div className="h-[600px] bg-center bg-cover bg-no-repeat" style={{backgroundImage: 'url(/img/personally/personally.webp)'}}>
                         </div>
                     </div>
                 </div>
@@ -496,5 +495,3 @@ function PersonalyMain(props) {
 
     );
 }
-
-export default PersonalyMain;

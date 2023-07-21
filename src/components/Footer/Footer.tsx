@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 interface FooterProps {
     // Определите типы для пропсов, если они присутствуют
@@ -12,7 +13,7 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
                 <div className="flex justify-between w-full">
                     <div className="text-left">Копирование любой информации с сайта запрещено</div>
                     <div className="text-center">Copyright @ 2023</div>
-                    <a href="#" className="text-right">Политика конфиденциальности</a>
+                    <Link href="/personally" className="text-right">Политика конфиденциальности</Link>
                 </div>
             </div>
         </footer>
