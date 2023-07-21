@@ -1,660 +1,1374 @@
-'use client'
-import './develop.css'
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import {AnimatePresence, motion} from "framer-motion";
-// Import Swiper React components
-import {Swiper, SwiperSlide} from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-cards';
+import DevelopUnits from "@/components/Pages/Develop/DevelopUnits/DevelopUnits";
 
-
-// import required modules
-import {EffectCards, Mousewheel} from 'swiper/modules';
-import Loader from "@/components/Loader/Loader";
-
-function Page(props) {
-
-    // стейт менеджеры контента
-    const [dataPopup, setDataPopup] = useState([])
-    const [buttonsMenu, setButtonsMenu] = useState('develop')
-    const [isShow, setIsShow] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-
-
-    const [currentDescriptionButton, setCurrentDescriptionButton] = useState(0)
-
-    useEffect(() => {
-        hiddenScrollBody()
-    }, [dataPopup])
-
-    function hiddenScrollBody() {
-        if (dataPopup.length <= 0) {
-            document.body.style.overflow = 'auto'
-        } else {
-            document.body.style.overflow = 'hidden'
-        }
-    }
-
-    const block = [
-        {
-            id: 1,
-            el: 'develop',
-            title: 'Разработка сайтов'
-
-        },
-        {
-            id: 2,
-            el: 'design',
-            title: 'Дизайн'
-
-        },
-        {
-            id: 3,
-            el: 'market',
-            title: 'Маркетинг'
-
-        },
-    ]
-
-
-    const content = {
-
-        develop: {
-            title: 'Создание сайтов',
-            description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.',
-            els: [
-                {
-                    id: 1,
-                    label: 'Корпоративный сайт',
-                    content: {
-                        title: 'Корпоративный',
-                        description: 'Так называют многостраничный сайт со статичными страницами.\n' +
-                            '\n' +
-                            'В нашей компетенции разработка сайтов для компаний совершенно разного уровня и типа.\n' +
-                            '\n' +
-                            'Все успешные веб-студии знают “секретный состав работ” для создания сайта - лидера ниши.',
-                        request: '/develop/create-company-more'
-                    }
-                },
-                {
-                    id: 2,
-                    label: 'Интернет магазин',
-                    content: {
-                        title: 'Магазин / каталог',
-                        description: 'От того как собран E-comerce сайт зависит не только продажи и перспиктивы, но и удобства его администрирования.\n' +
-                            '\n' +
-                            'Перспективы роста в поисковых выдачах и возможность развиваться с течением времени, внедрять новый функционал.\n' +
-                            '\n' +
-                            'Выполняя разные задачи клиентов мы научились делать реально современные сайты',
-                        request: '/develop/create-shop-more'
-                    }
-                },
-                {
-                    id: 3,
-                    label: 'Лендинг',
-                    content: {
-                        title: 'Одностраничный сайт',
-                        description: 'Сайт, который имеет четкую цель, его логика, содержание и дизайн соответствуют целевой аудитории и задаче.\n' +
-                            '\n' +
-                            'Все успешные веб студии знают “секретный состав работ” для создания сайта - лидера ниши.',
-                        request: '/develop/create-landing-more'
-                    }
-                },
-                {
-                    id: 4,
-                    label: 'Для агентств недвижимости',
-                    content: {
-                        title: 'Для агентств недвижимости',
-                        description: 'Разработка требует понимания специфических потребностей агентств - облегчение их рабочих процессов и контроля.\n' +
-                            '\n' +
-                            'Наши решения помогут вам развивать продажи в сети. Экспертность приобретена из опыта партнерских отношений с агенствами недвижимости',
-                        request: '/develop/create-agency-more'
-                    }
-                },
-                {
-                    id: 5,
-                    label: 'Для отелей',
-                    content: {
-                        title: 'Для гостиниц и отелей',
-                        description: 'Вызвать эмоции и выделиться среди конкурентов.\n' +
-                            '\n' +
-                            'Легко оформить и оплатить бронь.\n' +
-                            '\n' +
-                            'Удобно управлять бронированием, легко продвигаться в поиске.\n' +
-                            '\n' +
-                            'Это на словах все просто а по факту удается далеко не каждому реализовать.\n' +
-                            '\n' +
-                            'Оцените наши успешные кейсы и решения.',
-                        request: '/develop/create-hotel-more'
-                    }
-                },
-            ]
-        },
-        design: {
-            title: 'Дизайн',
-            description: 'Мало просто красивой картинки. Для успеха необходимо учесть массу факторов - от пользовательского сценария до особенностей восприятия целевой аудитории и трендов... Вызываем эмоции графикой',
-            els: [
-                {
-                    id: 1,
-                    label: 'Web design',
-                    content: {
-                        title: 'Web design',
-                        description: 'Разработка концепции будущего веб-ресурса строится на на основе анализа, прототипирования и пользловательского сценария. После, вырабатывается стилистика, с её учетом полученный прототип обрастает содержимым, графикой, анимациями и “чувствами”.\n' +
-                            '\n' +
-                            'Это и называется “Дизайн проект”.',
-                        request: '/design/web-more'
-                    }
-                },
-                {
-                    id: 2,
-                    label: '3d design',
-                    content: {
-                        title: '3d design',
-                        description: 'От 3d съемки объектов и пространств до рендера 3d графики, а так же внедрение 3d графики в web пространство. Сегодня это уже отдельный вид графического искуства). Это требует особых навыков работы с специальными программами и средами.\n' +
-                            '\n' +
-                            'Зачастую внедрение 3д графики в веб среду требует выработки принципиально нового подхода.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 3,
-                    label: 'Видео',
-                    content: {
-                        title: 'Видео',
-                        description: 'Снять?\n' +
-                            '\n' +
-                            'Срендерить?\n' +
-                            '\n' +
-                            'Сгенерить?\n' +
-                            '\n' +
-                            'Или все это одновременно)?\n' +
-                            '\n' +
-                            'Богатый выбор дает возможность маневрировать и находить альтернативы.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 4,
-                    label: 'Брендбук',
-                    content: {
-                        title: 'Брендбук',
-                        description: 'Ваша компания на пути создания Бренда?\n' +
-                            '\n' +
-                            'Tone of voice? Корпоративный стиль?\n' +
-                            '\n' +
-                            'Стандартизация и выработка правил подачи инфы.\n' +
-                            '\n' +
-                            'Отныне это для вас не просто слова, а необходимость.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 5,
-                    label: 'Графика',
-                    content: {
-                        title: 'Графика',
-                        description: 'Создание рекламных постеров, карточек товаров, обложки к альбомам, рендер изображений недвижимости для застройщиков, интерьеры, меню для ресторанов, эскизы вывесок и многое другое...',
-                        request: '/develop/'
-                    }
-                },
-            ]
-        },
-        market: {
-            title: 'Маркетинг',
-            description: 'От стратегического планирования до реализации отдельных задач. Каждое действие может привести как к заработку так и к потере ваших денег. Ставим цели, оцифровуем и фиксируем в таймлайне.',
-            els: [
-                {
-                    id: 1,
-                    label: 'Реклама',
-                    content: {
-                        title: 'Реклама',
-                        description: 'В данном блоке мы объединяем все платные инструменты Digital маркетинга.\n' +
-                            '\n' +
-                            'Наши кометенции - подбор инструментов и планирование, создание и управление, сокращение затрат и корректировка процесса в зависимости от целей заказчика.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 2,
-                    label: 'Продвижение',
-                    content: {
-                        title: 'Продвижение',
-                        description: 'Тут мы говорим не только о повышении места стайта в поисковой выдачи по фразам...\n' +
-                            '\n' +
-                            'Объединяем все те работы и методы, которые позволяют получать органический (не рекламный) трафик на ресурс.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 3,
-                    label: 'SEO оптимизация',
-                    content: {
-                        title: 'SEO оптимизация',
-                        description: 'Приведение к стандартам поисковиков ресурсов. Другими словами в результате этих действий поисковые роботы запомнят ваш саш сайт более качественным и более правильно определят содержимое.',
-                        request: '/develop/'
-                    }
-                },
-                {
-                    id: 4,
-                    label: 'Performance-маркетинг',
-                    content: {
-                        title: 'Performance-маркетинг',
-                        description: 'Самый правильный подход.\n' +
-                            '\n' +
-                            'Четкие, измеримые цели.\n' +
-                            '\n' +
-                            'Один подрядчик для всех работ интернет маркетинга, фокус ответственности, скорость коммуникации и понятные перспективы.',
-                        request: '/develop/'
-                    }
-                },
-            ]
-        }
-    }
-
-    const buttonsMenuChange = (el) => {
-        setButtonsMenu(el)
-        setCurrentDescriptionButton(0)
-        setIsShow(false)
-    }
-
-    const CurrentDescriptionChange = (el) => {
-        setCurrentDescriptionButton(el)
-        setIsShow(true)
-    }
-
-    const CurrentDescriptionClose = () => {
-        setIsShow(false)
-        setCurrentDescriptionButton(0)
-    }
-
-
-    async function getData(link) {
-        setIsLoading(true)
-        const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1${link}`
-        await axios.get(`${url}`).then(res => {
-            const data = res.data.fields.blocks
-            setDataPopup(data)
-            console.log(data)
-            setIsLoading(false)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
+export default function Page(props) {
 
     return (
-        <section className=' pt-44 pb-40 w-full'>
-            <div>
-                <svg
-                    className="w-full h-auto"
-                    width={1454}
-                    height={80}
-                    viewBox="0 0 1454 80"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
+        <>
+        <DevelopUnits />
 
-                    <g filter="url(#filter0_d_460_881)">
-                        <path d="M7 73L166 7H1289L1447 73" stroke="white"/>
-                    </g>
-                    <defs>
-                        <filter
-                            id="filter0_d_460_881"
-                            x="0.808105"
-                            y="0.5"
-                            width="1452.38"
-                            height="78.9618"
-                            filterUnits="userSpaceOnUse"
-                            colorInterpolationFilters="sRGB"
+
+            <section
+                className="skills-wrapper min-h-screen bg-center bg-cover bg-no-repeat"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/develop/develop-fone3.webp)"
+                }}
+            >
+                <div className="skills max-w-screen-xl mx-auto pt-20 pb-20 flex justify-end font-grotesk-light">
+                    <div className="w-full grid gap-y-20">
+                        <div
+                            className="skills-header inline-block w-5/12 relative bg-center bg-cover bg-no-repeat rounded-[20px] shadow-interface-mapbiz select-none"
+                            style={{
+                                backgroundImage: "url(assets/images/develop/develop-skills-fone.svg)",
+                                backdropFilter: "blur(205px)"
+                            }}
                         >
-                            <feFlood floodOpacity={0} result="BackgroundImageFix"/>
-                            <feColorMatrix
-                                in="SourceAlpha"
-                                type="matrix"
-                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                result="hardAlpha"
-                            />
-                            <feOffset/>
-                            <feGaussianBlur stdDeviation={3}/>
-                            <feComposite in2="hardAlpha" operator="out"/>
-                            <feColorMatrix
-                                type="matrix"
-                                values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
-                            />
-                            <feBlend
-                                mode="normal"
-                                in2="BackgroundImageFix"
-                                result="effect1_dropShadow_460_881"
-                            />
-                            <feBlend
-                                mode="normal"
-                                in="SourceGraphic"
-                                in2="effect1_dropShadow_460_881"
-                                result="shape"
-                            />
-                        </filter>
-                    </defs>
-                </svg>
-            </div>
-
-            <div
-                className="develop-nav max-w-screen-xl mx-auto grid grid-cols-3 font-grotesk-light text-2xl text-whitetext-mapbiz -mt-16">
-                {block.map((item) => {
-                    return (
-                        <button
-                            onClick={() => buttonsMenuChange(item.el)}
-                            key={item.id}
-                            className={`${buttonsMenu === item.id ? 'bg-red-100' : ''} develop-nav-el w-full mx-auto flex justify-center items-center gap-x-6 py-4 relative hover:text-neon-mapbiz cursor-pointer select-none`}
-                        >
-                            <div
-                                className="develop-nav-border__bottom absolute w-[95%] h-0.5 bg-white shadow-neon-mapbiz -bottom-1 left-0 right-0 mx-auto"/>
-                            <div>
-                                <svg
-                                    width={36}
-                                    height={36}
-                                    viewBox="0 0 36 36"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g clipPath="url(#clip0_238_343)">
-                                        <g filter="url(#filter0_d_238_343)">
-                                            <path
-                                                d="M35.814 19.1374C35.86 22.5064 35.9221 25.8766 35.9436 29.2463C35.9513 30.4768 35.8349 31.7076 35.8232 32.9387C35.8064 34.671 34.1362 35.7152 32.2021 35.7471C28.2791 35.812 24.3549 35.889 20.4309 35.8727C15.7615 35.8532 11.0922 35.7554 6.42391 35.6581C5.33708 35.6145 4.25425 35.5202 3.18075 35.3758C1.87152 35.2251 0.584536 34.0037 0.537485 32.8464C0.418769 29.9208 0.282307 26.9947 0.242623 24.068C0.155218 17.6288 0.138159 11.1895 0.0534333 4.75103C0.0403728 3.76177 0.0715036 2.80373 0.575503 1.88878C0.952749 1.2041 1.49393 0.649972 2.42942 0.445248C2.76099 0.375874 3.10101 0.336558 3.44326 0.328104C4.90269 0.281236 6.36564 0.283492 7.82222 0.205787C13.2937 -0.085066 18.7645 0.137924 24.2359 0.174875C24.76 0.167002 25.2807 0.245558 25.7663 0.405846C26.252 0.566134 26.6924 0.804848 27.061 1.10738C28.804 2.45093 30.6722 3.68749 32.4797 4.97643C33.1465 5.4519 33.7615 5.97639 34.447 6.43216C35.2306 6.95328 35.4684 7.61839 35.4823 8.40197C35.5417 11.7254 35.6246 15.0484 35.6976 18.3716C35.7031 18.627 35.6976 18.8825 35.6976 19.138L35.814 19.1374ZM23.7449 1.91292C23.2491 1.88005 22.8269 1.83293 22.4037 1.82709C18.7954 1.77745 15.1869 1.73247 11.5783 1.69217C9.94704 1.67383 8.31549 1.66636 6.6841 1.65834C5.8551 1.65427 5.02445 1.63286 4.19762 1.66709C3.01565 1.716 2.66851 1.99417 2.45619 2.96536C2.25464 3.83406 2.21324 4.72216 2.33331 5.60075C2.38954 5.96966 2.41887 6.34102 2.4212 6.71274C2.44052 15.0086 2.4565 23.3041 2.46912 31.5993C2.45876 31.8083 2.46827 32.0175 2.49757 32.2253C2.70369 33.285 3.39238 33.9279 4.81731 33.9745C10.3441 34.1555 15.871 34.1547 21.3997 34.0789C24.1776 34.0407 26.956 34.0213 29.7342 33.9954C30.4207 33.9891 31.1087 34.0103 31.7937 33.9839C33.0277 33.9365 33.6039 33.4541 33.5925 32.4412C33.5726 30.6768 33.5165 28.9127 33.4721 27.1485C33.4464 26.1264 33.4246 25.1041 33.3827 24.0824C33.2893 21.8071 33.1398 19.5325 33.0962 17.2567C33.0488 14.7706 33.0962 12.2846 33.0991 9.79774C33.0991 9.61842 33.079 9.43899 33.0678 9.25315C32.9735 9.23237 32.8772 9.21826 32.7799 9.21109C31.0333 9.23934 29.2869 9.28426 27.5402 9.29268C26.9965 9.29614 26.4545 9.24589 25.9257 9.14316C24.8424 8.92934 24.5098 8.59201 24.3837 7.70043C24.3479 7.4468 24.3462 7.1902 24.3168 6.93575C24.1327 5.29673 23.9442 3.65627 23.7449 1.91292ZM31.757 7.36983L31.7925 7.22258L26.1218 3.04827L25.9912 3.11766C26.2696 4.60072 26.5481 6.0838 26.8347 7.61102L31.757 7.36983Z"
-                                                fill="white"
-                                            />
-                                        </g>
-                                        <path
-                                            d="M27.4635 26.5907C26.5484 25.9169 25.6878 25.2798 24.8223 24.6479C24.5041 24.4152 24.1681 24.198 23.8524 23.963C23.7047 23.8532 23.574 23.7293 23.4628 23.5941C23.1596 23.2233 23.1751 22.8228 23.4836 22.5723C23.653 22.444 23.875 22.3712 24.1068 22.3681C24.3385 22.365 24.5636 22.4317 24.7382 22.5553C25.7057 23.1695 26.6629 23.7957 27.5931 24.4466C28.1766 24.8551 28.7019 25.3183 29.2561 25.7546C30.0324 26.3659 30.0883 26.8821 29.2844 27.4758C27.9951 28.4275 26.644 29.3233 25.3132 30.2383C25.0123 30.4526 24.6933 30.6497 24.3588 30.8282C23.8119 31.1089 23.2202 31.0436 22.899 30.6997C22.5809 30.3585 22.6884 29.888 23.2036 29.5358C24.3191 28.7733 25.45 28.0257 26.5683 27.2661C26.8485 27.0747 27.1048 26.8625 27.4635 26.5907Z"
-                                            fill="white"
-                                        />
-                                        <path
-                                            d="M8.39993 26.6529C9.68153 27.2568 10.8659 27.8136 12.0485 28.3726C12.3269 28.4897 12.5942 28.6234 12.8482 28.7727C13.2293 29.0218 13.3209 29.3234 13.1692 29.6348C12.9984 29.9856 12.652 30.1559 12.1409 30.1018C11.9148 30.0781 11.6961 30.0206 11.4956 29.9324C9.89789 29.2124 8.29543 28.4995 6.71947 27.7495C5.89398 27.3567 5.81262 26.7714 6.42563 26.1736C6.55288 26.0496 6.70792 25.9445 6.84874 25.8294C8.25809 24.6782 9.67315 23.5318 11.073 22.373C11.5656 21.9654 11.9723 21.851 12.3174 22.0821C12.6674 22.3165 12.6928 22.6924 12.239 23.1373C11.292 24.0657 10.2915 24.9582 9.30881 25.8623C9.04609 26.1034 8.76764 26.3337 8.39993 26.6529Z"
-                                            fill="white"
-                                        />
-                                        <path
-                                            d="M20.2756 21.3659C21.0254 21.2397 21.3127 21.3739 21.3138 21.9127C21.3 22.3296 21.2374 22.7445 21.1271 23.1517C20.7229 24.8646 19.9988 26.4988 19.2263 28.1197C18.9277 28.7461 18.6494 29.3814 18.2901 29.9846C18.0972 30.2871 17.8259 30.5523 17.4949 30.7618C17.2143 30.9445 16.828 30.8975 16.5405 30.7036C16.4008 30.6193 16.2986 30.5003 16.2495 30.3647C16.2003 30.2291 16.2068 30.0843 16.2679 29.952C16.406 29.6482 16.5682 29.3519 16.7535 29.0653C18.0992 26.9368 19.2509 24.7482 19.92 22.4087C20.0037 22.1155 20.0814 21.821 20.1669 21.5281C20.1961 21.4711 20.2324 21.4167 20.2756 21.3659Z"
-                                            fill="white"
-                                        />
-                                    </g>
-                                    <defs>
-                                        <filter
-                                            id="filter0_d_238_343"
-                                            x="-5.94873"
-                                            y="-5.9416"
-                                            width="47.8926"
-                                            height="47.8166"
-                                            filterUnits="userSpaceOnUse"
-                                            colorInterpolationFilters="sRGB"
-                                        >
-                                            <feFlood floodOpacity={0} result="BackgroundImageFix"/>
-                                            <feColorMatrix
-                                                in="SourceAlpha"
-                                                type="matrix"
-                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                                result="hardAlpha"
-                                            />
-                                            <feOffset/>
-                                            <feGaussianBlur stdDeviation={3}/>
-                                            <feComposite in2="hardAlpha" operator="out"/>
-                                            <feColorMatrix
-                                                type="matrix"
-                                                values="0 0 0 0 0.441862 0 0 0 0 0.945833 0 0 0 0 0.398038 0 0 0 0.45 0"
-                                            />
-                                            <feBlend
-                                                mode="normal"
-                                                in2="BackgroundImageFix"
-                                                result="effect1_dropShadow_238_343"
-                                            />
-                                            <feBlend
-                                                mode="normal"
-                                                in="SourceGraphic"
-                                                in2="effect1_dropShadow_238_343"
-                                                result="shape"
-                                            />
-                                        </filter>
-                                        <clipPath id="clip0_238_343">
-                                            <rect width={36} height={36} fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                            <div>{item.title}</div>
-                        </button>
-                    )
-                })}
-            </div>
-
-
-            <div className="max-w-screen-xl mx-auto pt-28 pb-40 font-grotesk font-light">
-                <div className="w-full flex justify-end">
-                    <div className="w-11/12 grid gap-y-24">
-                        <h2 className="text-6xl leading-[5.5rem] text-white opacity-90">
-                            {content[buttonsMenu]['title']}
-                        </h2>
-                        <div className="foryou-grid grid grid-cols-2">
                             <div className="">
-                                <div className="w-[85%] text-2xl leading-9 text-white opacity-90">
-                                    {content[buttonsMenu]['description']}
-                                </div>
-                                <div
-                                    className="foryou-nav mt-6 flex flex-wrap gap-x-4 gap-y-4 text-sm text-grey-mapbiz uppercase">
-                                    {content[buttonsMenu]['els'].map((item) => {
-
-                                        return (
-                                            <button
-                                                onClick={() => CurrentDescriptionChange(item.id)}
-                                                key={item.id}
-                                                href="#"
-                                                className={`${item.id === currentDescriptionButton && 'bg-white'} foryou-nav__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300`}
-                                            >
-                                                {item.label}
-                                            </button>
-                                        )
-                                    })}
+                                <img
+                                    className="w-full h-auto -mt-4 cursor-default"
+                                    src="assets/images/develop/develop-skills-btn.svg"
+                                    alt=""
+                                />
+                                <div className="py-4 px-32 absolute left-0 right-0 mx-auto text-sm text-center -top-4">
+                                    Меню инструментария
                                 </div>
                             </div>
-
-                            <div className="foryou-toggle flex justify-end h-[530px]">
-                                {isShow ?
-                                    <div
-                                        className="foryou-toggle__active w-[90%] h-full bg-center bg-cover bg-no-repeat relative">
-                                        <img
-                                            className="w-full h-full absolute left-0 top-0"
-                                            src="/img/home/img.png"
-                                            alt=""
-                                        />
-                                        <div
-                                            onClick={() => CurrentDescriptionClose()}
-                                            className="foryou-toggle__close absolute top-6 right-6 cursor-pointer z-20">
-                                            <svg
-                                                width={30}
-                                                height={30}
-                                                viewBox="0 0 30 30"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
+                            <div
+                                className="pt-4 pb-4 pl-9 text-2xl text-whitetext-mapbiz tracking-[0.07rem] font-grotesk-heavy">
+                                MaPbiz Group
+                            </div>
+                        </div>
+                        <div className="skills-content w-10/12 mx-auto">
+                            <div className="skills-content-title w-full relative h-auto select-none">
+                                <img
+                                    className="w-full h-auto cursor-default"
+                                    src="assets/images/develop/develop-skills-interface.svg"
+                                    alt=""
+                                />
+                                <div
+                                    className="py-2 px-32 absolute top-0 left-0 right-0 mx-auto text-center text-2xl text-whitetext-mapbiz tracking-[0.07rem] font-grotesk-heavy">
+                                    Арсенал
+                                </div>
+                            </div>
+                            <div
+                                className="skills-content-nav py-10 w-[80%] mx-auto flex justify-evenly text-sm text-whitetext-more-mapbiz uppercase">
+                                <a
+                                    className="develop-skills-nav__el relative px-10 pb-5"
+                                    href="#"
+                                    ffcoder-develop-el="develop"
+                                >
+                                    <span className="transition-all duration-300">Разработка</span>
+                                    <div className="absolute left-0 right-0 mx-auto bottom-0">
+                                        <svg
+                                            className="base absolute bottom-0 w-full h-auto transition-all duration-300"
+                                            width={137}
+                                            height={7}
+                                            viewBox="0 0 137 7"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M1 6L3.59615 1H30.7115L32.4423 3.22222H127.923L129.077 1H136V6H1Z"
+                                                stroke="#808080"
+                                                strokeOpacity="0.8"
+                                            />
+                                        </svg>
+                                        <svg
+                                            className="active absolute -bottom-0.5 w-full h-auto hidden transition-all duration-300"
+                                            width={193}
+                                            height={19}
+                                            viewBox="0 0 193 19"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g filter="url(#filter0_d_644_823)">
                                                 <path
-                                                    d="M14.3226 17.9674C11.7133 20.3402 9.16172 22.6385 6.63565 24.9654C5.17224 26.3134 3.76123 27.7199 2.30123 29.0716C1.91237 29.4408 1.46552 29.7409 0.979126 29.9595C0.739275 30.0618 0.221335 29.9595 0.103217 29.7722C-0.0530674 29.5234 -0.00686019 29.082 0.0779113 28.7574C0.139582 28.5207 0.390682 28.3248 0.580112 28.1348C4.18256 24.5318 7.78667 20.9312 11.3923 17.3329C11.7969 16.9293 12.2131 16.538 12.6779 16.0898C11.1022 14.316 9.52409 12.6043 8.01749 10.829C5.61295 7.99437 3.25666 5.11755 0.880452 2.25835C0.794073 2.15444 0.71977 2.04071 0.632588 1.9368C0.216766 1.43749 -0.0763915 0.899327 0.397083 0.293654C0.751637 -0.159833 1.59922 -0.0921009 2.18941 0.524822C3.65925 2.06079 5.09106 3.63397 6.51089 5.21923C9.10345 8.11218 11.6758 11.024 14.2591 13.9255C14.3697 14.031 14.4873 14.1287 14.611 14.2178C16.6086 12.2784 18.584 10.3454 20.5759 8.42901C22.8861 6.2076 25.2043 3.99493 27.5306 1.79097C28.4033 0.962547 29.103 0.813227 29.6385 1.29658C30.1935 1.79732 30.1418 2.6339 29.2568 3.53085C26.8639 5.9562 24.4132 8.32265 21.9648 10.6917C20.0997 12.4971 18.2047 14.2714 16.2196 16.1571C17.8327 17.8518 19.3755 19.541 20.993 21.152C22.5466 22.6994 24.187 24.1571 25.7712 25.6726C26.3905 26.2429 26.9704 26.856 27.5069 27.5076C27.9396 28.0543 28.0035 28.733 27.4716 29.2722C26.9475 29.8041 26.3406 29.6161 25.835 29.2136C24.8679 28.4836 23.9408 27.7001 23.058 26.8667C20.3556 24.1783 17.7008 21.4406 15.0287 18.7207C14.8174 18.506 14.6154 18.2806 14.3226 17.9674Z"
-                                                    fill="white"
-                                                    fillOpacity="0.8"
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    fill="#DCF1EB"
+                                                    shapeRendering="crispEdges"
                                                 />
-                                            </svg>
+                                                <path
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    stroke="url(#paint0_linear_644_823)"
+                                                    shapeRendering="crispEdges"
+                                                />
+                                            </g>
+                                            <defs>
+                                                <filter
+                                                    id="filter0_d_644_823"
+                                                    x="0.0488281"
+                                                    y="0.5"
+                                                    width="192.451"
+                                                    height={18}
+                                                    filterUnits="userSpaceOnUse"
+                                                    colorInterpolationFilters="sRGB"
+                                                >
+                                                    <feFlood floodOpacity={0} result="BackgroundImageFix"/>
+                                                    <feColorMatrix
+                                                        in="SourceAlpha"
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                        result="hardAlpha"
+                                                    />
+                                                    <feOffset/>
+                                                    <feGaussianBlur stdDeviation={3}/>
+                                                    <feComposite in2="hardAlpha" operator="out"/>
+                                                    <feColorMatrix
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in2="BackgroundImageFix"
+                                                        result="effect1_dropShadow_644_823"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in="SourceGraphic"
+                                                        in2="effect1_dropShadow_644_823"
+                                                        result="shape"
+                                                    />
+                                                </filter>
+                                                <linearGradient
+                                                    id="paint0_linear_644_823"
+                                                    x1="80.6943"
+                                                    y1="12.6855"
+                                                    x2="80.6282"
+                                                    y2="6.98246"
+                                                    gradientUnits="userSpaceOnUse"
+                                                >
+                                                    <stop stopColor="#00FFE5"/>
+                                                    <stop offset={1} stopOpacity="0.02"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a
+                                    className="develop-skills-nav__el relative px-10 pb-5"
+                                    href="#"
+                                    ffcoder-develop-el="design"
+                                >
+                                    <span className="transition-all duration-300">Дизайн</span>
+                                    <div className="absolute left-0 right-0 mx-auto bottom-0">
+                                        <svg
+                                            className="base absolute bottom-0 w-full h-auto transition-all duration-300"
+                                            width={137}
+                                            height={7}
+                                            viewBox="0 0 137 7"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M1 6L3.59615 1H30.7115L32.4423 3.22222H127.923L129.077 1H136V6H1Z"
+                                                stroke="#808080"
+                                                strokeOpacity="0.8"
+                                            />
+                                        </svg>
+                                        <svg
+                                            className="active absolute -bottom-0.5 w-full h-auto hidden transition-all duration-300"
+                                            width={193}
+                                            height={19}
+                                            viewBox="0 0 193 19"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g filter="url(#filter0_d_644_823)">
+                                                <path
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    fill="#DCF1EB"
+                                                    shapeRendering="crispEdges"
+                                                />
+                                                <path
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    stroke="url(#paint0_linear_644_823)"
+                                                    shapeRendering="crispEdges"
+                                                />
+                                            </g>
+                                            <defs>
+                                                <filter
+                                                    id="filter0_d_644_823"
+                                                    x="0.0488281"
+                                                    y="0.5"
+                                                    width="192.451"
+                                                    height={18}
+                                                    filterUnits="userSpaceOnUse"
+                                                    colorInterpolationFilters="sRGB"
+                                                >
+                                                    <feFlood floodOpacity={0} result="BackgroundImageFix"/>
+                                                    <feColorMatrix
+                                                        in="SourceAlpha"
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                        result="hardAlpha"
+                                                    />
+                                                    <feOffset/>
+                                                    <feGaussianBlur stdDeviation={3}/>
+                                                    <feComposite in2="hardAlpha" operator="out"/>
+                                                    <feColorMatrix
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in2="BackgroundImageFix"
+                                                        result="effect1_dropShadow_644_823"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in="SourceGraphic"
+                                                        in2="effect1_dropShadow_644_823"
+                                                        result="shape"
+                                                    />
+                                                </filter>
+                                                <linearGradient
+                                                    id="paint0_linear_644_823"
+                                                    x1="80.6943"
+                                                    y1="12.6855"
+                                                    x2="80.6282"
+                                                    y2="6.98246"
+                                                    gradientUnits="userSpaceOnUse"
+                                                >
+                                                    <stop stopColor="#00FFE5"/>
+                                                    <stop offset={1} stopOpacity="0.02"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a
+                                    className="develop-skills-nav__el relative px-10 pb-5"
+                                    href="#"
+                                    ffcoder-develop-el="market"
+                                >
+                                    <span className="transition-all duration-300">Маркетинг</span>
+                                    <div className="absolute left-0 right-0 mx-auto bottom-0">
+                                        <svg
+                                            className="base absolute bottom-0 w-full h-auto transition-all duration-300"
+                                            width={137}
+                                            height={7}
+                                            viewBox="0 0 137 7"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M1 6L3.59615 1H30.7115L32.4423 3.22222H127.923L129.077 1H136V6H1Z"
+                                                stroke="#808080"
+                                                strokeOpacity="0.8"
+                                            />
+                                        </svg>
+                                        <svg
+                                            className="active absolute -bottom-0.5 w-full h-auto hidden transition-all duration-300"
+                                            width={193}
+                                            height={19}
+                                            viewBox="0 0 193 19"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <g filter="url(#filter0_d_644_823)">
+                                                <path
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    fill="#DCF1EB"
+                                                    shapeRendering="crispEdges"
+                                                />
+                                                <path
+                                                    d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                    stroke="url(#paint0_linear_644_823)"
+                                                    shapeRendering="crispEdges"
+                                                />
+                                            </g>
+                                            <defs>
+                                                <filter
+                                                    id="filter0_d_644_823"
+                                                    x="0.0488281"
+                                                    y="0.5"
+                                                    width="192.451"
+                                                    height={18}
+                                                    filterUnits="userSpaceOnUse"
+                                                    colorInterpolationFilters="sRGB"
+                                                >
+                                                    <feFlood floodOpacity={0} result="BackgroundImageFix"/>
+                                                    <feColorMatrix
+                                                        in="SourceAlpha"
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                        result="hardAlpha"
+                                                    />
+                                                    <feOffset/>
+                                                    <feGaussianBlur stdDeviation={3}/>
+                                                    <feComposite in2="hardAlpha" operator="out"/>
+                                                    <feColorMatrix
+                                                        type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in2="BackgroundImageFix"
+                                                        result="effect1_dropShadow_644_823"
+                                                    />
+                                                    <feBlend
+                                                        mode="normal"
+                                                        in="SourceGraphic"
+                                                        in2="effect1_dropShadow_644_823"
+                                                        result="shape"
+                                                    />
+                                                </filter>
+                                                <linearGradient
+                                                    id="paint0_linear_644_823"
+                                                    x1="80.6943"
+                                                    y1="12.6855"
+                                                    x2="80.6282"
+                                                    y2="6.98246"
+                                                    gradientUnits="userSpaceOnUse"
+                                                >
+                                                    <stop stopColor="#00FFE5"/>
+                                                    <stop offset={1} stopOpacity="0.02"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="skills-content-grid flex">
+                                <div className="skills-content-techno w-[70%] pr-10">
+                                    <div className="relative">
+                                        <div
+                                            className="techno-border-left w-[6px] h-[94%] bg-greywhite-interface-mapbiz absolute left-1 -bottom-2"/>
+                                        <div
+                                            className="techno-border-right w-[6px] h-[94%] bg-greywhite-interface-mapbiz absolute right-1 top-0"/>
+                                        <div
+                                            className="techno-border-bottom h-[6px] w-[94%] bg-greywhite-interface-mapbiz absolute left-1 -bottom-2"/>
+                                        <div className="techno-border-el__left absolute left-1 -bottom-2">
+                                            <img
+                                                className="w-full h-auto select-none cursor-default"
+                                                src="assets/images/develop/develop-techno-border-left.svg"
+                                                alt=""
+                                            />
                                         </div>
-                                        <div className="foryou-els relative z-10 px-9 py-20 text-white opacity-90">
-                                            <div className="foryou-el">
-                                                <h3 className="foryou-el__title font-grotesk-medium text-2xl leading-7">
-                                                    {
-                                                        content[buttonsMenu]['els'].map((item) => {
-                                                            if (item.id === currentDescriptionButton) {
-                                                                return item.content.title
-                                                            }
-                                                        })
-                                                    }
-                                                </h3>
-                                                <div className="foryou-el__content mt-6 font-grotesk-light text-xl">
-                                                    <p>
-                                                        {
-                                                            content[buttonsMenu]['els'].map((item) => {
-                                                                if (item.id === currentDescriptionButton) {
-                                                                    return item.content.description
-                                                                }
-                                                            })
-                                                        }
-                                                    </p>
-                                                </div>
+                                        <div className="techno-border-el__right absolute right-1 -bottom-2">
+                                            <img
+                                                className="w-full h-auto select-none cursor-default"
+                                                src="assets/images/develop/develop-techno-border-right.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div className="hdevelop-skills-tecno__title relative select-none">
+                                            <img
+                                                className="w-full h-auto cursor-default"
+                                                src="assets/images/develop/develop-techno-interface.svg"
+                                                alt=""
+                                            />
+                                            <div
+                                                className="py-3 px-32 absolute top-0 left-0 right-0 mx-auto text-sm text-center">
+                                                Доступные технологии
                                             </div>
                                         </div>
                                         <div
-                                            className="foryou-nav absolute z-20 w-full bottom-8 flex justify-end px-6 text-whitelink-mapbiz font-grotesk-medium text-lg">
-                                            {
-                                                content[buttonsMenu]['els'].map((item, index) => {
-                                                    if (item.id === currentDescriptionButton) {
-                                                        return (
-                                                            <button key={index} className="foryou-nav-more ">
-                                                                <div className="flex items-center gap-4">
-                                                                    <span onClick={() => getData(item.content.request)}>смотреть состав работ</span>
-                                                                    <svg
-                                                                        width={41}
-                                                                        height={20}
-                                                                        viewBox="0 0 41 20"
-                                                                        fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                    >
-                                                                        <path
-                                                                            d="M18.7324 9.93514C13.8433 9.90013 8.95418 9.87207 4.06505 9.82476C3.09057 9.81514 2.11468 9.74748 1.14412 9.66311C0.983558 9.64768 0.831987 9.58974 0.70925 9.49689C0.586513 9.40404 0.498316 9.2806 0.456192 9.1427C0.376487 8.92192 0.653585 8.60874 0.984532 8.56269C1.30549 8.51806 1.62483 8.44882 1.9474 8.43164C4.00743 8.32125 6.0673 8.16498 8.1293 8.13202C12.3656 8.06469 16.6032 8.04765 20.8404 8.0434C24.8605 8.0393 28.8807 8.08376 32.9007 8.09196C33.5462 8.09338 34.1921 8.02147 34.8365 7.97053C34.8792 7.96121 34.9186 7.94252 34.9511 7.91621C34.9836 7.8899 35.008 7.8568 35.0223 7.81994C35.0339 7.73194 35.0044 7.58338 34.9383 7.55184C33.7029 6.95795 32.4828 6.33315 31.2125 5.80313C28.2573 4.57009 25.4851 3.05808 22.7148 1.54103C22.2596 1.29171 21.7824 1.03845 21.5988 0.543749C21.5654 0.453703 21.5134 0.299476 21.5558 0.269356C21.7078 0.144017 21.8925 0.0539037 22.0934 0.00709057C22.3074 -0.0152477 22.5242 0.0154373 22.7197 0.0957187C23.4119 0.372952 24.0991 0.662338 24.7726 0.973318C29.586 3.19591 34.398 5.42098 39.2085 7.64852C41.0255 8.48432 41.8889 9.29473 39.7078 11.1324C39.0794 11.6621 38.4437 12.191 37.7604 12.6621C34.5915 14.8488 31.4109 17.0222 28.2188 19.1822C27.7799 19.4608 27.3171 19.7086 26.8346 19.9234C26.5198 20.0745 26.2048 19.9849 25.933 19.8037C25.634 19.6042 25.4484 19.0244 25.5514 18.7694C25.7805 18.2032 26.237 17.7879 26.7272 17.4118C28.6147 15.9638 30.5122 14.5262 32.4198 13.099C33.6594 12.1664 34.9121 11.2475 36.1497 10.313C36.2109 10.2669 36.2139 10.1237 36.1892 10.0376C36.1729 10.0004 36.1466 9.96717 36.1127 9.94086C36.0787 9.91454 36.038 9.89591 35.9941 9.88657C35.3472 9.84904 34.6992 9.80126 34.0517 9.80426C28.9451 9.82812 23.8385 9.85786 18.7319 9.8935L18.7324 9.93514Z"
-                                                                            fill="white"
-                                                                            fillOpacity="0.8"
-                                                                        />
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
-                                                        )
-                                                    }
-                                                })
-                                            }
+                                            className="develop-skills-techno__wrapper px-8 py-6 h-[350px] overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
+                                            <div
+                                                className="develop-skills-techno__els pb-8 hidden"
+                                                ffcoder-develop-el="develop"
+                                            >
+                                                <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/HTML.svg"
+                                                            alt="HTML"
+                                                        />
+                                                        <span>HTML</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/CSS.svg"
+                                                            alt="CSS"
+                                                        />
+                                                        <span>CSS</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/TailwindCSS.png"
+                                                            alt="TailwindCSS"
+                                                        />
+                                                        <span>TailwindCSS</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/JavaScript.png"
+                                                            alt="JavaScript"
+                                                        />
+                                                        <span>JavaScript</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/WordPress.png"
+                                                            alt="WordPpress"
+                                                        />
+                                                        <span>WordPress</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/jQueryJS.png"
+                                                            alt="jQuery.js"
+                                                        />
+                                                        <span>jQuery.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/jQueryUI.png"
+                                                            alt="jQueryUI.js"
+                                                        />
+                                                        <span>jQueryUI.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/ScrollMagicJS.png"
+                                                            alt="ScrollMagic.js"
+                                                        />
+                                                        <span>ScrollMagic.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/GsapJS.svg"
+                                                            alt="Gsap.js"
+                                                        />
+                                                        <span>Gsap.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/AOS-js.png"
+                                                            alt="AOS.js"
+                                                        />
+                                                        <span>AOS.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/SwiperJS.png"
+                                                            alt="Swiper.js"
+                                                        />
+                                                        <span>Swiper.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/ThreeJS.png"
+                                                            alt="Three.js"
+                                                        />
+                                                        <span>Three.js</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/PHP.png"
+                                                            alt="PHP"
+                                                        />
+                                                        <span>PHP</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="develop-skills-techno__els pb-8 hidden"
+                                                ffcoder-develop-el="design"
+                                            >
+                                                <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Figma.png"
+                                                            alt="Figma"
+                                                        />
+                                                        <span>Figma</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Photoshop.png"
+                                                            alt="Photoshop"
+                                                        />
+                                                        <span>Photoshop</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Illustrator.png"
+                                                            alt="Illustrator"
+                                                        />
+                                                        <span>Illustrator</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/InDesign.png"
+                                                            alt="InDesign"
+                                                        />
+                                                        <span>InDesign</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/After Effects.png"
+                                                            alt="After Effects"
+                                                        />
+                                                        <span>After Effects</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Blender.png"
+                                                            alt="Blender"
+                                                        />
+                                                        <span>Blender</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Armory3D.png"
+                                                            alt="Armory3D"
+                                                        />
+                                                        <span>Armory3D</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Spline.design.png"
+                                                            alt="Spline.design"
+                                                        />
+                                                        <span>Spline.design</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Stable diffusion.png"
+                                                            alt="Stable diffusion"
+                                                        />
+                                                        <span>Stable diffusion</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Tridiv.png"
+                                                            alt="Tridiv"
+                                                        />
+                                                        <span>Tridiv</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Unreal Engine.png"
+                                                            alt="Unreal Engine"
+                                                        />
+                                                        <span>Unreal Engine</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Verge3D.png"
+                                                            alt="Verge3D"
+                                                        />
+                                                        <span>Verge3D</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Adobe Premiere.png"
+                                                            alt="Adobe Premiere"
+                                                        />
+                                                        <span>Adobe Premiere</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Canva.png"
+                                                            alt="Canva"
+                                                        />
+                                                        <span>Canva</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Corel Draw.png"
+                                                            alt="Corel Draw"
+                                                        />
+                                                        <span>Corel Draw</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Lightroom.png"
+                                                            alt="Lightroom"
+                                                        />
+                                                        <span>Lightroom</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="develop-skills-techno__els pb-8 hidden"
+                                                ffcoder-develop-el="market"
+                                            >
+                                                <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Директ.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Директ</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Маркет.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Маркет</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Метрика.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Метрика</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Вебмастер.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Вебмастер</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Wordstat.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Wordstat</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Яндекс Q.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Яндекс Q</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Дзен.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Дзен</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/MyTarget.png"
+                                                            alt=""
+                                                        />
+                                                        <span>MyTarget</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/VK Реклама.png"
+                                                            alt=""
+                                                        />
+                                                        <span>VK Реклама</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/MegaIndex.png"
+                                                            alt=""
+                                                        />
+                                                        <span>MegaIndex</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Topvizor.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Topvizor</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Avito.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Avito</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Google ADS.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Google ADS</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Facebook.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Facebook</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Telegram.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Telegram</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/DevTools.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>DevTools</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Analitica.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Analitica</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Search Console.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Search Console</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Merchant Center.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Merchant Center</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Page Speed.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Page Speed</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Марквиз.png"
+                                                            alt=""
+                                                        />
+                                                        <span>Марквиз</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Roistat.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Roistat</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/YouToube.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>YouToube</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/Instagram.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>Instagram</span>
+                                                    </div>
+                                                    <div
+                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                        <img
+                                                            className="w-[73px] h-[80px]"
+                                                            src="assets/images/develop/TikTok.svg"
+                                                            alt=""
+                                                        />
+                                                        <span>TikTok</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    :
-                                    <div
-                                        className="foryou-toggle__base w-[90%] h-full bg-center bg-cover bg-no-repeat"
-                                        style={{
-                                            backgroundImage: "url(/img/develop/develop-fone.webp)"
-                                        }}
-                                    />
-                                }
+                                </div>
+                                <div className="skills-content-expert w-[30%]">
+                                    <div className="relative">
+                                        <div
+                                            className="techno-border-left w-[6px] h-[94%] bg-greywhite-interface-mapbiz absolute left-1 -bottom-2"/>
+                                        <div
+                                            className="techno-border-right w-[6px] h-[94%] bg-greywhite-interface-mapbiz absolute right-1 top-0"/>
+                                        <div
+                                            className="techno-border-bottom h-[6px] w-[90%] bg-greywhite-interface-mapbiz absolute left-1 -bottom-2"/>
+                                        <div className="techno-border-el__left absolute left-1 -bottom-2">
+                                            <img
+                                                className="w-full h-auto select-none cursor-default"
+                                                src="assets/images/develop/develop-expert-border-left.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div className="techno-border-el__right absolute right-1 -bottom-2">
+                                            <img
+                                                className="w-full h-auto select-none cursor-default"
+                                                src="assets/images/develop/develop-expert-border-right.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div className="develop-skills-expert__title relative select-none">
+                                            <img
+                                                className="w-full h-auto cursor-default"
+                                                src="assets/images/develop/develop-skills-expert.svg"
+                                                alt=""
+                                            />
+                                            <div
+                                                className="py-3 px-4 absolute top-0 left-0 right-0 mx-auto text-sm text-center">
+                                                Специалисты
+                                            </div>
+                                        </div>
+                                        <div
+                                            className="develop-skills-expert__wrapper px-8 py-6 h-[350px] overflow-auto text-white text-xs text-center">
+                                            <div
+                                                className="develop-skills-expert__els hidden"
+                                                ffcoder-develop-el="develop"
+                                            >
+                                                <div className="develop-skills-expert__grid grid gap-3">
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Front-end developer</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Back-end developer</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Product manager</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Content manager</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Tester</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="develop-skills-expert__els hidden"
+                                                ffcoder-develop-el="design"
+                                            >
+                                                <div className="develop-skills-expert__grid grid gap-3">
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Art director</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Web designer</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>3d artist</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Motion designer</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>UX/UI designer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="develop-skills-expert__els hidden"
+                                                ffcoder-develop-el="market"
+                                            >
+                                                <div className="develop-skills-expert__grid grid gap-3">
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Targetolog</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>SEO master</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Content manager</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Copywriter</span>
+                                                    </div>
+                                                    <div className="develop-skills-expert__el flex items-center gap-3">
+                                                        <svg
+                                                            width={24}
+                                                            height={24}
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M10.6392 9.61766C10.5852 9.67155 10.534 9.7277 10.4852 9.78613C10.534 9.84455 10.5852 9.90071 10.6392 9.95459C10.7694 10.0839 10.9132 10.1991 11.0684 10.2989C11.0399 10.1321 11.0246 9.9614 11.0246 9.7867C11.0246 9.61199 11.0399 9.44068 11.0684 9.27392C10.9132 9.37318 10.7694 9.48834 10.6392 9.61823V9.61766ZM12.0165 12.0397C11.6942 11.7436 11.435 11.3801 11.2628 10.9711C10.8529 10.7992 10.488 10.5406 10.1918 10.2189C9.99858 10.578 9.88888 10.9881 9.88888 11.4249C9.88888 11.7017 9.93322 11.9671 10.0145 12.2161C10.264 12.2973 10.5306 12.3415 10.808 12.3415C11.2457 12.3415 11.6567 12.232 12.0165 12.0392V12.0397ZM11.2628 8.60119C11.435 8.19165 11.6942 7.82805 12.0165 7.53196C11.6567 7.3391 11.2457 7.22962 10.808 7.22962C10.5306 7.22962 10.2646 7.27388 10.0151 7.35499C9.93378 7.604 9.88945 7.87003 9.88945 8.14684C9.88945 8.58361 9.99915 8.99372 10.1924 9.35277C10.4891 9.03115 10.8535 8.7725 11.2633 8.60062L11.2628 8.60119ZM12.4502 12.3716C11.975 12.6728 11.4123 12.8475 10.808 12.8475C10.6329 12.8475 10.4613 12.8322 10.2942 12.8038C10.3936 12.9586 10.509 13.1022 10.6392 13.232C11.1036 13.6949 11.7419 13.9808 12.4502 13.9808C13.1585 13.9808 13.7968 13.6949 14.2612 13.232C14.3908 13.1022 14.5062 12.9586 14.6063 12.8038C14.4391 12.8322 14.2681 12.8475 14.093 12.8475C13.4887 12.8475 12.9254 12.6722 12.4508 12.3716H12.4502ZM9.4256 7.63463C9.27042 7.7339 9.12661 7.84905 8.99644 7.97894C8.5326 8.44237 8.24611 9.07993 8.24611 9.7867C8.24611 10.4935 8.5326 11.1305 8.99644 11.5939C9.12661 11.7232 9.27042 11.8384 9.4256 11.9382C9.39718 11.7714 9.38183 11.6001 9.38183 11.4254C9.38183 10.8225 9.55748 10.2603 9.85875 9.7867C9.55692 9.31306 9.38183 8.75094 9.38183 8.14798C9.38183 7.97327 9.39718 7.80196 9.4256 7.6352V7.63463ZM12.4502 7.82521C12.3917 7.87399 12.3354 7.92506 12.2814 7.97894C12.1512 8.10884 12.0358 8.25234 11.9364 8.40719C12.1035 8.37883 12.2751 8.36351 12.4502 8.36351C12.6253 8.36351 12.797 8.37883 12.9641 8.40719C12.8646 8.25234 12.7492 8.10884 12.619 7.97894C12.565 7.92506 12.5088 7.87399 12.4502 7.82521ZM13.3694 9.78613C13.3694 9.50932 13.325 9.24386 13.2437 8.99428C12.9942 8.91316 12.7276 8.86892 12.4502 8.86892C12.1728 8.86892 11.9068 8.91316 11.6567 8.99428C11.5754 9.24329 11.5311 9.50932 11.5311 9.78613C11.5311 10.0629 11.5754 10.3284 11.6567 10.5774C11.9062 10.6585 12.1728 10.7028 12.4502 10.7028C12.7276 10.7028 12.9936 10.6585 13.2437 10.5774C13.325 10.3284 13.3694 10.0624 13.3694 9.78613ZM14.0924 7.23019C13.6547 7.23019 13.2437 7.33967 12.8839 7.53253C13.2062 7.82862 13.4654 8.19222 13.6377 8.60176C14.0475 8.77363 14.4124 9.03172 14.7086 9.35391C14.9018 8.99485 15.0116 8.58474 15.0116 8.14798C15.0116 7.87117 14.9672 7.60513 14.8859 7.35611C14.6364 7.275 14.3698 7.23076 14.093 7.23076L14.0924 7.23019ZM11.9364 11.1656C12.0358 11.3205 12.1512 11.464 12.2814 11.5939C12.3354 11.6478 12.3917 11.6988 12.4502 11.7476C12.5088 11.6988 12.565 11.6478 12.619 11.5939C12.7486 11.464 12.864 11.3205 12.9641 11.1656C12.797 11.194 12.6253 11.2093 12.4502 11.2093C12.2751 11.2093 12.1035 11.194 11.9369 11.1656H11.9364ZM15.4743 7.63463C15.5027 7.8014 15.518 7.9727 15.518 8.14741C15.518 8.75037 15.3424 9.31249 15.0405 9.78613C15.3424 10.2598 15.5175 10.8219 15.518 11.4249C15.518 11.5996 15.5027 11.7709 15.4743 11.9376C15.6294 11.8384 15.7732 11.7232 15.9034 11.5933C16.3672 11.1299 16.6537 10.4923 16.6537 9.78613C16.6537 9.07936 16.3672 8.4418 15.9034 7.97837C15.7732 7.84905 15.6294 7.73389 15.4743 7.63406V7.63463ZM14.2612 9.95459C14.3152 9.90071 14.3664 9.84455 14.4153 9.78613C14.3664 9.7277 14.3152 9.67155 14.2612 9.61766C14.1311 9.48834 13.9872 9.37318 13.8321 9.27392C13.8605 9.44068 13.8758 9.61142 13.8758 9.7867C13.8758 9.9614 13.8605 10.1321 13.8321 10.2989C13.9872 10.1996 14.1311 10.0845 14.2612 9.95516V9.95459ZM13.6377 10.9711C13.4654 11.3801 13.2062 11.7442 12.8839 12.0397C13.2437 12.2326 13.6547 12.3421 14.0924 12.3421C14.3698 12.3421 14.6358 12.2978 14.8854 12.2167C14.9666 11.9677 15.011 11.7017 15.011 11.4254C15.011 10.9887 14.9013 10.5786 14.708 10.2195C14.4113 10.5411 14.0469 10.7998 13.6371 10.9716L13.6377 10.9711ZM18.7962 6.57278C19.6198 8.0039 19.713 9.53088 19.3146 11.1044C19.0707 12.0675 18.6455 12.9473 18.0276 13.7278C17.4308 14.4817 17.2318 15.3427 17.2637 16.2871C17.3091 17.64 17.6462 18.9287 18.0651 20.2033C18.0873 20.2702 18.126 20.3366 18.126 20.403C18.126 20.4591 18.1828 20.5153 18.1578 20.5714L9.09932 20.5555C8.99246 20.1568 8.82193 19.6202 8.71905 19.2197C8.68096 19.0717 8.64572 18.9231 8.60764 18.775C8.52749 18.4636 8.31489 18.2997 8.00396 18.2753C7.56514 18.2413 7.12347 18.239 6.68521 18.1976C6.45954 18.176 6.23104 18.1221 6.01845 18.0427C5.54608 17.8669 5.20844 17.2713 5.29654 16.7761C5.32383 16.6252 5.3909 16.4687 5.48015 16.3433C5.59497 16.1822 5.59156 16.0727 5.42729 15.9627C5.36419 15.9207 5.31019 15.864 5.25733 15.8095C5.02256 15.5696 5.01516 15.3478 5.2306 15.0863C5.25049 15.0619 5.27096 15.0381 5.27835 15.029C5.14875 14.8617 5.00892 14.7125 4.91058 14.5389C4.86965 14.4669 4.8975 14.3359 4.93274 14.2468C4.97594 14.1362 5.06803 14.0466 5.12317 13.9394C5.20389 13.7834 5.15671 13.6977 4.99584 13.6342C4.82475 13.5661 4.65137 13.4969 4.49278 13.4045C4.11307 13.1844 4.00905 12.8038 4.22619 12.4232C4.31657 12.2644 4.43821 12.1214 4.55304 11.9768C4.88954 11.5531 5.2289 11.131 5.56939 10.7107C5.78369 10.4458 5.8303 10.1622 5.77971 9.81903C5.62737 8.78214 5.79961 7.77757 6.28107 6.85185C7.00922 5.45136 8.17733 4.5211 9.62114 3.92891C10.7665 3.45981 11.967 3.36962 13.1926 3.45981C14.2123 3.53526 15.2037 3.71733 16.1467 4.1229C17.3194 4.62717 18.1697 5.48597 18.7944 6.57278H18.7962ZM17.1608 9.7867C17.1608 8.51553 16.3849 7.42588 15.2798 6.96246C14.8154 5.85976 13.7235 5.08607 12.4502 5.08607C11.1769 5.08607 10.085 5.86033 9.62058 6.96302C8.51556 7.42645 7.73965 8.5161 7.73965 9.7867C7.73965 11.0573 8.51556 12.1469 9.62058 12.6104C10.0844 13.7131 11.1764 14.4868 12.4502 14.4873C13.7235 14.4873 14.816 13.7131 15.2798 12.6109C16.3849 12.1475 17.1608 11.0579 17.1608 9.78726V9.7867ZM12.4502 7.20126C12.9254 6.90006 13.4882 6.72536 14.0924 6.72536C14.2675 6.72536 14.4386 6.74068 14.6057 6.76904C14.5062 6.61418 14.3908 6.47067 14.2607 6.34078C13.7963 5.87792 13.1573 5.59204 12.4496 5.59204C11.7414 5.59204 11.103 5.87792 10.6386 6.34078C10.509 6.47067 10.3936 6.61418 10.2942 6.76904C10.4613 6.74068 10.6324 6.72536 10.808 6.72536C11.4123 6.72536 11.9756 6.90063 12.4502 7.20126Z"
+                                                                fill="white"
+                                                                fillOpacity="0.8"
+                                                            />
+                                                            <rect
+                                                                x="0.228571"
+                                                                y="0.228571"
+                                                                width="23.5429"
+                                                                height="23.5429"
+                                                                rx="0.771429"
+                                                                stroke="white"
+                                                                strokeOpacity="0.8"
+                                                                strokeWidth="0.457143"
+                                                            />
+                                                        </svg>
+                                                        <span>Growth Hacker</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="skills-content-btns w-[65%] flex gap-8 mt-14 text-whitetext-more-mapbiz">
+                                <div className="skills-content-btn w-auto inline-block">
+                                    <a className="block relative" href="#">
+                                        <img
+                                            className="base"
+                                            src="assets/images/develop/develop-skills-btns.svg"
+                                            alt=""
+                                        />
+                                        <img
+                                            className="hover hidden"
+                                            src="assets/images/develop/develop-skills-btns-active.svg"
+                                            alt=""
+                                        />
+                                        <span
+                                            className="absolute w-full top-0 bottom-0 my-auto flex items-center justify-center text-center">
+                Смотреть портфолио
+              </span>
+                                    </a>
+                                </div>
+                                <div className="skills-content-btn w-auto inline-block">
+                                    <a className="block relative" href="#">
+                                        <img
+                                            className="base"
+                                            src="assets/images/develop/develop-skills-btns.svg"
+                                            alt=""
+                                        />
+                                        <img
+                                            className="hover hidden"
+                                            src="assets/images/develop/develop-skills-btns-active.svg"
+                                            alt=""
+                                        />
+                                        <span
+                                            className="absolute w-full top-0 bottom-0 my-auto flex items-center justify-center text-center">
+                Начать работу
+              </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <AnimatePresence>
-                {dataPopup.length !== 0 &&
-                    (!isLoading ? <motion.div
-                        initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                        animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
-                        exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                        transition={{duration: 0.5}}
-                        style={{backdropFilter: 'blur(5px)'}}
-                        className=' z-40 mx-auto fixed top-0 left-0 right-0 w-screen h-screen overflow-auto'>
-                        <div className='z-40 w-[1024px] m-auto absolute top-0 left-0 right-0 bottom-0  h-[50vh]'>
-                            <button className='text-amber-50 right-[30px] absolute top-[-80px]' onClick={() => {
-                                setDataPopup([])
-                            }}>
-                                <svg
-                                    width={30}
-                                    height={30}
-                                    viewBox="0 0 30 30"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M14.3226 17.9674C11.7133 20.3402 9.16172 22.6385 6.63565 24.9654C5.17224 26.3134 3.76123 27.7199 2.30123 29.0716C1.91237 29.4408 1.46552 29.7409 0.979126 29.9595C0.739275 30.0618 0.221335 29.9595 0.103217 29.7722C-0.0530674 29.5234 -0.00686019 29.082 0.0779113 28.7574C0.139582 28.5207 0.390682 28.3248 0.580112 28.1348C4.18256 24.5318 7.78667 20.9312 11.3923 17.3329C11.7969 16.9293 12.2131 16.538 12.6779 16.0898C11.1022 14.316 9.52409 12.6043 8.01749 10.829C5.61295 7.99437 3.25666 5.11755 0.880452 2.25835C0.794073 2.15444 0.71977 2.04071 0.632588 1.9368C0.216766 1.43749 -0.0763915 0.899327 0.397083 0.293654C0.751637 -0.159833 1.59922 -0.0921009 2.18941 0.524822C3.65925 2.06079 5.09106 3.63397 6.51089 5.21923C9.10345 8.11218 11.6758 11.024 14.2591 13.9255C14.3697 14.031 14.4873 14.1287 14.611 14.2178C16.6086 12.2784 18.584 10.3454 20.5759 8.42901C22.8861 6.2076 25.2043 3.99493 27.5306 1.79097C28.4033 0.962547 29.103 0.813227 29.6385 1.29658C30.1935 1.79732 30.1418 2.6339 29.2568 3.53085C26.8639 5.9562 24.4132 8.32265 21.9648 10.6917C20.0997 12.4971 18.2047 14.2714 16.2196 16.1571C17.8327 17.8518 19.3755 19.541 20.993 21.152C22.5466 22.6994 24.187 24.1571 25.7712 25.6726C26.3905 26.2429 26.9704 26.856 27.5069 27.5076C27.9396 28.0543 28.0035 28.733 27.4716 29.2722C26.9475 29.8041 26.3406 29.6161 25.835 29.2136C24.8679 28.4836 23.9408 27.7001 23.058 26.8667C20.3556 24.1783 17.7008 21.4406 15.0287 18.7207C14.8174 18.506 14.6154 18.2806 14.3226 17.9674Z"
-                                        fill="white"
-                                        fillOpacity="0.8"
-                                    />
-                                </svg>
-                            </button>
-                            <Swiper
+            </section>
 
-                                effect={'cards'}
-                                mousewheel={true}
-                                grabCursor={true}
-                                modules={[EffectCards, Mousewheel]}
-                                className="mySwiper overflow-hidden">
-                                {dataPopup && dataPopup.map((item, index) => {
-                                    console.log(index + 'index')
-                                    return (
-                                        <SwiperSlide
-                                            key={index}
-                                            className="bg-transparent">
-                                            <div
-                                                className="overflow-auto h-[600px] develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative ">
-                                                <h2 className="develop-step-title font-medium text-2xl">
-                                                    {item.title}
-                                                </h2>
-                                                <div dangerouslySetInnerHTML={{__html: item.text}}
-                                                     className="develop-step-content text-[1.2rem]">
 
-                                                </div>
-                                                <div className="">
-                                                    {item.media && item.media.map((image) => {
-                                                        console.log(image, index)
-                                                        if (image.imgs) {
-                                                            return (
-                                                                <div
-                                                                    key={index}
-                                                                    className={'develop-step-gallery grid grid-cols-3 gap-8'}>{image.imgs.map((item, index) => {
-                                                                    return (
-                                                                        <div
-                                                                            key={index}
-                                                                            className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
-                                                                            style={{
-                                                                                backgroundImage: `url(${item.img})`
-                                                                            }}
-                                                                        >
-                                                                        </div>)
-                                                                })}</div>
-                                                            )
-                                                        } else if (image.frame) {
-                                                            return (
-                                                                <div key={index} dangerouslySetInnerHTML={{__html: image.frame}}
-                                                                     className="h-[600x] develop-step-content text-[1.2rem]">
-                                                                </div>
-                                                            )
-                                                        }
-
-                                                    })}
-                                                </div>
-
-                                                {dataPopup.length === index + 1 && <div
-                                                    className="develop-step-btns flex justify-end gap-6 font-grotesk font-light text-xs"
-                                                >
-                                                    <a
-                                                        href="#"
-                                                        className="develop-step-portfolio btn-white px-8 py-3 text-darkgrey-mapbiz rounded-[24px] border border-darkgrey-mapbiz"
-                                                    >
-                                                        Смотрите портфолио
-                                                    </a>
-                                                    <a
-                                                        href="#"
-                                                        className="develop-step-talk btn-white px-8 py-3 rounded-[24px] bg-darkgrey-mapbiz text-white shadow-interface-mapbiz"
-                                                    >
-                                                        Обсудить проект
-                                                    </a>
-                                                </div>}
-                                            </div>
-                                        </SwiperSlide>
-                                    )
-                                })}
-                            </Swiper>
-                        </div>
-                    </motion.div> : '')}
-            </AnimatePresence>
-        </section>
-
+        </>
     );
 }
-
-export default Page;
