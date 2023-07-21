@@ -68,7 +68,7 @@ const VerticalMode = ({data}) => {
 
                 {data.map((image, index) => {
                     return (
-                        <div className={'slider__div flex'}>
+                        <div key={index} className={'slider__div flex'}>
                             <img
                                 key={index}
                                 className={'slider__img'}
