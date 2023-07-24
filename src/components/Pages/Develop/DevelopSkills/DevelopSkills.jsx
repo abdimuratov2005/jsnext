@@ -359,7 +359,7 @@ export default function DevelopSkills(props) {
                                     <div
                                         className="develop-skills-techno__wrapper px-8 py-6 h-[350px] overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
                                         <div
-                                            className="develop-skills-techno__els pb-8 hidden"
+                                            className="develop-skills-techno__els pb-8"
                                             ffcoder-develop-el="develop"
                                         >
                                             <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
@@ -367,119 +367,12 @@ export default function DevelopSkills(props) {
                                                     className="develop-skills-techno__el flex flex-col items-center gap-y-3">
                                                     <img
                                                         className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/HTML.svg"
-                                                        alt="HTML"
+                                                        src="/img/develop/JavaScript.png"
+                                                        alt="JavaScript"
                                                     />
                                                     <span>HTML</span>
                                                 </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/CSS.svg"
-                                                        alt="CSS"
-                                                    />
-                                                    <span>CSS</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/TailwindCSS.png"
-                                                        alt="TailwindCSS"
-                                                    />
-                                                    <span>TailwindCSS</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/JavaScript.png"
-                                                        alt="JavaScript"
-                                                    />
-                                                    <span>JavaScript</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/WordPress.png"
-                                                        alt="WordPpress"
-                                                    />
-                                                    <span>WordPress</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/jQueryJS.png"
-                                                        alt="jQuery.js"
-                                                    />
-                                                    <span>jQuery.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/jQueryUI.png"
-                                                        alt="jQueryUI.js"
-                                                    />
-                                                    <span>jQueryUI.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/ScrollMagicJS.png"
-                                                        alt="ScrollMagic.js"
-                                                    />
-                                                    <span>ScrollMagic.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/GsapJS.svg"
-                                                        alt="Gsap.js"
-                                                    />
-                                                    <span>Gsap.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/AOS-js.png"
-                                                        alt="AOS.js"
-                                                    />
-                                                    <span>AOS.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/SwiperJS.png"
-                                                        alt="Swiper.js"
-                                                    />
-                                                    <span>Swiper.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/ThreeJS.png"
-                                                        alt="Three.js"
-                                                    />
-                                                    <span>Three.js</span>
-                                                </div>
-                                                <div
-                                                    className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                    <img
-                                                        className="w-[73px] h-[80px]"
-                                                        src="assets/images/develop/PHP.png"
-                                                        alt="PHP"
-                                                    />
-                                                    <span>PHP</span>
-                                                </div>
+
                                             </div>
                                         </div>
                                         <div
