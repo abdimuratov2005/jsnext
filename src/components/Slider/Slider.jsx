@@ -66,7 +66,6 @@ const VerticalMode = ({data}) => {
                 swipeToSlide={true}
                 focusOnSelect={true}
             >
-
                 {data.map((image, index) => {
                     return (
                         <div key={index} className={'slider__div flex'}>
@@ -78,7 +77,6 @@ const VerticalMode = ({data}) => {
                         </div>
                         )
                 })}
-
             </Slider>
         </>
 
