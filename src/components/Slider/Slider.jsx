@@ -6,8 +6,6 @@ import './slider.css'
 import React, {Suspense, useEffect, useRef, useState} from "react";
 import Slider from "react-slick";
 
-
-
 const VerticalMode = ({data}) => {
 
     const [nav1, setNav1] = useState(null);
