@@ -21,6 +21,7 @@ const VerticalMode = ({data}) => {
     const test = data.map((item) => {
         return item.img
     })
+
     const settings = {
         customPaging: function (i) {
             return (
