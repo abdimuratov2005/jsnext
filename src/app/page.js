@@ -1,7 +1,7 @@
 import HomePageMain from "@/components/Pages/HomePage/HomePageMain/HomePageMain";
 import Services from "@/components/Pages/HomePage/Services/Services";
 import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
-import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
+
 import AboutUs from "@/components/Pages/HomePage/AboutUs/AboutUs";
 import InTouch from "@/components/InTouch/InTouch";
 import API from "@/Api/Api";
@@ -9,6 +9,9 @@ import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import Team from "@/components/Pages/HomePage/Team/Team";
 import Video from "@/components/Video/Video";
+import {useContext} from "react";
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 
 async function getData() {
 

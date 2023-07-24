@@ -1,5 +1,8 @@
-import React from 'react';
+'use client'
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import React, {useContext} from 'react';
 import Link from "next/link";
+
 
 
 const links = [
@@ -19,64 +22,93 @@ const links = [
 
 const subLinks = [
     {
+        id: '1',
+        href: '/develop',
+        title: 'Корпоративный сайт',
+        data: 'develop'
+    },
+    {
+        id: '2',
         href: '/',
-        title: 'Корпоративный сайт'
+        title: 'Интернет магазин',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Интернет магазин'
+        id: '1',
+        title: 'Лэндинг',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Лэндинг'
+        id: '1',
+        title: 'Для агентств недвижимости',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Для агентств недвижимости'
+        id: '1',
+        title: 'Для отелей',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Для отелей'
+        id: '1',
+        title: 'Web design',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Web design'
+        id: '1',
+        title: 'Реклама',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Реклама'
+        id: '1',
+        title: 'SEO',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'SEO'
+        id: '1',
+        title: 'Видео',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Видео'
+        id: '1',
+        title: 'Брендбук',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Брендбук'
+        id: '1',
+        title: 'Графика',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Графика'
+        id: '1',
+        title: '3D-design',
+        data: 'design'
     },
     {
         href: '/',
-        title: '3D-design'
+        id: '1',
+        title: 'Performance-маркетинг',
+        data: 'design'
     },
     {
         href: '/',
-        title: 'Performance-маркетинг'
-    },
-    {
-        href: '/',
-        title: 'Продвижение'
+        id: '1',
+        title: 'Продвижение',
+        data: 'develop'
     },
 ]
 
-function Services(props) {
+export default function Services(props) {
+    const { buttonsMenu, setDataButton,  setDataDescriptionButton, setShow} = useContext(DataDevelopContext);
     return (
         <section
             className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
@@ -139,7 +171,12 @@ function Services(props) {
                         <div
                             className="services-more__wrapper w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
                             {subLinks.map((item, index) => {
-                                return <Link key={index} className="services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={item.href}>{item.title}</Link>
+                                return <Link onClick={() => {
+                                    setShow(true)
+                                    setDataDescriptionButton(item.id)
+                                    setDataButton(item.data)
+
+                                }} key={index} className="services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={'/develop'}>{item.title}</Link>
                             })}
                         </div>
                     </div>
@@ -148,5 +185,3 @@ function Services(props) {
         </section>
     );
 }
-
-export default Services;

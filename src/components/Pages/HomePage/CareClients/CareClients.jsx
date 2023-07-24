@@ -1,10 +1,7 @@
 'use client'
-import React, {useState} from 'react';
 import styles from './CareClents.module.scss'
-import Link from "next/link";
-import {AnimatePresence, motion} from "framer-motion";
-
-function CareClients(props) {
+import {useContext, useState} from "react";
+export  default function CareClients(props) {
     const [data, setData] = useState()
     const [selectButton, setSelectButton] = useState(0)
     const [showInfo, setShowInfo] = useState(false)
@@ -147,4 +144,3 @@ function CareClients(props) {
     );
 }
 
-export default CareClients;

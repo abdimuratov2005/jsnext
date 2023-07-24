@@ -1,7 +1,6 @@
 'use client'
-
 import './develop.css'
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
 import {AnimatePresence, motion} from "framer-motion";
 // Import Swiper React components
@@ -12,20 +11,16 @@ import 'swiper/css/effect-cards';
 
 // import required modules
 import {EffectCards, Mousewheel} from 'swiper/modules';
-import Loader from "@/components/Loader/Loader";
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 
 
 
-export default function DevelopUnits(props) {
+export default function DevelopUnits() {
+    const { buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow } = useContext(DataDevelopContext);
 
     // стейт менеджеры контента
     const [dataPopup, setDataPopup] = useState([])
-    const [buttonsMenu, setButtonsMenu] = useState('develop')
-    const [isShow, setIsShow] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
-
-    const [currentDescriptionButton, setCurrentDescriptionButton] = useState(0)
 
     useEffect(() => {
         hiddenScrollBody()
@@ -62,7 +57,6 @@ export default function DevelopUnits(props) {
 
 
     const content = {
-
         develop: {
             title: 'Создание сайтов',
             description: 'Создаем веб сайты и сервисы различного направления и функционала. От одностраничных сайтов до онлайн сервисов с бекэндом.',
@@ -256,19 +250,19 @@ export default function DevelopUnits(props) {
     }
 
     const buttonsMenuChange = (el) => {
-        setButtonsMenu(el)
-        setCurrentDescriptionButton(0)
-        setIsShow(false)
+        setDataButton(el)
+        setDataDescriptionButton(0)
+        setShow(false)
     }
 
     const CurrentDescriptionChange = (el) => {
-        setCurrentDescriptionButton(el)
-        setIsShow(true)
+        setDataDescriptionButton(el)
+        setShow(true)
     }
 
     const CurrentDescriptionClose = () => {
-        setIsShow(false)
-        setCurrentDescriptionButton(0)
+        setShow(false)
+        setDataDescriptionButton(0)
     }
 
 
@@ -450,7 +444,6 @@ export default function DevelopUnits(props) {
                                             <button
                                                 onClick={() => CurrentDescriptionChange(item.id)}
                                                 key={item.id}
-                                                href="#"
                                                 className={`${item.id === currentDescriptionButton && 'bg-white'} foryou-nav__el px-4 py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300`}
                                             >
                                                 {item.label}
