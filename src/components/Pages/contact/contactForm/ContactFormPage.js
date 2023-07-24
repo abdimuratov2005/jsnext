@@ -19,16 +19,20 @@ export default function ContactFormPage(props) {
                             className='h-8 ml-2 max-w-[200px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'
                             name='name' placeholder='Ваше Имя'
                             defaultValue="" {...register("name", {required: true})} />
+                        {errors?.name && <span className={'text-redbright-mapbiz ml-2'}>Вы не представились:)</span>}
                     </label>
                     <label className='text-black flex flex-col ml-2 '>
                         <InputMask placeholder='Telephone No' mask="+7 (999)-999-99-99" type='phone'
                                    className={'h-8 mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'} {...register("telephone", {required: true})} />
+                        {errors?.telephone && <span className={'text-redbright-mapbiz ml-2'}>Вы не указали телефон</span>}
                     </label>
                     <label htmlFor="email" className='ml-2 text-black flex flex-col'>
                         <input
                             type='email'
                             className=' h-8 mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'
                             name='email' placeholder='Email' defaultValue="" {...register("email", {required: true})} />
+                        {errors?.email && <span className={'text-redbright-mapbiz ml-2'}>Вы не указали почту</span>}
+
                     </label>
                     <label className='text-black flex flex-col ml-2 '>
                         <textarea
@@ -37,17 +41,28 @@ export default function ContactFormPage(props) {
                             defaultValue="" {...register("textareac", {required: true})} />
                     </label>
                     <div className={'flex justify-end'}>
-                        <button className={'ml-5 mr-7 bg-[#1e1e1e] text-white py-3 px-8 border border-white rounded-[24px]'} type={"submit"}>Отправить</button>
+                        <button
+                            className={'ml-5 mr-7 bg-[#1e1e1e] text-white py-3 px-8 border border-white rounded-[24px]'}
+                            type={"submit"}>Отправить
+                        </button>
                     </div>
 
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
-                    <label htmlFor="email" className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
+                    <label htmlFor="email"
+                           className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
                 </form>
                 <img src='/img/contact/formBottom.png'></img>
             </div>
