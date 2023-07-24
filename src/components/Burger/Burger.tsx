@@ -68,13 +68,13 @@ function Burger({isOpen, setIsOpen}) {
                             >
                                 <path
                                     d="M14.3226 17.9674C11.7133 20.3402 9.16172 22.6385 6.63565 24.9654C5.17224 26.3134 3.76123 27.7199 2.30123 29.0716C1.91237 29.4408 1.46552 29.7409 0.979126 29.9595C0.739275 30.0618 0.221335 29.9595 0.103217 29.7722C-0.0530674 29.5234 -0.00686019 29.082 0.0779113 28.7574C0.139582 28.5207 0.390682 28.3248 0.580112 28.1348C4.18256 24.5318 7.78667 20.9312 11.3923 17.3329C11.7969 16.9293 12.2131 16.538 12.6779 16.0898C11.1022 14.316 9.52409 12.6043 8.01749 10.829C5.61295 7.99437 3.25666 5.11755 0.880452 2.25835C0.794073 2.15444 0.71977 2.04071 0.632588 1.9368C0.216766 1.43749 -0.0763915 0.899327 0.397083 0.293654C0.751637 -0.159833 1.59922 -0.0921009 2.18941 0.524822C3.65925 2.06079 5.09106 3.63397 6.51089 5.21923C9.10345 8.11218 11.6758 11.024 14.2591 13.9255C14.3697 14.031 14.4873 14.1287 14.611 14.2178C16.6086 12.2784 18.584 10.3454 20.5759 8.42901C22.8861 6.2076 25.2043 3.99493 27.5306 1.79097C28.4033 0.962547 29.103 0.813227 29.6385 1.29658C30.1935 1.79732 30.1418 2.6339 29.2568 3.53085C26.8639 5.9562 24.4132 8.32265 21.9648 10.6917C20.0997 12.4971 18.2047 14.2714 16.2196 16.1571C17.8327 17.8518 19.3755 19.541 20.993 21.152C22.5466 22.6994 24.187 24.1571 25.7712 25.6726C26.3905 26.2429 26.9704 26.856 27.5069 27.5076C27.9396 28.0543 28.0035 28.733 27.4716 29.2722C26.9475 29.8041 26.3406 29.6161 25.835 29.2136C24.8679 28.4836 23.9408 27.7001 23.058 26.8667C20.3556 24.1783 17.7008 21.4406 15.0287 18.7207C14.8174 18.506 14.6154 18.2806 14.3226 17.9674Z"
-                                    fill="#808080"
+                                    fill="#E8E8E8"
                                 />
                             </svg>
                         </button>
                         <div className="popup-menu-header relative">
-                            <div className="font-grotesk-bold text-3xl text-white">
-                                MapBiz
+                            <div className="font-grotesk font-bold text-3xl text-white">
+                                MaPbiz Group
                             </div>
                             <div className="popup-menu-lang absolute right-6 top-4">
                                 <svg
@@ -290,7 +290,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                                 <img
                                                     className="w-full h-auto"
-                                                    src="assets/images/header/popup-menu-link.svg"
+                                                    src="img/burger/popup-menu-link.svg"
                                                     alt=""
                                                 />
                                                 <Link onClick={handleClick} href={'/develop'} className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -298,7 +298,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 </Link>
                                             </div>
                                             <div
-                                                className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
+                                                className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white">
                                                 <a
                                                     href="/develop.html"
                                                     className="popup-menu-services__link relative"
@@ -306,7 +306,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -320,7 +320,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -334,7 +334,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -348,7 +348,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -362,7 +362,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -379,7 +379,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                                 <img
                                                     className="w-full h-auto"
-                                                    src="assets/images/header/popup-menu-link.svg"
+                                                    src="img/burger/popup-menu-link.svg"
                                                     alt=""
                                                 />
                                                 <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -395,7 +395,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -409,7 +409,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -423,7 +423,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -437,7 +437,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -451,7 +451,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -468,7 +468,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
                                                 <img
                                                     className="w-full h-auto"
-                                                    src="assets/images/header/popup-menu-link.svg"
+                                                    src="img/burger/popup-menu-link.svg"
                                                     alt=""
                                                 />
                                                 <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -484,7 +484,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -498,7 +498,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -512,7 +512,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -526,7 +526,7 @@ function Burger({isOpen, setIsOpen}) {
                                                 >
                                                     <img
                                                         className="w-full h-auto"
-                                                        src="assets/images/header/popup-menu-link.svg"
+                                                        src="img/burger/popup-menu-link.svg"
                                                         alt=""
                                                     />
                                                     <div className="absolute w-full h-full top-0 left-6 flex items-center">
@@ -548,14 +548,14 @@ function Burger({isOpen, setIsOpen}) {
                                 </div>
                                 <div className="grid">
                                     <span>Сотрудничество</span>
-                                    <a href="mailto:mapbiz@yandex.ru">mapbiz@yandex.ru</a>
+                                    <a className="underline hover:no-underline" href="mailto:mapbiz@yandex.ru">mapbiz@yandex.ru</a>
                                 </div>
                                 <div className="grid">
-                                    <a href="#">Telegram</a>
-                                    <a href="#">Vkontakte</a>
-                                    <a href="#">Behance</a>
-                                    <a href="#">Dribbble</a>
-                                    <a href="#">LinkedIn</a>
+                                    <a className="underline hover:no-underline" href="https://t.me/MapbizGroup">Telegram</a>
+                                    <a className="underline hover:no-underline" href="https://vk.com/id177191269">Vkontakte</a>
+                                    <a className="underline hover:no-underline" href="https://www.behance.net/mapbiz">Behance</a>
+                                    <a className="underline hover:no-underline" href="https://dribbble.com/mapbiz">Dribbble</a>
+                                    <a className="underline hover:no-underline" href="https://www.linkedin.com/in/yuri-peklich/">LinkedIn</a>
                                 </div>
                             </div>
                         </div>
