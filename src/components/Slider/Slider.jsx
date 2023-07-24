@@ -39,6 +39,7 @@ const VerticalMode = ({data}) => {
         slidesToShow: 1,
         slidesToScroll: 1
     };
+
     const settingsTwo = {
         centerPadding: 50,
         arrows: false
@@ -56,6 +57,7 @@ const VerticalMode = ({data}) => {
                     </div>
                 })}
             </Slider>
+
             <Slider
                 {...settings}
                 asNavFor={nav1}
