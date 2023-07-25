@@ -42,11 +42,13 @@ export default function RootLayout({ children }) {
   return (
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>
-      <Header />
+
       <DataDevelopProvider>
+          <Header />
             {children}
+          <Footer />
       </DataDevelopProvider>
-      <Footer />
+
       </body>
       </html>
   );

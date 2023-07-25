@@ -7,6 +7,9 @@ const DataDevelopContext = createContext();
 // Создаем провайдер, который будет оборачивать наше приложение
 const DataDevelopProvider = ({children}) => {
 
+    // язык сайта
+    const [language, setLanguage] = useState('russian')
+
     // Верхний таб
     const [buttonsMenu, setButtonsMenu] = useState('develop');
     //Кнопки в табе
@@ -24,11 +27,14 @@ const DataDevelopProvider = ({children}) => {
         setIsShow(data)
     }
 
+    const isLanguage = (lang) => {
+        setLanguage(lang)
+    }
     console.log(currentDescriptionButton)
     // Передаем значения контекста в Provider
     return (
         <DataDevelopContext.Provider
-            value={{buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow}}>
+            value={{language, isLanguage, buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow}}>
             {children}
         </DataDevelopContext.Provider>
     );

@@ -7,14 +7,17 @@ import Link from "next/link";
 
 const links = [
     {
+        data: 'design',
         href: '/services',
         title: 'Дизайн'
     },
     {
+        data: 'develop',
         href: '/develop',
         title: 'Разработка'
     },
     {
+        data: 'market',
         href: '/services',
         title: 'Маркетинг'
     },
@@ -22,93 +25,94 @@ const links = [
 
 const subLinks = [
     {
-        id: '1',
+        id: 1,
         href: '/develop',
         title: 'Корпоративный сайт',
         data: 'develop'
     },
     {
-        id: '2',
+        id: 2,
         href: '/',
         title: 'Интернет магазин',
-        data: 'design'
+        data: 'develop'
     },
     {
         href: '/',
-        id: '1',
+        id: 3,
         title: 'Лэндинг',
-        data: 'design'
+        data: 'develop'
     },
     {
         href: '/',
-        id: '1',
+        id: 4,
         title: 'Для агентств недвижимости',
-        data: 'design'
+        data: 'develop'
     },
     {
         href: '/',
-        id: '1',
+        id: 5,
         title: 'Для отелей',
-        data: 'design'
+        data: 'develop'
     },
     {
         href: '/',
-        id: '1',
+        id: 1,
         title: 'Web design',
         data: 'design'
     },
     {
         href: '/',
-        id: '1',
-        title: 'Реклама',
-        data: 'design'
-    },
-    {
-        href: '/',
-        id: '1',
-        title: 'SEO',
-        data: 'design'
-    },
-    {
-        href: '/',
-        id: '1',
-        title: 'Видео',
-        data: 'design'
-    },
-    {
-        href: '/',
-        id: '1',
-        title: 'Брендбук',
-        data: 'design'
-    },
-    {
-        href: '/',
-        id: '1',
-        title: 'Графика',
-        data: 'design'
-    },
-    {
-        href: '/',
-        id: '1',
+        id: 2,
         title: '3D-design',
         data: 'design'
     },
     {
         href: '/',
-        id: '1',
-        title: 'Performance-маркетинг',
+        id: 3,
+        title: 'Видео',
         data: 'design'
     },
     {
         href: '/',
-        id: '1',
-        title: 'Продвижение',
-        data: 'develop'
+        id: 4,
+        title: 'Брендбук',
+        data: 'design'
     },
+    {
+        href: '/',
+        id: 5,
+        title: 'Графика',
+        data: 'design'
+    },
+    {
+        href: '/',
+        id: 1,
+        title: 'Реклама',
+        data: 'market'
+    },
+    {
+        href: '/',
+        id: 2,
+        title: 'Продвижение',
+        data: 'market'
+    },
+    {
+        href: '/',
+        id: 3,
+        title: 'SEO',
+        data: 'market'
+    },
+    {
+        href: '/',
+        id: 4,
+        title: 'Performance-маркетинг',
+        data: 'market'
+    },
+
 ]
 
 export default function Services(props) {
-    const { buttonsMenu, setDataButton,  setDataDescriptionButton, setShow} = useContext(DataDevelopContext);
+    const { setDataButton,  setDataDescriptionButton, setShow} = useContext(DataDevelopContext);
     return (
         <section
             className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
@@ -117,7 +121,9 @@ export default function Services(props) {
                 <div className="w-6/12 grid gap-y-1.5 2xl:gap-y-6">
                     {links.map((item,index) => {
                         return (
-                            <Link key={index} className="flex group justify-between items-center" href={item.href}>
+                            <Link
+                                onClick={() => setDataButton(item.data)}
+                                key={index} className="flex group justify-between items-center" href={'/develop'}>
                                 <p>{item.title}</p>
                                 <svg
                                     className="group-hover:hidden w-2 2xl:w-[28px] h-2 2xl:h-[28px]"

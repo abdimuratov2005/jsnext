@@ -1,15 +1,18 @@
 'use client'
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion"
 import Burger from "@/components/Burger/Burger";
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 
 
 // Загрузка компонента Burger динамически
 
 
 function Header(props) {
+
+    const { language, isLanguage} = useContext(DataDevelopContext);
 
     const [openBurger, setOpenBurger] = useState(false)
     const [isScroll, setIsScroll] = useState(false)
@@ -94,13 +97,19 @@ function Header(props) {
                                 </defs>
                             </svg>
                         </div>
-                        <div className="header-lang mr-4 2xl:mr-0 2xl:my-auto" ffcoder-lang="ru">
+                        <div className="w-[60px] mr-4 2xl:mr-0 2xl:my-auto" ffcoder-lang="ru">
                             <button
-                                className={`select-none font-bold  ${isScroll ? styles.buttons__language : 'text-white'}`}>Ru
+                                onClick={() => isLanguage('russian')}
+                                className={`select-none 
+                                 ${language === 'russian' ? 'font-bold' : ''}
+                                 ${isScroll ? styles.buttons__language : 'text-white'}`}>Ru
                             </button>
                             <span className={isScroll ? styles.buttons__language : 'text-white'}> / </span>
                             <button
-                                className={`cursor-pointer ${isScroll ? styles.buttons__language : 'text-white'}`}>Eng
+                                onClick={() => isLanguage('english')}
+                                className={`
+                                 ${language === 'english' ? 'font-bold' : ''}
+                                cursor-pointer ${isScroll ? styles.buttons__language : 'text-white'}`}>Eng
                             </button>
                         </div>
                         <button onClick={() => {

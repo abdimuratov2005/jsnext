@@ -174,17 +174,11 @@ export default function Clients({posts}) {
 
                 <div className="flex justify-end text-sm">
                     <div className="inline-block w-auto mt-24">
-                        <a
-                            className="py-3 px-10 text-white underline hover:no-underline"
-                            href="#"
-                        >
-                            Весь список работ
-                        </a>
                     </div>
                     <div className="inline-block w-auto mt-24">
                         <Link
                             className={`py-3 px-10 border ${ hoverBtn ? 'bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}
-                            href="#"
+                            href="/portfolio"
                             onMouseEnter={hoverBtnChange}
                             onMouseLeave={hoverBtnChange}
                         >
