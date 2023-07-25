@@ -313,6 +313,7 @@ function Burger({isOpen, setIsOpen}) {
                                         {block && block.map((item,index) => {
                                             return (
                                                 <div
+                                                    key={item.id}
                                                     className={`${(index > 0) && 'mt-6'} popup-menu-services__el`}
                                                 >
                                                     <div
@@ -324,7 +325,6 @@ function Burger({isOpen, setIsOpen}) {
                                                         />
                                                         <Link
                                                             onClick={() => buttonsMenuChange(item.el)}
-                                                            key={item.id}
                                                             href={'/develop'}
                                                             className="absolute w-full h-full top-0 left-6 flex items-center">
                                                             {item.title}
