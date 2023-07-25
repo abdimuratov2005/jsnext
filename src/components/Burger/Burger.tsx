@@ -1,11 +1,24 @@
-import React from 'react';
+'use client'
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import React, {useContext} from 'react';
 import styles from './Burger.module.scss'
 import Link from "next/link";
 import {usePathname} from 'next/navigation';
 import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
 
+import {content, block} from '../Pages/Develop/DevelopUnits/develop'
+
 function Burger({isOpen, setIsOpen}) {
+    const {
+        buttonsMenu,
+        setDataButton,
+        currentDescriptionButton,
+        setDataDescriptionButton,
+        isShow,
+        setShow
+    } = useContext(DataDevelopContext);
+
     const currentRoute = usePathname();
     const navLink = [
         {
@@ -31,13 +44,26 @@ function Burger({isOpen, setIsOpen}) {
             href: "/contact",
             className: "",
         },
-    ]
-
+    ];
 
 
     const handleClick = () => {
         setIsOpen(false);
     };
+
+    const buttonsMenuChange = (el) => {
+        setDataButton(el)
+        setDataDescriptionButton(0)
+        setShow(false)
+        setIsOpen(false)
+    }
+
+    const CurrentDescriptionChange = (item, el) => {
+        setDataButton(item)
+        setDataDescriptionButton(el)
+        setShow(true)
+        setIsOpen(false)
+    }
 
     return (
         <AnimatePresence mode={"wait"} >
@@ -282,259 +308,58 @@ function Burger({isOpen, setIsOpen}) {
                                     </div>
                                     <div
                                         className="popup-menu-services__wrapper h-[17rem] relative overflow-x-hidden overflow-y-auto px-9 py-5">
-                                        <div
-                                            className="popup-menu-services__el"
-                                            ffcoder-develop-el="develop"
-                                        >
-                                            <div
-                                                className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
-                                                <img
-                                                    className="w-full h-auto"
-                                                    src="img/burger/popup-menu-link.svg"
-                                                    alt=""
-                                                />
-                                                <Link onClick={handleClick} href={'/develop'} className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                    Разработка
-                                                </Link>
-                                            </div>
-                                            <div
-                                                className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white">
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={3}
+
+
+                                        {block && block.map((item,index) => {
+                                            return (
+                                                <div
+                                                    className={`${(index > 0) && 'mt-6'} popup-menu-services__el`}
                                                 >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Langing Page
+                                                    <div
+                                                        className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                                        <img
+                                                            className="w-full h-auto"
+                                                            src="img/burger/popup-menu-link.svg"
+                                                            alt=""
+                                                        />
+                                                        <Link
+                                                            onClick={() => buttonsMenuChange(item.el)}
+                                                            key={item.id}
+                                                            href={'/develop'}
+                                                            className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                            {item.title}
+                                                        </Link>
                                                     </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={1}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Корпоративный сайт
+                                                    <div
+                                                        className="popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white">
+
+                                                        {content && content[item.el]['els'].map((el) => {
+                                                            return (
+
+                                                                <Link
+                                                                    key={el.id}
+                                                                    onClick={() => CurrentDescriptionChange(item.el, el.id)}
+                                                                    href={'/develop'}
+                                                                    className="popup-menu-services__link relative"
+                                                                    >
+                                                                    <img
+                                                                        className="w-full h-auto"
+                                                                        src="img/burger/popup-menu-link.svg"
+                                                                        alt=""
+                                                                    />
+                                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                                        {el.label}
+                                                                    </div>
+                                                                </Link>
+
+                                                            )
+                                                        })}
+
                                                     </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={2}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Интернет магазин
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={4}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Для агентств недвижимости
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html#"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={5}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Для гостиничного бизнеса
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="popup-menu-services__el mt-4"
-                                            ffcoder-develop-el="design"
-                                        >
-                                            <div
-                                                className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
-                                                <img
-                                                    className="w-full h-auto"
-                                                    src="img/burger/popup-menu-link.svg"
-                                                    alt=""
-                                                />
-                                                <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                    Дизайн
                                                 </div>
-                                            </div>
-                                            <div
-                                                className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={1}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Web design
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={2}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        3d design
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={3}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Видео
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={4}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Брендбук
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={5}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Графика
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="popup-menu-services__el mt-4"
-                                            ffcoder-develop-el="market"
-                                        >
-                                            <div
-                                                className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
-                                                <img
-                                                    className="w-full h-auto"
-                                                    src="img/burger/popup-menu-link.svg"
-                                                    alt=""
-                                                />
-                                                <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                    Маркетинг
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="popup-menu-services__links pl-5 mt-4 grid gap-4 font-grotesk text-sm text-white hidden">
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={1}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Реклама
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={2}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Продвижение
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={3}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        SEO оптимизация
-                                                    </div>
-                                                </a>
-                                                <a
-                                                    href="/develop.html"
-                                                    className="popup-menu-services__link relative"
-                                                    ffcoder-foryou-el={4}
-                                                >
-                                                    <img
-                                                        className="w-full h-auto"
-                                                        src="img/burger/popup-menu-link.svg"
-                                                        alt=""
-                                                    />
-                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                        Performance-маркетинг
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                            )
+                                        })}
+
                                     </div>
                                 </div>
                             </div>
