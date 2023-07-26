@@ -1,19 +1,21 @@
 'use client'
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion"
 import Burger from "@/components/Burger/Burger";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
-
+import {
+    motion
+} from "framer-motion"
 
 // Загрузка компонента Burger динамически
 
 
 function Header(props) {
 
-    const { language, isLanguage} = useContext(DataDevelopContext);
-
+    const {language, isLanguage} = useContext(DataDevelopContext);
+    const [isLogo, setIsLogo] = useState(false)
     const [openBurger, setOpenBurger] = useState(false)
     const [isScroll, setIsScroll] = useState(false)
     const [isMuted, setIsMuted] = useState(false)
@@ -25,25 +27,46 @@ function Header(props) {
     const {scrollY} = useScroll()
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-
         if (latest >= 100) {
             setIsScroll(true)
         } else {
+            setIsLogo(false)
             setIsScroll(false)
         }
     })
+    console.log()
 
 
     return (
         <>
-            <header className={`${isScroll ? styles.headerActive : ''} fixed w-full z-20`}>
+            <motion.header
+                initial={{}}
+                animate={{backgroundColor: isScroll ? '#F5F9FF' : 'transparent'}} //цвет
+                transition={{duration: 2}} // Длительность анимации
+                className={`fixed w-full z-20`}>
                 <div
                     className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
                     <div
                         className="header-logo w-2/12 xl:w-5/12 font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
-                        <Link href={'/'}
-                              className={`header-logo-text ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
-                            MaPbiz Group
+                        <Link href={'/'}>
+                            <motion.div
+                                initial={{width: '100%', height: '60px'}} // Начальная высота шапки
+                                animate={
+                                    {
+                                        width: isScroll ? '88px' : '',
+                                    }}
+                                transition={{duration: 0.3}} // Длительность анимации
+                                onAnimationComplete={() => {
+                                    if(scrollY.get() < 100) {
+                                        setIsLogo(false  );
+                                    } else {
+                                        setIsLogo(prevState => !prevState  );
+                                    }
+                                }}
+                                // style={{background: isScroll ? 'url(/img/mapLogo.svg) no-repeat center/contain' : '',}}
+                                className={`whitespace-nowrap header-logo-text  ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
+                                {isLogo ? <img src={'/img/mapLogo.svg'} alt='лого'></img> : 'MaPbiz Group'}
+                            </motion.div>
                         </Link>
                         <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">
                             <img
@@ -129,7 +152,7 @@ function Header(props) {
                     </div>
                 </div>
                 <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
-            </header>
+            </motion.header>
         </>
     );
 }

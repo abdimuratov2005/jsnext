@@ -4,6 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import localFont from 'next/font/local'
 import {DataDevelopContext, DataDevelopProvider} from "@/app/contexts/DataDevelopContext";
 
+
 const cygrotesk = localFont({
     src: [
         {
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
 
       <DataDevelopProvider>
           <Header />
-            {children}
+              {children}
           <Footer />
       </DataDevelopProvider>
 
