@@ -53,9 +53,6 @@ function Burger({isOpen, setIsOpen}) {
 
     const buttonsMenuChange = (el) => {
         setDataButton(el)
-        setDataDescriptionButton(0)
-        setShow(false)
-        setIsOpen(false)
     }
 
     const CurrentDescriptionChange = (item, el) => {
@@ -72,7 +69,7 @@ function Burger({isOpen, setIsOpen}) {
                 animate={{ opacity: 1, clipPath: 'circle(100% at 50% 50%)' }}
                 exit={{ opacity: 0, clipPath: 'circle(0% at 50% 50%)' }}
                 transition={{ duration: 0.5 }}
-                className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-50 overflow-hidden`}>
+                className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
                 <Image placeholder={"blur"} blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='} src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
@@ -323,15 +320,16 @@ function Burger({isOpen, setIsOpen}) {
                                                             src="img/burger/popup-menu-link.svg"
                                                             alt=""
                                                         />
-                                                        <Link
+                                                        <div
                                                             onClick={() => buttonsMenuChange(item.el)}
-                                                            href={'/develop'}
+                                                            // href={'/develop'}
                                                             className="absolute w-full h-full top-0 left-6 flex items-center">
                                                             {item.title}
-                                                        </Link>
+                                                        </div>
                                                     </div>
+                                                    {/*buttonsMenu*/}
                                                     <div
-                                                        className="popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white">
+                                                        className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
 
                                                         {content && content[item.el]['els'].map((el) => {
                                                             return (
