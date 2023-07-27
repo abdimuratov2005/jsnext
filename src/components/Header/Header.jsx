@@ -2,7 +2,7 @@
 import React, {useContext, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
-import {useMotionValueEvent, useScroll} from "framer-motion"
+import {AnimatePresence, useMotionValueEvent, useScroll} from "framer-motion"
 import Burger from "@/components/Burger/Burger";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {
@@ -52,9 +52,9 @@ function Header(props) {
                                 initial={{width: '100%', height: '60px'}} // Начальная высота шапки
                                 animate={
                                     {
-                                        width: isScroll ? '88px' : '',
+                                        width: isScroll ? '90px' : '',
                                     }}
-                                transition={{duration: 0.3}} // Длительность анимации
+                                transition={{duration: 0.4}} // Длительность анимации
                                 onAnimationComplete={() => {
                                     if(scrollY.get() < 100) {
                                         setIsLogo(false  );
@@ -64,7 +64,17 @@ function Header(props) {
                                 }}
                                 // style={{background: isScroll ? 'url(/img/mapLogo.svg) no-repeat center/contain' : '',}}
                                 className={`whitespace-nowrap header-logo-text  ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
-                                {isLogo ? <img src={'/img/mapLogo.svg'} alt='лого'></img> : 'MaPbiz Group'}
+                                {isLogo ? <AnimatePresence
+                                    >
+                                    <motion.div
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
+                                        transition={{duration: 1}}
+                                        exit={{opacity: 0}}>
+                                        <img className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></img>
+                                    </motion.div>
+                                </AnimatePresence>
+                                    : 'MaPbiz Group'}
                             </motion.div>
                         </Link>
                         <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">

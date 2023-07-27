@@ -135,7 +135,7 @@ function FeedBackForm(props) {
                         const labelClass = isChecked ? 'checkbox-btn checkbox-btn_active' : 'checkbox-btn';
                         return (
                             <label key={item.name}
-                                   className={`${labelClass} px-[16px] py-[8px] text-[14px] border rounded-[24px] text-[#808080]`}>
+                                   className={`${labelClass} px-[16px] py-[8px] text-[14px] rounded-[24px] text-[#808080]`}>
                                 <input
                                     {...register(`${item.name}`)}
                                     type="checkbox"
