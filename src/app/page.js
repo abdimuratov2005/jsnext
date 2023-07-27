@@ -37,7 +37,7 @@ export default async function Page() {
     return (
         <>
             <HomePageMain/>
-            <Video></Video>
+            <Video />
             <Services/>
             <RunTimeLine
                 text={textik}/>

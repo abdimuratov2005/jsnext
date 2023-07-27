@@ -18,7 +18,7 @@ export default function Video() {
                 <div className={'m-auto max-w-[1280px] relative'}>
                     <Image onClick={() => setPlayStatus(true)} className={'absolute bottom-[10%] left-[10%] cursor-pointer'}
                            height={60} width={60} src={'/img/play.svg'} alt={'посмотреть видео кнопка'}></Image>
-                    <Image className={'m-auto'} height={530} width={1280} src={`/img/video.jpg`}
+                    <Image className={'m-auto'} height={530} width={1280} src={`/img/videooooo.jpg`}
                            alt={'Видео о MapBiz - создание и продвжиение сайтов'}></Image>
                 </div>}
 
