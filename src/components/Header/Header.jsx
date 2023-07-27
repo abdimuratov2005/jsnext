@@ -1,5 +1,5 @@
 'use client'
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion"
@@ -34,7 +34,6 @@ function Header(props) {
             setIsScroll(false)
         }
     })
-    console.log()
 
 
     return (
