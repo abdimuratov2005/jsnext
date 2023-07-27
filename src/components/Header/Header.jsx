@@ -8,6 +8,7 @@ import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {
     motion
 } from "framer-motion"
+import Image from "next/image";
 
 // Загрузка компонента Burger динамически
 
@@ -42,14 +43,14 @@ function Header(props) {
                 initial={{}}
                 animate={{backgroundColor: isScroll ? '#F5F9FF' : 'transparent'}} //цвет
                 transition={{duration: 2}} // Длительность анимации
-                className={`fixed w-full z-20`}>
+                className={`fixed h-[88px]  w-full z-20`}>
                 <div
                     className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
                     <div
                         className="header-logo w-2/12 xl:w-5/12 font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
                         <Link href={'/'}>
                             <motion.div
-                                initial={{width: '100%', height: '60px'}} // Начальная высота шапки
+                                initial={{width: '100%', height: '66px'}} // Начальная высота шапки
                                 animate={
                                     {
                                         width: isScroll ? '90px' : '',
@@ -71,7 +72,7 @@ function Header(props) {
                                         animate={{opacity: 1}}
                                         transition={{duration: 1}}
                                         exit={{opacity: 0}}>
-                                        <img className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></img>
+                                        <Image height={66} width={88} className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></Image>
                                     </motion.div>
                                 </AnimatePresence>
                                     : 'MaPbiz Group'}
