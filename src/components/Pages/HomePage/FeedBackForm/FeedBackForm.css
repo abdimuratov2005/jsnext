@@ -140,3 +140,9 @@
   transform: rotate(45deg);
   margin-left: 6px;
 }
+.country-name {
+  color: black;
+}
+.search-box {
+  color: black
+}

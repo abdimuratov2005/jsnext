@@ -2,6 +2,7 @@
 import {useForm} from "react-hook-form";
 import React from "react";
 import InputMask from "react-input-mask";
+import Image from "next/image";
 
 export default function ContactFormPage(props) {
     const {register, handleSubmit, watch, reset, formState: {errors, isSubmitSuccessful}} = useForm();
@@ -11,7 +12,7 @@ export default function ContactFormPage(props) {
     return (
         <section className={`flex justify-center items-center py-[163px]`}>
             <div className={`flex justify-center items-center flex-col max-w-[825px]`}>
-                <img src='/img/contact/formTop.png' alt=""/>
+                <Image width={828} height={193} src='/img/contact/formTop.png' alt=""/>
                 <form style={{backgroundImage: `url(/img/contact/contactFon.png)`}}
                       className={`bg-center bg-cover w-full `} onSubmit={handleSubmit(onSubmit)}>
                     <label className='text-black flex flex-col ml-2 '>
@@ -64,7 +65,7 @@ export default function ContactFormPage(props) {
                     <label htmlFor="email"
                            className='mt-8 ml-2 text-black flex flex-col mr-7 ml-2 bg-transparent outline-0 border-b border-[#616161] placeholder:text-black'></label>
                 </form>
-                <img src='/img/contact/formBottom.png'></img>
+                <Image alt={''} height={70} width={828} src='/img/contact/formBottom.png'></Image>
             </div>
         </section>
     );

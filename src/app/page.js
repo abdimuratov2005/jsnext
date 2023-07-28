@@ -12,6 +12,7 @@ import Video from "@/components/Video/Video";
 import {useContext} from "react";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
+import NextPage from "@/components/NextPage/NextPage";
 
 async function getData() {
 
@@ -54,6 +55,7 @@ export default async function Page() {
                     '                Связаться с нами - Давайте обсудим проект - Давайте обсудим проект - Связаться с нами - Давайте обсудим\n' +
                     '                проект - Давайте обсудим проект - Связаться с нами - Давайте обсудим проект'}/>
             <FeedBackForm/>
+            <NextPage></NextPage>
             <InTouch/>
         </>
     )

@@ -1,8 +1,11 @@
 'use client'
-import React, {useEffect, useState} from 'react';
-import {useForm} from "react-hook-form";
-import './FeedBackForm.css'
+import React, {useContext, useEffect, useState} from 'react';
+import {useForm, Controller } from "react-hook-form";
 import InputMask from 'react-input-mask';
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css';
+import './FeedBackForm.css'
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 
 
 const stateCheckBox = [
@@ -78,13 +81,16 @@ const socialPhone = [
 
 
 function FeedBackForm(props) {
-    const [hoverBtn, setHoverBtn] = useState(false)
-    const {register, handleSubmit, watch, reset, formState: {errors, isSubmitSuccessful, isValid }} = useForm({mode: "onChange"});
+    const {
+        language
+    } = useContext(DataDevelopContext);
 
-    const onSubmit = (data) => {
-        console.log(data)
-    };
-    const hoverBtnChange = () => setHoverBtn(!hoverBtn);
+
+    const [hoverBtn, setHoverBtn] = useState(false)
+    const {register, handleSubmit, setValue, watch, reset, control, formState: {errors, isSubmitSuccessful, isValid }} = useForm({mode: "onChange"});
+
+    // Устанавливаем значение страны по умолчанию (например, Россия - RU) при первоначальной загрузке
+
     useEffect(() => {
         const clearChecked = stateCheckBox.map((item) => {
             return item.name
@@ -100,6 +106,12 @@ function FeedBackForm(props) {
             setCheckedItems([])
         }
     }, [isSubmitSuccessful])
+
+    const onSubmit = (data) => {
+        console.log(data)
+    };
+    const hoverBtnChange = () => setHoverBtn(!hoverBtn);
+
 
     const [checkedItems, setCheckedItems] = useState([]);
 
@@ -150,8 +162,29 @@ function FeedBackForm(props) {
 
                 <label className='text-white flex flex-col mt-[40px] mb-[8px]'>
                     Как с вами связаться? *
-                    <InputMask mask="+7 (999)-999-99-99" type='phone' placeholder=''
-                               className={'max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080] text-[#808080]'} {...register("telephone", {required: true,  minLength: 18})} />
+                    <Controller
+                        name="telephone"
+                        control={control}
+                        defaultValue=''
+                        render={({ field }) => (
+                            <PhoneInput
+                                country={language === 'russian' ? 'ru' : 'us'}
+                                enableSearch
+                                {...register("telephone", { required: true })}
+                                {...field}
+                                type="phone"
+                                placeholder=""
+                                inputProps={{
+                                    className:
+                                        "ml-[50px] max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080] text-[#808080]",
+                                }}
+                                defaultCountry="RU"
+                                value={field.value} // Добавьте эту строку, чтобы передать значение в PhoneInput
+                                onChange={(value) => field.onChange(value)} // Добавьте эту строку, чтобы обновлять значение формы при изменении номера телефона
+                            />
+                        )}
+                    />
+
                 </label>
                 {errors?.telephone && <span className={'text-redbright-mapbiz'}>Вы не указали номер телефона</span>}
 
