@@ -9,6 +9,7 @@ import {
     motion
 } from "framer-motion"
 import Image from "next/image";
+import Quiz from "@/components/Quiz/Quiz";
 
 // Загрузка компонента Burger динамически
 
@@ -35,6 +36,16 @@ function Header(props) {
             setIsScroll(false)
         }
     })
+
+    // квиз
+
+    const [quizOpen, setQuizOpen] = useState(false)
+
+    function handleQuiz () {
+        setQuizOpen(prevState => !prevState)
+    }
+
+    //квиз енд
 
 
     return (
@@ -152,9 +163,7 @@ function Header(props) {
                         ></button>
                         <button
                             className={`${styles.header__callback} btn block py-3 px-8 border border-white rounded-[24px] text-white bg-center bg-cover bg-no-repeat`}
-                            onClick={() => {
-                                alert('открыл попап')
-                            }}
+                            onClick={handleQuiz}
                         >
                             Заказать проект
                         </button>
@@ -163,6 +172,7 @@ function Header(props) {
                 </div>
                 <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
             </motion.header>
+            <Quiz isOpenQuiz={quizOpen}></Quiz>
         </>
     );
 }
