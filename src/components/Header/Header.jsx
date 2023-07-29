@@ -83,7 +83,7 @@ function Header(props) {
                                         animate={{opacity: 1}}
                                         transition={{duration: 1}}
                                         exit={{opacity: 0}}>
-                                        <Image height={66} width={88} className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></Image>
+                                        <Image height={66} width={74} className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></Image>
                                     </motion.div>
                                 </AnimatePresence>
                                     : 'MaPbiz Group'}
@@ -106,7 +106,7 @@ function Header(props) {
                     </div>
                     <div className="w-6/12 2xl:w-3/12"/>
                     <div
-                        className="header-els w-4/12 flex justify-end gap-x-8 font-grotesk-light text-xs text-greywhite-mapbiz">
+                        className="header-els w-4/12 flex justify-end gap-x-6 font-grotesk-light text-xs text-greywhite-mapbiz">
                         <div
                             className="header-volume  2xl:block m-auto select-none cursor-pointer"
                             ffcoder-status="false"
