@@ -62,9 +62,15 @@ const subLinks = [
     },
     {
         href: '/',
-        id: 2,
-        title: '3D-design',
-        data: 'design'
+        id: 1,
+        title: 'Реклама',
+        data: 'market'
+    },
+    {
+        href: '/',
+        id: 3,
+        title: 'SEO',
+        data: 'market'
     },
     {
         href: '/',
@@ -86,8 +92,14 @@ const subLinks = [
     },
     {
         href: '/',
-        id: 1,
-        title: 'Реклама',
+        id: 2,
+        title: '3D-design',
+        data: 'design'
+    },
+    {
+        href: '/',
+        id: 4,
+        title: 'Performance-маркетинг',
         data: 'market'
     },
     {
@@ -96,19 +108,6 @@ const subLinks = [
         title: 'Продвижение',
         data: 'market'
     },
-    {
-        href: '/',
-        id: 3,
-        title: 'SEO',
-        data: 'market'
-    },
-    {
-        href: '/',
-        id: 4,
-        title: 'Performance-маркетинг',
-        data: 'market'
-    },
-
 ]
 
 export default function Services(props) {
@@ -175,7 +174,7 @@ export default function Services(props) {
                     </div>
                     <div className="services-more__nav font-light flex flex-col items-end text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
                         <div
-                            className="services-more__wrapper w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-4 gap-y-3 2xl:gap-y-5">
+                            className="services-more__wrapper w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-2 gap-y-3 2xl:gap-y-4">
                             {subLinks.map((item, index) => {
                                 return <Link onClick={() => {
                                     setShow(true)
