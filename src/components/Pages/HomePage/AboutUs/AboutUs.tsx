@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 function AboutUs(props) {
     return (
@@ -23,13 +24,19 @@ function AboutUs(props) {
                         </p>
                     </div>
                     <div className="flex justify-end">
-                        <div className="w-full 2xl:w-[48%] pb-8 border-b-[3px] border-greyborder-mapbiz">
-                            <p>
+                        <div className="w-full 2xl:w-[48%]">
+                            <p className="border-b-[3px] border-greyborder-mapbiz pb-8">
                                 Не делаем работу ради процесса за который платит клиент, а находим
-                                способ досжения конечной цели. Создаем цифровые активы нацеленные на
+                                способ достижения конечной цели. Создаем цифровые активы, нацеленные на
                                 конкретный результат
                             </p>
+                            <Link
+                                className="block text-sm font-light mt-6 hover:underline"
+                                href={'/contact#form'}>
+                                Написать сообщение
+                            </Link>
                         </div>
+
                     </div>
                 </div>
             </div>
