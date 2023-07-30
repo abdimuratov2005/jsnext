@@ -264,12 +264,12 @@ export default function DevelopUnits() {
                                         </div>
                                     </div>
                                     :
+
                                     <div
                                         className="foryou-toggle__base w-[90%] h-full bg-center bg-cover bg-no-repeat"
-                                        style={{
-                                            backgroundImage: "url(/img/develop/develop-fone.webp)"
-                                        }}
+                                        style={{ backgroundImage: `url(${content[buttonsMenu].img})` }}
                                     />
+
                                 }
                             </div>
                         </div>
