@@ -201,21 +201,21 @@ export const block = [
         id: 1,
         el: 'develop',
         title: 'Разработка сайтов',
-        svg: svgDevelop
+        svg: svgDevelop,
 
     },
     {
         id: 2,
         el: 'design',
         title: 'Дизайн',
-        svg: svgDesign
+        svg: svgDesign,
 
     },
     {
         id: 3,
         el: 'market',
         title: 'Маркетинг',
-        svg: svgMarket
+        svg: svgMarket,
 
     },
 ]

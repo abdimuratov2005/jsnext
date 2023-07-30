@@ -1,5 +1,7 @@
 'use client'
 import React, {useContext, useEffect, useState} from 'react';
+import axios from "axios";
+import {block} from './develop';
 
 // import required modules
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
@@ -7,113 +9,30 @@ import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 export default function DevelopSkills(props) {
     const { buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow } = useContext(DataDevelopContext);
 
-    const block = [
-        {
-            id: 1,
-            el: 'develop',
-            title: 'Разработка'
-
-        },
-        {
-            id: 2,
-            el: 'design',
-            title: 'Дизайн'
-
-        },
-        {
-            id: 3,
-            el: 'market',
-            title: 'Маркетинг'
-
-        },
-    ];
-
-    const content = {
-        develop: {
-            techno: [
-                {
-                    id: 1,
-                    label: 'JavaScript',
-                    img: '/img/develop/JavaScript.png',
-                },
-                {
-                    id: 2,
-                    label: 'JavaScript',
-                    img: '/img/develop/JavaScript.png',
-                },
-            ],
-            expert: [
-                {
-                    id: 1,
-                    label: 'Front-end developer',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-                {
-                    id: 2,
-                    label: 'Front-end developer',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-
-            ],
-        },
-        design: {
-            techno: [
-                {
-                    id: 1,
-                    label: 'Figma',
-                    img: '/img/develop/JavaScript.png',
-                },
-                {
-                    id: 2,
-                    label: 'Figma',
-                    img: '/img/develop/JavaScript.png',
-                },
-            ],
-            expert: [
-                {
-                    id: 1,
-                    label: 'Art director',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-                {
-                    id: 2,
-                    label: 'Art director',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-
-            ],
-        },
-        market: {
-            techno: [
-                {
-                    id: 1,
-                    label: 'Директ',
-                    img: '/img/develop/JavaScript.png',
-                },
-                {
-                    id: 2,
-                    label: 'Директ',
-                    img: '/img/develop/JavaScript.png',
-                },
-            ],
-            expert: [
-                {
-                    id: 1,
-                    label: 'Targetolog',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-                {
-                    id: 2,
-                    label: 'Targetolog',
-                    img: '/img/develop/develop-skills-expert.svg',
-                },
-
-            ],
-        }
-    };
+    const [technoContent, setTechnoContent] = useState([])
+    const [expertContent, setExpertContent] = useState([])
 
     const buttonsMenuChange = (el) => {
         setDataButton(el)
+        setTechnoContent([])
+    }
+
+    async function getData(link, type) {
+        const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1${link}`
+        await axios.get(`${url}`).then(res => {
+            const data = res.data.fields.content[0][type]
+            switch (type){
+                case 'techno' :
+                    setTechnoContent(data);
+                    break;
+                case 'expert' :
+                    setExpertContent(data);
+                    break;
+            }
+
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -164,7 +83,10 @@ export default function DevelopSkills(props) {
                             className="skills-content-nav py-10 w-[80%] mx-auto flex justify-evenly text-sm text-whitetext-more-mapbiz uppercase">
 
                             {block.map((item) => {
-                                console.log(buttonsMenu);
+                                // console.log(buttonsMenu);
+                                // if(buttonsMenu === item.el){
+                                //
+                                // }
                                 return (
 
                                     <button
@@ -307,20 +229,30 @@ export default function DevelopSkills(props) {
                                         >
 
                                             <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
-                                                {content[buttonsMenu]['techno'].map((item) => {
-                                                    return (
-                                                            <div
-                                                                key={item.id}
-                                                                className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                                <img
-                                                                    className="w-[73px] h-[80px]"
-                                                                    src="/img/develop/JavaScript.png"
-                                                                    alt="JavaScript"
-                                                                />
-                                                                <span>{item.label}</span>
-                                                            </div>
-                                                    )
-                                                })}
+                                                {
+                                                    block && block.map((item) => {
+                                                        if(buttonsMenu === item.el){
+                                                            getData(item.request, 'techno')
+                                                            return technoContent.map((item, index) => {
+                                                                console.log(item)
+                                                                return (
+                                                                    <div
+                                                                        key={index}
+                                                                        className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                                        <img
+                                                                            className="w-[73px] h-[80px]"
+                                                                            src={item.img}
+                                                                            alt="JavaScript"
+                                                                        />
+                                                                        <span>{item.title}</span>
+                                                                    </div>
+                                                                )
+                                                            })
+
+                                                        }
+                                                    })
+                                                }
+
                                             </div>
 
                                         </div>
@@ -368,20 +300,29 @@ export default function DevelopSkills(props) {
                                             className="develop-skills-expert__els"
                                         >
                                             <div className="develop-skills-expert__grid grid gap-3">
-                                                {content[buttonsMenu]['expert'].map((item) => {
-                                                    return (
-                                                        <div
-                                                            key={item.id}
-                                                            className="develop-skills-expert__el flex items-center gap-3">
-                                                            <img
-                                                                className="w-6 h-6"
-                                                                src={item.img}
-                                                                alt="JavaScript"
-                                                            />
-                                                            <span>{item.label}</span>
-                                                        </div>
-                                                    )
-                                                })}
+                                                {
+                                                    block && block.map((item) => {
+                                                        if(buttonsMenu === item.el){
+                                                            getData(item.request, 'expert')
+                                                            return expertContent.map((item, index) => {
+                                                                console.log(item)
+                                                                return (
+                                                                    <div
+                                                                        key={index}
+                                                                        className="develop-skills-expert__el flex items-center gap-3">
+                                                                        <img
+                                                                            className="w-6 h-6"
+                                                                            src={item.img}
+                                                                            alt={item.title}
+                                                                        />
+                                                                        <span>{item.title}</span>
+                                                                    </div>
+                                                                )
+                                                            })
+
+                                                        }
+                                                    })
+                                                }
 
                                             </div>
                                         </div>
