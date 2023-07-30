@@ -1,3 +1,5 @@
+import {svgDevelop, svgDesign, svgMarket} from "./svg";
+
 export const content = {
     develop: {
         title: 'Создание сайтов',
@@ -195,19 +197,22 @@ export const block = [
     {
         id: 1,
         el: 'develop',
-        title: 'Разработка сайтов'
+        title: 'Разработка сайтов',
+        svg: svgDevelop
 
     },
     {
         id: 2,
         el: 'design',
-        title: 'Дизайн'
+        title: 'Дизайн',
+        svg: svgDesign
 
     },
     {
         id: 3,
         el: 'market',
-        title: 'Маркетинг'
+        title: 'Маркетинг',
+        svg: svgMarket
 
     },
 ]

@@ -1,3 +1,11 @@
 .swiper-slide-shadow {
     border-radius: 35px;
 }
+
+.develop-nav-el:hover path {
+    fill: #00FFE5;
+}
+
+.develop-nav-el.develop-nav-el__active path {
+    fill: #00FFE5;
+}
