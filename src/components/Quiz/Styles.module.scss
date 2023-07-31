@@ -1,0 +1,147 @@
+.titleBlock {
+  height: 59px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url('../../../public/img/Popup/popupTitle.svg');
+}
+
+/* YourComponent.module.scss */
+
+.checkbox-btn {
+  border: 1px solid;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 5px 0 0;
+  user-select: none;
+  position: relative;
+
+  input[type=radio] {
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+  }
+
+  span {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 10px;
+    line-height: 30px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  /* Checked */
+  input[type=radio]:checked + span {
+    background: #ffe0a6;
+  }
+
+  /* Focus */
+  &.focused span {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+
+  /* Hover */
+  &:hover {
+    color: #666;
+  }
+
+  &.checkbox-btn_active {
+    background: #FFF;
+    box-shadow: 3px 4px 3px 0px rgba(255, 255, 255, 0.12);
+  }
+
+  /* Active */
+  input[type=radio]:active:not(:disabled) + span {
+    background: #d2c5ac;
+    color: #000;
+  }
+
+  /* Disabled */
+  input[type=radio]:disabled + span {
+    background: #efefef;
+    color: #666;
+    cursor: default;
+  }
+
+  input[type=radio]:checked:disabled + span {
+    background: #f7efdc;
+  }
+}
+
+/* стили при наведении курсора на checkbox */
+.custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
+  border-color: #b3d7ff;
+}
+
+/* стили для активного состояния чекбокса (при нажатии на него) */
+.custom-checkbox:not(:disabled):active + label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.custom-checkbox:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.custom-checkbox:focus:not(:checked) + label::before {
+  border-color: #80bdff;
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.custom-checkbox:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+.custom-social {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: transparent;
+    margin-right: 8px;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type="radio"]:checked + .checkmark {
+    background-color: transparent;
+    position: relative;
+  }
+
+  input[type="radio"]:checked + .checkmark::after {
+    content: '';
+    left: auto;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 14px;
+    border: solid #ff0000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-left: 6px;
+  }
+}
+
+.country-name {
+  color: black;
+}
+
+.search-box {
+  color: black;
+}
