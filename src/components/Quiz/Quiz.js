@@ -2,7 +2,6 @@
 import styles from './Styles.module.scss'
 import {useEffect, useState} from "react";
 import FormQuiz from "@/components/Quiz/FormQuiz";
-import {dataQuiz} from './DataQuiz'
 import axios from "axios";
 
 export default function Quiz({isOpenQuiz}) {
@@ -33,17 +32,22 @@ export default function Quiz({isOpenQuiz}) {
     }, [route]);
 
 
-    const handleGoBack = () => {
-        if (previousRoutes.length > 0) {
-            const lastRoute = previousRoutes.pop();
-            setRoute(lastRoute);
-        } else {
-            setRoute("/quiz"); // Если стек пуст, устанавливаем рут в "/quiz"
-        }
+    const handleGoBack = (link) => {
+        setRoute(link)
     };
 
+    const handlePostData = (data) => {
+        console.log(data)
+    }
+
     const [step, setStep] = useState(undefined)
-    const {title, subtitle, checkbox} = currentData || {};
+    const {title, subtitle, content, next, prev} = currentData || {};
+    const {checkroutes, radio, checkboxes, inputs, finish} = content || {}
+
+    const handleNext = (link) => {
+        console.log(link)
+        setRoute(link)
+    }
 
     const handleRoute = (route) => {
         // При добавлении нового рута, сохраняем текущий route в стек предыдущих рутов
@@ -58,12 +62,15 @@ export default function Quiz({isOpenQuiz}) {
                     <p className={`text-[20px]`}>{title}</p>
                 </div>
                 <p className={'text-white text-[23px] font-medium'}>{subtitle}</p>
-                <FormQuiz onRoute={handleRoute} checkbox={checkbox}/>
-                {route !== '/quiz' && <button onClick={handleGoBack}>Назад</button>}
-                <button onClick={() => {
-
+                <FormQuiz isPost={handlePostData} checkroutes={checkroutes} radio={radio} title={title} checkboxes={checkboxes} inputs={inputs} finish={finish} onRoute={handleRoute} />
+                {route !== '/quiz' && <button onClick={() => {
+                    handleGoBack(prev)
+                }}>Назад</button>}
+                {finish === false &&
+                    <button onClick={() => {
+                    handleNext(next)
                 }}>Далее
-                </button>
+                </button>}
             </div>
         </div>
     )

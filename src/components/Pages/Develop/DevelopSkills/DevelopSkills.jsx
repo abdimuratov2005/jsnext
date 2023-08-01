@@ -303,7 +303,7 @@ export default function DevelopSkills(props) {
                                                 {
                                                     block && block.map((item) => {
                                                         if(buttonsMenu === item.el){
-                                                            getData(item.request, 'expert')
+
                                                             return expertContent.map((item, index) => {
                                                                 console.log(item)
                                                                 return (
