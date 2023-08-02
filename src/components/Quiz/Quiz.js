@@ -3,12 +3,14 @@ import styles from './Styles.module.scss'
 import {useEffect, useState} from "react";
 import FormQuiz from "@/components/Quiz/FormQuiz";
 import axios from "axios";
+import Image from "next/image";
 
 export default function Quiz({isOpenQuiz}) {
 
     const [currentData, setCurrentData] = useState()
     const [route, setRoute] = useState("/quiz")
     const [previousRoutes, setPreviousRoutes] = useState([]);
+
 
     async function getData(route) {
         const url = `https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1${route}`;
@@ -57,6 +59,8 @@ export default function Quiz({isOpenQuiz}) {
     return (
         isOpenQuiz &&
         <div className={`fixed m-auto w-full h-full flex  items-center justify-center bg-[#1E1E1E]`}>
+            <div className={`max-w-[1280px] w-full flex justify-between`}>
+                <Image src={'/img/burger.png'} width={357} height={360} alt={'rfhnbyrf'}></Image>
             <div className={'w-[745px] h-[550px] bg-center '}>
                 <div className={`${styles.titleBlock} flex justify-center items-center `}>
                     <p className={`text-[20px]`}>{title}</p>
@@ -71,6 +75,7 @@ export default function Quiz({isOpenQuiz}) {
                     handleNext(next)
                 }}>Далее
                 </button>}
+            </div>
             </div>
         </div>
     )
