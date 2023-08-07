@@ -6,6 +6,7 @@ import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
 import './FeedBackForm.css'
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import ButtonBgImage from "@/components/ButtonBgImage/ButtonBgImage";
 
 
 const stateCheckBox = [
@@ -86,7 +87,6 @@ function FeedBackForm(props) {
     } = useContext(DataDevelopContext);
 
 
-    const [hoverBtn, setHoverBtn] = useState(false)
     const {register, handleSubmit, setValue, watch, reset, control, formState: {errors, isSubmitSuccessful, isValid }} = useForm({mode: "onChange"});
 
     // Устанавливаем значение страны по умолчанию (например, Россия - RU) при первоначальной загрузке
@@ -110,7 +110,6 @@ function FeedBackForm(props) {
     const onSubmit = (data) => {
         console.log(data)
     };
-    const hoverBtnChange = () => setHoverBtn(!hoverBtn);
 
 
     const [checkedItems, setCheckedItems] = useState([]);
@@ -208,13 +207,7 @@ function FeedBackForm(props) {
                         )
                     })}
                 </div>
-                <button
-                    disabled={!isValid}
-                    onMouseEnter={hoverBtnChange}
-                    onMouseLeave={hoverBtnChange} type="submit"
-                    className={`${!isValid && 'cursor-not-allowed'} py-3 px-10 border mt-[40px] ${hoverBtn ? ' bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}>Начать
-                    общение
-                </button>
+                <ButtonBgImage type={'submit'} isValid={isValid} text={'начать общение'} />
             </form>
         </div>
     );

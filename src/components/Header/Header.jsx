@@ -13,7 +13,6 @@ import Quiz from "@/components/Quiz/Quiz";
 
 // Загрузка компонента Burger динамически
 
-
 function Header(props) {
 
     const {language, isLanguage} = useContext(DataDevelopContext);
@@ -43,6 +42,10 @@ function Header(props) {
 
     function handleQuiz () {
         setQuizOpen(prevState => !prevState)
+    }
+
+    const handleQuizClose = () => {
+        setQuizOpen(false)
     }
 
     //квиз енд
@@ -172,7 +175,7 @@ function Header(props) {
                 </div>
                 <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
             </motion.header>
-            <Quiz isOpenQuiz={quizOpen}></Quiz>
+            <Quiz isClose={handleQuizClose} isOpenQuiz={quizOpen}></Quiz>
         </>
     );
 }

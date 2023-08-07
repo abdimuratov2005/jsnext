@@ -4,8 +4,10 @@ import React, {useContext, useEffect, useState} from "react";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {Controller, useForm} from "react-hook-form";
 import PhoneInput from "react-phone-input-2"; // Импортируем файл стилей
+import '@/components/Pages/HomePage/FeedBackForm/FeedBackForm.css'
+import ButtonBgImage from "@/components/ButtonBgImage/ButtonBgImage";
 
-export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radio, inputs, finish, isPost}) {
+export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radio, inputs, finish, isPost, thanks}) {
 
     //Валидация //
     const {
@@ -24,7 +26,6 @@ export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radi
         },
     ]
     const {register, handleSubmit, setValue, watch, reset, control, formState: {errors, isSubmitSuccessful, isValid }} = useForm({mode: "onChange"});
-
 
     const [userAnswer, setUserAnswer]  = useState([])
 
@@ -61,9 +62,14 @@ export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radi
     const isChecked = (item) => userAnswer.some((answer) => answer[title] === item.title);
 
     return (
+        thanks ? <p className={'text-white text-[23px] font-medium'}>
+                Спасибо за обращение!
+                Как только мы обдумаем возможности  сотрудничества - сразу же с вами свяжемся.
+                Хорошего дня
+        </p>
+            :
          (
             <form onSubmit={handleSubmit(handlePostForm)}>
-
                 <div className={'flex flex-col'}>
                 {checkroutes &&
                     checkroutes.map((item, index) => {
@@ -94,15 +100,34 @@ export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radi
                     } )}
                 </div>
                 {inputs &&
-                    inputs.map((inputs, index) => {
+                    inputs.map((input, index) => {
                         return (
                             <label key={index}>
-                                {inputs.title}
-                                <input name={index} placeholder={inputs.placeholder} type={inputs.type} />
+                                {input.title}
+                                <input
+                                    onChange={(e) => {
+                                        const newValue = e.target.value;
+                                        setUserAnswer((prevState) => {
+                                            // Находим объект с текущим вопросом в предыдущем состоянии
+                                            const existingAnswer = prevState.find((item) => item[title]);
+
+                                            if (existingAnswer) {
+                                                // Если объект уже есть в массиве, обновляем его значение
+                                                existingAnswer[title] = newValue;
+                                                return [...prevState];
+                                            } else {
+                                                // Если объекта нет в массиве, добавляем новый объект с текущим вопросом и его ответом
+                                                return [...prevState, { [title]: newValue }];
+                                            }
+                                        });
+                                    }}
+                                    name={index}
+                                    placeholder={input.placeholder}
+                                    type={input.type}
+                                />
                             </label>
                         );
-                    })}
-                <div className={'flex flex-wrap gap-[8px]'}>
+                    })}                <div className={'flex flex-wrap gap-[8px]'}>
                 {checkboxes &&
                     checkboxes.map((checkbox) => {
                         const labelClass = isChecked(checkbox) ? 'checkbox-btn checkbox-btn_active' : 'checkbox-btn';
@@ -210,9 +235,7 @@ export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radi
                                 </label>
                             )
                         })}
-                        <button type="submit" >
-                            отправить
-                        </button>
+                        <ButtonBgImage type={'submit'} isValid={isValid} text={'    отправить'} />
                     </div>
 
                    }
