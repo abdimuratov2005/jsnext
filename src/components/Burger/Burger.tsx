@@ -8,6 +8,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
 
 import {content, block} from '../Pages/Develop/DevelopUnits/develop'
+import Scrollbars from "react-custom-scrollbars-2";
 
 function Burger({isOpen, setIsOpen}) {
     const {
@@ -63,14 +64,16 @@ function Burger({isOpen, setIsOpen}) {
     }
 
     return (
-        <AnimatePresence mode={"wait"} >
-            {isOpen &&  <motion.div
-                initial={{ opacity: 0, clipPath: 'circle(0% at 50% 50%)' }}
-                animate={{ opacity: 1, clipPath: 'circle(100% at 50% 50%)' }}
-                exit={{ opacity: 0, clipPath: 'circle(0% at 50% 50%)' }}
-                transition={{ duration: 0.5 }}
+        <AnimatePresence mode={"wait"}>
+            {isOpen && <motion.div
+                initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
+                exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                transition={{duration: 0.5}}
                 className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
-                <Image placeholder={"blur"} blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='} src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
+                <Image placeholder={"blur"}
+                       blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='}
+                       src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                     <div
@@ -303,62 +306,60 @@ function Burger({isOpen, setIsOpen}) {
                                             </defs>
                                         </svg>
                                     </div>
-                                    <div
-                                        className="popup-menu-services__wrapper h-[17rem] relative overflow-x-hidden overflow-y-auto px-9 py-5">
-
-
-                                        {block && block.map((item,index) => {
-                                            return (
-                                                <div
-                                                    key={item.id}
-                                                    className={`${(index > 0) && 'mt-6'} popup-menu-services__el`}
-                                                >
+                                    <Scrollbars
+                                        autoHeight
+                                        className="popup-menu-services__wrapper h-[17rem] relative px-9 py-5 overflow-auto">
+                                            {block && block.map((item, index) => {
+                                                return (
                                                     <div
-                                                        className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
-                                                        <img
-                                                            className="w-full h-auto"
-                                                            src="img/burger/popup-menu-link.svg"
-                                                            alt=""
-                                                        />
+                                                        key={item.id}
+                                                        className={`${(index > 0) && 'mt-6'} popup-menu-services__el`}
+                                                    >
                                                         <div
-                                                            onClick={() => buttonsMenuChange(item.el)}
-                                                            // href={'/develop'}
-                                                            className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                            {item.title}
+                                                            className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                                            <img
+                                                                className="w-full h-auto"
+                                                                src="img/burger/popup-menu-link.svg"
+                                                                alt=""
+                                                            />
+                                                            <div
+                                                                onClick={() => buttonsMenuChange(item.el)}
+                                                                // href={'/develop'}
+                                                                className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                                {item.title}
+                                                            </div>
+                                                        </div>
+                                                        {/*buttonsMenu*/}
+                                                        <div
+                                                            className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
+
+                                                            {content && content[item.el]['els'].map((el) => {
+                                                                return (
+
+                                                                    <Link
+                                                                        key={el.id}
+                                                                        onClick={() => CurrentDescriptionChange(item.el, el.id)}
+                                                                        href={'/develop'}
+                                                                        className="popup-menu-services__link relative"
+                                                                    >
+                                                                        <img
+                                                                            className="w-full h-auto"
+                                                                            src="img/burger/popup-menu-link.svg"
+                                                                            alt=""
+                                                                        />
+                                                                        <div
+                                                                            className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                                            {el.label}
+                                                                        </div>
+                                                                    </Link>
+                                                                )
+                                                            })}
+
                                                         </div>
                                                     </div>
-                                                    {/*buttonsMenu*/}
-                                                    <div
-                                                        className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
-
-                                                        {content && content[item.el]['els'].map((el) => {
-                                                            return (
-
-                                                                <Link
-                                                                    key={el.id}
-                                                                    onClick={() => CurrentDescriptionChange(item.el, el.id)}
-                                                                    href={'/develop'}
-                                                                    className="popup-menu-services__link relative"
-                                                                    >
-                                                                    <img
-                                                                        className="w-full h-auto"
-                                                                        src="img/burger/popup-menu-link.svg"
-                                                                        alt=""
-                                                                    />
-                                                                    <div className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                                        {el.label}
-                                                                    </div>
-                                                                </Link>
-
-                                                            )
-                                                        })}
-
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-
-                                    </div>
+                                                )
+                                            })}
+                                    </Scrollbars>
                                 </div>
                             </div>
                         </div>
@@ -371,14 +372,20 @@ function Burger({isOpen, setIsOpen}) {
                                 </div>
                                 <div className="grid">
                                     <span>Сотрудничество</span>
-                                    <a className="underline hover:no-underline" href="mailto:mapbiz@yandex.ru">mapbiz@yandex.ru</a>
+                                    <a className="underline hover:no-underline"
+                                       href="mailto:mapbiz@yandex.ru">mapbiz@yandex.ru</a>
                                 </div>
                                 <div className="grid">
-                                    <a className="underline hover:no-underline" href="https://t.me/MapbizGroup">Telegram</a>
-                                    <a className="underline hover:no-underline" href="https://vk.com/id177191269">Vkontakte</a>
-                                    <a className="underline hover:no-underline" href="https://www.behance.net/mapbiz">Behance</a>
-                                    <a className="underline hover:no-underline" href="https://dribbble.com/mapbiz">Dribbble</a>
-                                    <a className="underline hover:no-underline" href="https://www.linkedin.com/in/yuri-peklich/">LinkedIn</a>
+                                    <a className="underline hover:no-underline"
+                                       href="https://t.me/MapbizGroup">Telegram</a>
+                                    <a className="underline hover:no-underline"
+                                       href="https://vk.com/id177191269">Vkontakte</a>
+                                    <a className="underline hover:no-underline"
+                                       href="https://www.behance.net/mapbiz">Behance</a>
+                                    <a className="underline hover:no-underline"
+                                       href="https://dribbble.com/mapbiz">Dribbble</a>
+                                    <a className="underline hover:no-underline"
+                                       href="https://www.linkedin.com/in/yuri-peklich/">LinkedIn</a>
                                 </div>
                             </div>
                         </div>

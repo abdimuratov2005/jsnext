@@ -30,7 +30,7 @@ const DataDevelopProvider = ({children}) => {
     const isLanguage = (lang) => {
         setLanguage(lang)
     }
-    console.log(currentDescriptionButton)
+
     // Передаем значения контекста в Provider
     return (
         <DataDevelopContext.Provider

@@ -235,7 +235,7 @@ export default function FormQuiz({ checkroutes, title, onRoute, checkboxes, radi
                                 </label>
                             )
                         })}
-                        <ButtonBgImage type={'submit'} isValid={isValid} text={'    отправить'} />
+                        <ButtonBgImage type={'submit'} isValid={isValid} text={'отправить'} />
                     </div>
 
                    }

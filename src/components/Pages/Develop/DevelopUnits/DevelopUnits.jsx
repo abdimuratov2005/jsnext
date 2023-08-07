@@ -311,7 +311,6 @@ export default function DevelopUnits() {
                                 modules={[EffectCards, Mousewheel]}
                                 className="mySwiper overflow-hidden">
                                 {dataPopup && dataPopup.map((item, index) => {
-                                    console.log(index + 'index')
                                     return (
                                         <SwiperSlide
                                             key={index}

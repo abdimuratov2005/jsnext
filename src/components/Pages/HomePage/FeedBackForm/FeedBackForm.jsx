@@ -115,7 +115,6 @@ function FeedBackForm(props) {
     const [checkedItems, setCheckedItems] = useState([]);
 
     const handleCheckboxChange = (event) => {
-        console.log(checkedItems)
         const {name, checked} = event.target;
 
         if (checked) {

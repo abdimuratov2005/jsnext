@@ -234,7 +234,6 @@ export default function DevelopSkills(props) {
                                                         if(buttonsMenu === item.el){
                                                             getData(item.request, 'techno')
                                                             return technoContent.map((item, index) => {
-                                                                console.log(item)
                                                                 return (
                                                                     <div
                                                                         key={index}
@@ -305,7 +304,6 @@ export default function DevelopSkills(props) {
                                                         if(buttonsMenu === item.el){
 
                                                             return expertContent.map((item, index) => {
-                                                                console.log(item)
                                                                 return (
                                                                     <div
                                                                         key={index}
