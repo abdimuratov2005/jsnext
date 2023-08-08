@@ -38,6 +38,7 @@
   }
 }
 .thumbVertical {
+
   background-position: center;
   width: 16px !important; /* Изменение ширины бегунка */
   background-size: cover;
@@ -45,7 +46,11 @@
   content: '';
   background-image: url('../../../public/img/scroll.svg');
 }
-
+.TrackVertical {
+  height: 100%;
+  right: 10px;
+  top: 0;
+}
 .thumbVertical:hover {
   cursor: pointer;
 }

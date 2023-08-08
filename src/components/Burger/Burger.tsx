@@ -308,6 +308,7 @@ function Burger({isOpen, setIsOpen}) {
                                     </div>
                                     <Scrollbars
                                         thumbSize={16}
+                                        renderTrackVertical={props => <div {...props} className={`${styles.TrackVertical}`}/>}
                                         renderThumbVertical={props => <div {...props} className={`${styles.thumbVertical}`}/>}
                                         autoHeight autoHeightMin={0} autoHeightMax={'355px'}
                                         className={`popup-menu-services__wrapper relative overflow-auto`}>

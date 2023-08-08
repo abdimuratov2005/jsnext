@@ -246,7 +246,6 @@ export default function DevelopSkills(props) {
                                                                     </div>
                                                                 )
                                                             })
-
                                                         }
                                                     })
                                                 }
