@@ -14,7 +14,6 @@ export default function DevelopSkills(props) {
 
     const buttonsMenuChange = (el) => {
         setDataButton(el)
-        setTechnoContent([])
     }
 
     async function getData(link, type) {
@@ -29,11 +28,20 @@ export default function DevelopSkills(props) {
                     setExpertContent(data);
                     break;
             }
-
         }).catch(err => {
             console.log(err)
         })
     }
+
+    useEffect(() => {
+        block && block.map((item) => {
+            if (buttonsMenu === item.el) {
+                getData(item.request, 'techno')
+                getData(item.request, 'expert')
+            }
+        })
+    }, [buttonsMenu])
+
 
     return (
         <section
@@ -186,7 +194,6 @@ export default function DevelopSkills(props) {
 
                                 )
                             })}
-
                         </div>
                         <div className="skills-content-grid flex">
                             <div className="skills-content-techno w-[70%] pr-10">
@@ -230,6 +237,9 @@ export default function DevelopSkills(props) {
 
                                             <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
                                                 {
+
+
+
                                                     block && block.map((item) => {
                                                         if(buttonsMenu === item.el){
                                                             return technoContent.map((item, index) => {
