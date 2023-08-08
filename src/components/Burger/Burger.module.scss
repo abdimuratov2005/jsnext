@@ -35,6 +35,20 @@
   &__titleTop {
     padding-top: 7px;
     text-align: center;
-
   }
 }
+.thumbVertical {
+  background-position: center;
+  width: 16px !important; /* Изменение ширины бегунка */
+  background-size: cover;
+  background-repeat: no-repeat;
+  content: '';
+  background-image: url('../../../public/img/scroll.svg');
+}
+
+.thumbVertical:hover {
+  cursor: pointer;
+}
+
+
+

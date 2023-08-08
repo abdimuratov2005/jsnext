@@ -232,7 +232,6 @@ export default function DevelopSkills(props) {
                                                 {
                                                     block && block.map((item) => {
                                                         if(buttonsMenu === item.el){
-                                                            getData(item.request, 'techno')
                                                             return technoContent.map((item, index) => {
                                                                 return (
                                                                     <div

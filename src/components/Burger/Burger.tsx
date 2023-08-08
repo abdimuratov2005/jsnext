@@ -307,13 +307,15 @@ function Burger({isOpen, setIsOpen}) {
                                         </svg>
                                     </div>
                                     <Scrollbars
-                                        autoHeight
-                                        className="popup-menu-services__wrapper h-[17rem] relative px-9 py-5 overflow-auto">
+                                        thumbSize={16}
+                                        renderThumbVertical={props => <div {...props} className={`${styles.thumbVertical}`}/>}
+                                        autoHeight autoHeightMin={0} autoHeightMax={'355px'}
+                                        className={`popup-menu-services__wrapper relative overflow-auto`}>
                                             {block && block.map((item, index) => {
                                                 return (
                                                     <div
                                                         key={item.id}
-                                                        className={`${(index > 0) && 'mt-6'} popup-menu-services__el`}
+                                                        className={`${(index > 0) && 'mt-6'} popup-menu-services__el px-9 `}
                                                     >
                                                         <div
                                                             className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
@@ -332,10 +334,8 @@ function Burger({isOpen, setIsOpen}) {
                                                         {/*buttonsMenu*/}
                                                         <div
                                                             className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
-
                                                             {content && content[item.el]['els'].map((el) => {
                                                                 return (
-
                                                                     <Link
                                                                         key={el.id}
                                                                         onClick={() => CurrentDescriptionChange(item.el, el.id)}
