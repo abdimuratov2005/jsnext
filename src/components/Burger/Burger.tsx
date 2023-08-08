@@ -1,14 +1,14 @@
 'use client'
-import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import styles from './Burger.module.scss'
 import Link from "next/link";
 import {usePathname} from 'next/navigation';
 import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
-
+import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {content, block} from '../Pages/Develop/DevelopUnits/develop'
 import Scrollbars from "react-custom-scrollbars-2";
+
 
 function Burger({isOpen, setIsOpen}) {
     const {
@@ -62,7 +62,7 @@ function Burger({isOpen, setIsOpen}) {
         setShow(true)
         setIsOpen(false)
     }
-
+    const {language, isLanguage} = useContext(DataDevelopContext);
     return (
         <AnimatePresence mode={"wait"}>
             {isOpen && <motion.div
@@ -145,8 +145,9 @@ function Burger({isOpen, setIsOpen}) {
                                 </svg>
                                 <div
                                     className="absolute top-0 left-0 right-0 bottom-0 m-auto text-center flex justify-center items-center font-grotesk-light text-xs text-white">
-                                    <span className="ru font-grotesk-bold">Ru</span>&nbsp;/&nbsp;
-                                    <span className="eng">Eng</span>
+                                    <button   onClick={() => isLanguage('russian')} className={`select-none  ${language === 'russian' ? 'font-bold' : ''}`}>Ru</button>
+                                    &nbsp;/&nbsp;
+                                    <button   onClick={() => isLanguage('english')} className={`select-none  ${language === 'english' ? 'font-bold' : ''}`}>En</button>
                                 </div>
                             </div>
                         </div>
@@ -308,58 +309,60 @@ function Burger({isOpen, setIsOpen}) {
                                     </div>
                                     <Scrollbars
                                         thumbSize={16}
-                                        renderTrackVertical={props => <div {...props} className={`${styles.TrackVertical}`}/>}
-                                        renderThumbVertical={props => <div {...props} className={`${styles.thumbVertical}`}/>}
+                                        renderTrackVertical={props => <div {...props}
+                                                                           className={`${styles.TrackVertical}`}/>}
+                                        renderThumbVertical={props => <div {...props}
+                                                                           className={`${styles.thumbVertical}`}/>}
                                         autoHeight autoHeightMin={0} autoHeightMax={'355px'}
                                         className={`popup-menu-services__wrapper relative overflow-auto`}>
-                                            {block && block.map((item, index) => {
-                                                return (
+                                        {block && block.map((item, index) => {
+                                            return (
+                                                <div
+                                                    key={item.id}
+                                                    className={`${(index > 0) && 'mt-6'} popup-menu-services__el px-9 `}
+                                                >
                                                     <div
-                                                        key={item.id}
-                                                        className={`${(index > 0) && 'mt-6'} popup-menu-services__el px-9 `}
-                                                    >
+                                                        className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
+                                                        <img
+                                                            className="w-full h-auto"
+                                                            src="img/burger/popup-menu-link.svg"
+                                                            alt=""
+                                                        />
                                                         <div
-                                                            className="popup-menu-services__main relative font-grotesk text-xl text-white cursor-pointer select-none">
-                                                            <img
-                                                                className="w-full h-auto"
-                                                                src="img/burger/popup-menu-link.svg"
-                                                                alt=""
-                                                            />
-                                                            <div
-                                                                onClick={() => buttonsMenuChange(item.el)}
-                                                                // href={'/develop'}
-                                                                className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                                {item.title}
-                                                            </div>
-                                                        </div>
-                                                        {/*buttonsMenu*/}
-                                                        <div
-                                                            className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
-                                                            {content && content[item.el]['els'].map((el) => {
-                                                                return (
-                                                                    <Link
-                                                                        key={el.id}
-                                                                        onClick={() => CurrentDescriptionChange(item.el, el.id)}
-                                                                        href={'/develop'}
-                                                                        className="popup-menu-services__link relative"
-                                                                    >
-                                                                        <img
-                                                                            className="w-full h-auto"
-                                                                            src="img/burger/popup-menu-link.svg"
-                                                                            alt=""
-                                                                        />
-                                                                        <div
-                                                                            className="absolute w-full h-full top-0 left-6 flex items-center">
-                                                                            {el.label}
-                                                                        </div>
-                                                                    </Link>
-                                                                )
-                                                            })}
-
+                                                            onClick={() => buttonsMenuChange(item.el)}
+                                                            // href={'/develop'}
+                                                            className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                            {item.title}
                                                         </div>
                                                     </div>
-                                                )
-                                            })}
+                                                    {/*buttonsMenu*/}
+                                                    <div
+                                                        className={`${buttonsMenu != item.el && 'hidden'} popup-menu-services__links grid pl-5 mt-4 gap-4 font-grotesk text-sm text-white`}>
+                                                        {content && content[item.el]['els'].map((el) => {
+                                                            return (
+                                                                <Link
+                                                                    key={el.id}
+                                                                    onClick={() => CurrentDescriptionChange(item.el, el.id)}
+                                                                    href={'/develop'}
+                                                                    className="popup-menu-services__link relative"
+                                                                >
+                                                                    <img
+                                                                        className="w-full h-auto"
+                                                                        src="img/burger/popup-menu-link.svg"
+                                                                        alt=""
+                                                                    />
+                                                                    <div
+                                                                        className="absolute w-full h-full top-0 left-6 flex items-center">
+                                                                        {el.label}
+                                                                    </div>
+                                                                </Link>
+                                                            )
+                                                        })}
+
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
                                     </Scrollbars>
                                 </div>
                             </div>

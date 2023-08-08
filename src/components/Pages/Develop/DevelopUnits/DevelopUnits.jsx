@@ -304,7 +304,6 @@ export default function DevelopUnits() {
                                 </svg>
                             </button>
                             <Swiper
-
                                 effect={'cards'}
                                 mousewheel={true}
                                 grabCursor={true}
@@ -314,16 +313,19 @@ export default function DevelopUnits() {
                                     return (
                                         <SwiperSlide
                                             key={index}
-                                            className="bg-transparent">
+                                            className="">
                                             <div
-                                                className="overflow-auto h-[600px] develop-step-wrapper w-full h-auto bg-whitefone-mapbiz py-10 px-10 grid gap-8 rounded-[35px] relative ">
-                                                <h2 className="develop-step-title font-medium text-2xl">
-                                                    {item.title}
-                                                </h2>
-                                                <div dangerouslySetInnerHTML={{__html: item.text}}
-                                                     className="develop-step-content text-[1.2rem]">
+                                                className="overflow-auto h-[600px] develop-step-wrapper w-fit  bg-whitefone-mapbiz py-10 px-10 flex flex-col justify-between rounded-[35px] relative ">
+                                                <div>
+                                                    <h2 className="develop-step-title font-medium text-2xl mb-[30px]">
+                                                        {item.title}
+                                                    </h2>
+                                                    <div dangerouslySetInnerHTML={{__html: item.text}}
+                                                         className="develop-step-content text-[1.2rem]">
 
+                                                    </div>
                                                 </div>
+
                                                 <div className="">
                                                     {item.media && item.media.map((image) => {
                                                         console.log(image, index)
