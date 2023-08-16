@@ -1,13 +1,21 @@
 'use client'
+
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
 import {block} from './develop';
 
 // import required modules
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import dynamic from "next/dynamic";
 
-export default function DevelopSkills(props) {
-    const { buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow } = useContext(DataDevelopContext);
+
+const DynamicScrollbars = dynamic(() => import('react-custom-scrollbars-2'), {
+    loading: () => <p>Loading...</p>,
+    ssr: false,
+});
+export default function DevelopSkills() {
+
+    const { buttonsMenu, setDataButton} = useContext(DataDevelopContext);
 
     const [technoContent, setTechnoContent] = useState([])
     const [expertContent, setExpertContent] = useState([])
@@ -229,17 +237,14 @@ export default function DevelopSkills(props) {
                                             Доступные технологии
                                         </div>
                                     </div>
-                                    <div
-                                        className="develop-skills-techno__wrapper px-8 py-6 h-[350px] overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
+                                    <DynamicScrollbars
+                                        autoHeight autoHeightMin={0} autoHeightMax={'355px'}
+                                        className="develop-skills-techno__wrapper  overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
                                         <div
                                             className="develop-skills-techno__els pb-8"
                                         >
-
-                                            <div className="develop-skills-techno__grid grid grid-cols-5 gap-5">
+                                            <div className="develop-skills-techno__grid grid grid-cols-5 gap-5 h-full w-full">
                                                 {
-
-
-
                                                     block && block.map((item) => {
                                                         if(buttonsMenu === item.el){
                                                             return technoContent.map((item, index) => {
@@ -264,7 +269,7 @@ export default function DevelopSkills(props) {
 
                                         </div>
 
-                                    </div>
+                                    </DynamicScrollbars>
                                 </div>
                             </div>
                             <div className="skills-content-expert w-[30%]">

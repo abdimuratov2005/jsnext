@@ -74,7 +74,11 @@ export default function DevelopUnits() {
 
 
     return (
-        <section className=' pt-44 pb-40 w-full'>
+        <motion.section
+            initial={{opacity: 0, x: 500, y: 500, transition: {delay: 0.3}}}
+            animate={{opacity: 1, x: 0, y:0,  transition: {delay: 0.3}}}
+            exit={{opacity: 0, x: 500, y:500, transition: {delay: 0.3}}}
+            className='pt-44 pb-40 w-full'>
             <div>
                 <svg
                     className="w-full h-auto"
@@ -381,7 +385,7 @@ export default function DevelopUnits() {
                         </div>
                     </motion.div> : '')}
             </AnimatePresence>
-        </section>
+        </motion.section>
     );
 }
 

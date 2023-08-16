@@ -4,9 +4,9 @@ import DevelopSkills from "@/components/Pages/Develop/DevelopSkills/DevelopSkill
 export default function Page(props) {
 
     return (
-        <>
+        <div className={'overflow-hidden'}>
         <DevelopUnits />
         <DevelopSkills />
-        </>
+        </div>
     );
 }
