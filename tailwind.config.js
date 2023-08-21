@@ -62,6 +62,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-cygrotesk)'],
+        grotesk: ['var(--font-cygrotesk)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

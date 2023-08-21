@@ -56,11 +56,11 @@ export default function Clients({posts}) {
     const hoverBtnChange = () => setHoverBtn(!hoverBtn);
 
     return (
-        <div className="clients max-w-screen-xl mx-auto pt-64 pb-52 flex justify-end font-grotesk-light">
+        <div className="clients max-w-screen-xl mx-auto pt-64 pb-52 flex justify-end font-grotesk">
             <div className="w-full gap-y-12">
                 <div className="flex w-[100%] justify-end">
                     <h2 className="w-11/12 text-6xl leading-[5.5rem] text-white opacity-90">
-                        Наши клиенты
+                        Наши партнеры
                     </h2>
                 </div>
                 <div className="clients-wrapper mt-28">
@@ -172,10 +172,16 @@ export default function Clients({posts}) {
                     </div>
                 </div>
 
-                <div className="flex justify-end text-sm">
+                <div className="flex justify-end text-sm font-light">
                     <div className="inline-block w-auto mt-24">
                     </div>
                     <div className="inline-block w-auto mt-24">
+                        <Link
+                            className={`py-3 px-10 underline hover:no-underline text-white transition-all duration-300`}
+                            href="/portfolio"
+                        >
+                            Весь список работ
+                        </Link>
                         <Link
                             className={`py-3 px-10 border ${ hoverBtn ? 'bg-btn-fone-hover border-crimsondark-mapbiz shadow-neon-mapbiz' : 'bg-btn-fone border-white'}  rounded-[24px] text-white transition-all duration-300`}
                             href="/portfolio"

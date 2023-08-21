@@ -15,8 +15,8 @@ export default function Services() {
                     <ServicesList/>
                 </ParallaxLayer>
                 <ParallaxLayer  offset={2} speed={1.5}>
-                    <Link href={'/'}>
-                        <div className="next h-full  bg-amber-300 bg-center bg-cover bg-no-repeat cursor-next-mapbiz">
+                    <Link href={'/portfolio'}>
+                        <div className="next h-full bg-center bg-cover bg-no-repeat cursor-next-mapbiz" style={{backgroundImage: 'url(/img/home/from-services-to-portfolio.webp)'}}>
                         </div>
                     </Link>
                 </ParallaxLayer>

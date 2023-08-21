@@ -128,24 +128,24 @@ function FeedBackForm(props) {
 
 
     return (
-        <div className='w-[1024px] m-auto mt-[150px]'>
+        <div className='w-[1024px] m-auto mt-[150px] mb-[180px]'>
             <form className={`max-w-[550px]`} onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="name" className='text-white flex flex-col'>
+                <label htmlFor="name" className='text-white text-[23px] flex flex-col'>
                     Начнем знакомство*
                     <input
-                        className={`  ${errors?.name ? '!border-b-crimson-mapbiz text-[20px] text-[#808080] max-w-[240px] bg-transparent outline-0 border-b  placeholder:text-[#808080]' : "text-[20px] text-[#808080] max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080]"} `}
+                        className={`font-light mt-2 ${errors?.name ? '!border-b-crimson-mapbiz text-[20px] text-[#808080] max-w-[240px] bg-transparent outline-0 border-b  placeholder:text-[#FFFFFF4D]' : "text-[20px] text-[#808080] max-w-[240px] bg-transparent outline-0 border-b border-[#FFFFFF4D] placeholder:text-[#FFFFFF4D]"} `}
                         name='name' placeholder='Ваше Имя' defaultValue="" {...register("name", {required: true})} />
                 </label>
                 {errors?.name && <span className={'text-redbright-mapbiz'}>Вы не представились:)</span>}
 
-                <label className='text-white flex flex-col mb-[16px] mt-[40px]'>Какие услуги вам нужны?</label>
+                <label className='text-white text-[23px] flex flex-col mb-[16px] mt-[40px]'>Какие услуги вам нужны?</label>
                 <div className={`flex flex-wrap gap-[8px]`}>
                     {stateCheckBox.map((item) => {
                         const isChecked = checkedItems.includes(item.name);
                         const labelClass = isChecked ? 'checkbox-btn checkbox-btn_active' : 'checkbox-btn';
                         return (
                             <label key={item.name}
-                                   className={`${labelClass} px-[16px] py-[8px] text-[14px] rounded-[24px] text-[#808080]`}>
+                                   className={`${labelClass} px-4 py-2 text-sm font-light rounded-[24px] text-[#808080]`}>
                                 <input
                                     {...register(`${item.name}`)}
                                     type="checkbox"
@@ -158,7 +158,7 @@ function FeedBackForm(props) {
                     })}
                 </div>
 
-                <label className='text-white flex flex-col mt-[40px] mb-[8px]'>
+                <label className='text-white text-[23px] flex flex-col gap-y-2 mt-[40px] mb-2 mb-[8px]'>
                     Как с вами связаться? *
                     <Controller
                         name="telephone"
@@ -174,7 +174,7 @@ function FeedBackForm(props) {
                                 placeholder=""
                                 inputProps={{
                                     className:
-                                        "ml-[50px] max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#808080] text-[#808080]",
+                                        "ml-[50px] max-w-[240px] bg-transparent outline-0 border-b border-[#616161] placeholder:text-[#FFFFFF4D] text-[#FFFFFF4D] text-[20px] font-grotesk font-light",
                                 }}
                                 defaultCountry="RU"
                                 value={field.value} // Добавьте эту строку, чтобы передать значение в PhoneInput
@@ -187,12 +187,12 @@ function FeedBackForm(props) {
                 {errors?.telephone && <span className={'text-redbright-mapbiz'}>Вы не указали номер телефона</span>}
 
 
-                <div>
-                    <label className='text-white flex flex-col mt-[40px] mb-[40px]'>При номере есть:</label>
+                <div className=" mb-[40px]">
+                    <label className='text-white text-[23px] flex flex-col mt-[40px] mb-[40px]'>При номере есть:</label>
                     {socialPhone.map((item) => {
                         return (
                             <label key={item.social}
-                                   className={`custom-social px-4 py-2 rounded-[24px] text-[#808080] text-[20px]`}>
+                                   className={`custom-social px-4 py-2 rounded-[24px] text-[#808080] text-[20px] font-light`}>
                                 <input
                                     className={`text-[20px]`}
                                     {...register(`${item.social}`)}
