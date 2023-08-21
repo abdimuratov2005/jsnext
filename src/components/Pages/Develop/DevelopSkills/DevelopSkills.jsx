@@ -232,6 +232,7 @@ export default function DevelopSkills() {
                                             src="img/develop/develop-skills-btn-fone3.svg"
                                             alt=""
                                         />
+
                                         <div
                                             className="py-3 px-32 absolute top-0 left-0 right-0 mx-auto text-sm text-center">
                                             Доступные технологии
