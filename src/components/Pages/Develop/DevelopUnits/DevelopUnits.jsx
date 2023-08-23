@@ -197,7 +197,7 @@ export default function DevelopUnits() {
                                         />
                                         <div
                                             onClick={() => CurrentDescriptionClose()}
-                                            className="foryou-toggle__close absolute top-6 right-6 cursor-pointer z-20">
+                                            className="foryou-toggle__close absolute top-6 right-6 cursor-pointer z-10">
                                             <svg
                                                 width={30}
                                                 height={30}
@@ -212,7 +212,7 @@ export default function DevelopUnits() {
                                                 />
                                             </svg>
                                         </div>
-                                        <div className="foryou-els relative z-10 px-9 py-20 text-white opacity-90">
+                                        <div className="foryou-els relative px-9 py-20 text-white opacity-90">
                                             <div className="foryou-el">
                                                 <h3 className="foryou-el__title font-grotesk-medium text-2xl leading-7">
                                                     {
@@ -237,7 +237,7 @@ export default function DevelopUnits() {
                                             </div>
                                         </div>
                                         <div
-                                            className="foryou-nav absolute z-20 w-full bottom-8 flex justify-end px-6 text-whitelink-mapbiz font-grotesk-medium text-lg">
+                                            className="foryou-nav absolute z-10 w-full bottom-8 flex justify-end px-6 text-whitelink-mapbiz font-grotesk-medium text-lg">
                                             {
                                                 content[buttonsMenu]['els'].map((item, index) => {
                                                     if (item.id === currentDescriptionButton) {
@@ -314,6 +314,7 @@ export default function DevelopUnits() {
                                 modules={[EffectCards, Mousewheel]}
                                 className="mySwiper overflow-hidden">
                                 {dataPopup && dataPopup.map((item, index) => {
+                                    console.log('Элемент попапа: ', item)
                                     return (
                                         <SwiperSlide
                                             key={index}
@@ -329,21 +330,22 @@ export default function DevelopUnits() {
 
                                                     </div>
                                                 </div>
-
+                                                {/*<div className="h-230g h-350g h-370g h-270g h-250g h-290g h-130g h-300g h-200g"></div>*/}
+                                                {/*<div className="grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10"></div>*/}
                                                 <div className="">
-                                                    {item.media && item.media.map((image) => {
-                                                        console.log(image, index)
+                                                    {item.media && item.media.map((image, index) => {
                                                         if (image.imgs) {
+
                                                             return (
                                                                 <div
                                                                     key={index}
-                                                                    className={'develop-step-gallery grid grid-cols-3 gap-8'}>{image.imgs.map((item, index) => {
+                                                                    className={`develop-step-gallery grid grid-cols-${item.media[0].cols} gap-8`}>{image.imgs.map((el, index) => {
                                                                     return (
                                                                         <div
                                                                             key={index}
-                                                                            className="develop-step-gallery__el bg-center bg-cover bg-no-repeat h-[200px]"
+                                                                            className={`develop-step-gallery__el h-[${item.media[0].height}px] bg-center bg-cover bg-no-repeat rounded-[10px]`}
                                                                             style={{
-                                                                                backgroundImage: `url(${item.img})`
+                                                                                backgroundImage: `url(${el.img})`,
                                                                             }}
                                                                         >
                                                                         </div>)
@@ -354,6 +356,46 @@ export default function DevelopUnits() {
                                                                 <div key={index}
                                                                      dangerouslySetInnerHTML={{__html: image.frame}}
                                                                      className="h-[600x] develop-step-content text-[1.2rem]">
+                                                                </div>
+                                                            )
+                                                        } else if (image.icons) {
+                                                            // console.log(image.icons)
+                                                            return (
+                                                                <div key={index} className="bg-darkgrey-mapbiz px-10 py-6 rounded-[25px] grid grid-cols-7 gap-[18px] text-whitetext-more-mapbiz text-sm font-medium">
+                                                                    {image.icons.map((icon, index) => {
+                                                                        return (
+                                                                            <div
+                                                                                key={index}
+                                                                                className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                                                <img
+                                                                                    className="w-[73px] h-[80px]"
+                                                                                    src={icon.img}
+                                                                                    alt="JavaScript"
+                                                                                />
+                                                                                <span>{icon.title}</span>
+                                                                            </div>
+                                                                        )
+                                                                    })}
+                                                                </div>
+                                                            )
+                                                        } else if (image.hybrid) {
+                                                            console.log(image.hybrid)
+                                                            return (
+                                                                <div key={index} className="bg-darkgrey-mapbiz px-10 py-6 rounded-[25px] grid grid-cols-7 gap-[18px] text-whitetext-more-mapbiz text-sm font-medium">
+                                                                    {image.icons.map((icon, index) => {
+                                                                        return (
+                                                                            <div
+                                                                                key={index}
+                                                                                className="develop-skills-techno__el flex flex-col items-center gap-y-3">
+                                                                                <img
+                                                                                    className="w-[73px] h-[80px]"
+                                                                                    src={icon.img}
+                                                                                    alt="JavaScript"
+                                                                                />
+                                                                                <span>{icon.title}</span>
+                                                                            </div>
+                                                                        )
+                                                                    })}
                                                                 </div>
                                                             )
                                                         }

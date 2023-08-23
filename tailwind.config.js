@@ -16,6 +16,17 @@ module.exports = {
           '50%': { opacity: '0.2' },
         },
       },
+      height: {
+        '130g': '130px',
+        '200g': '200px',
+        '230g': '230px',
+        '250g': '250px',
+        '270g': '270px',
+        '290g': '290px',
+        '300g': '300px',
+        '350g': '350px',
+        '370g': '370px',
+      },
       cursor: {
         'next-mapbiz': 'url(/img/cursor.svg), pointer',
       },
