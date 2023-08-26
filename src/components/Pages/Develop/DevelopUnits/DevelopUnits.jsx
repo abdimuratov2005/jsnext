@@ -348,9 +348,8 @@ export default function DevelopUnits() {
                                                                     key={index}
                                                                     className={`develop-step-gallery grid grid-cols-${item.media[0].cols} gap-8`}>{content.imgs.map((el, index) => {
                                                                     return (
-                                                                        <div>
+                                                                        <div key={index}>
                                                                             <div
-                                                                                key={index}
                                                                                 className={`develop-step-gallery__el h-${item.media[0].height}g bg-center bg-cover bg-no-repeat rounded-[10px]`}
                                                                                 style={{
                                                                                     backgroundImage: `url(${el.img})`,
