@@ -13,6 +13,8 @@ import {content, block} from './develop';
 // import required modules
 import {EffectCards, Mousewheel} from 'swiper/modules';
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import Image from "next/image";
+import Link from "next/link";
 
 
 export default function DevelopUnits() {
@@ -28,6 +30,8 @@ export default function DevelopUnits() {
     // стейт менеджеры контента
     const [dataPopup, setDataPopup] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
+    const [playStatus, setPlayStatus] = useState(false)
 
     useEffect(() => {
         hiddenScrollBody()
@@ -65,7 +69,7 @@ export default function DevelopUnits() {
         await axios.get(`${url}`).then(res => {
             const data = res.data.fields.blocks
             setDataPopup(data)
-            console.log(data)
+            // console.log(data)
             setIsLoading(false)
         }).catch(err => {
             console.log(err)
@@ -314,13 +318,13 @@ export default function DevelopUnits() {
                                 modules={[EffectCards, Mousewheel]}
                                 className="mySwiper overflow-hidden">
                                 {dataPopup && dataPopup.map((item, index) => {
-                                    console.log('Элемент попапа: ', item)
+                                    // console.log('Элемент попапа: ', item)
                                     return (
                                         <SwiperSlide
                                             key={index}
                                             className="">
                                             <div
-                                                className="overflow-auto h-[600px] develop-step-wrapper w-fit  bg-whitefone-mapbiz py-10 px-10 flex flex-col justify-between rounded-[35px] relative ">
+                                                className="overflow-auto h-[600px] develop-step-wrapper w-full  bg-whitefone-mapbiz py-10 px-10 flex flex-col justify-between rounded-[35px] relative ">
                                                 <div>
                                                     <h2 className="develop-step-title font-medium text-2xl mb-[30px]">
                                                         {item.title}
@@ -330,39 +334,47 @@ export default function DevelopUnits() {
 
                                                     </div>
                                                 </div>
-                                                {/*<div className="h-230g h-350g h-370g h-270g h-250g h-290g h-130g h-300g h-200g"></div>*/}
-                                                {/*<div className="grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10"></div>*/}
+                                                {/*<div className="h-230g h-350g h-370g h-270g h-250g h-290g h-130g h-300g h-200g h-320g"></div>*/}
+                                                {/*<div className="grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6 grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10 text-[0.9em]"></div>*/}
                                                 <div className="">
-                                                    {item.media && item.media.map((image, index) => {
-                                                        if (image.imgs) {
+                                                    {item.media && item.media.map((content, index) => {
 
+                                                        console.log(content)
+
+                                                        if (content.acf_fc_layout == 'gallery') {
+                                                            console.log('imgs')
                                                             return (
                                                                 <div
                                                                     key={index}
-                                                                    className={`develop-step-gallery grid grid-cols-${item.media[0].cols} gap-8`}>{image.imgs.map((el, index) => {
+                                                                    className={`develop-step-gallery grid grid-cols-${item.media[0].cols} gap-8`}>{content.imgs.map((el, index) => {
                                                                     return (
-                                                                        <div
-                                                                            key={index}
-                                                                            className={`develop-step-gallery__el h-[${item.media[0].height}px] bg-center bg-cover bg-no-repeat rounded-[10px]`}
-                                                                            style={{
-                                                                                backgroundImage: `url(${el.img})`,
-                                                                            }}
-                                                                        >
-                                                                        </div>)
+                                                                        <div>
+                                                                            <div
+                                                                                key={index}
+                                                                                className={`develop-step-gallery__el h-${item.media[0].height}g bg-center bg-cover bg-no-repeat rounded-[10px]`}
+                                                                                style={{
+                                                                                    backgroundImage: `url(${el.img})`,
+                                                                                }}
+                                                                            >
+                                                                            </div>
+                                                                            { el.title && <Link className="text-sm font-light underline hover:no-underline" href={el.title.link}>{el.title.text}</Link> }
+                                                                        </div>
+                                                                    )
                                                                 })}</div>
                                                             )
-                                                        } else if (image.frame) {
+                                                        } else if (content.frame) {
                                                             return (
                                                                 <div key={index}
-                                                                     dangerouslySetInnerHTML={{__html: image.frame}}
+                                                                     dangerouslySetInnerHTML={{__html: content.frame}}
                                                                      className="h-[600x] develop-step-content text-[1.2rem]">
                                                                 </div>
                                                             )
-                                                        } else if (image.icons) {
-                                                            // console.log(image.icons)
+                                                        } else if (content.acf_fc_layout == 'icons') {
+                                                            console.log('icons')
+                                                            console.log(content)
                                                             return (
-                                                                <div key={index} className="bg-darkgrey-mapbiz px-10 py-6 rounded-[25px] grid grid-cols-7 gap-[18px] text-whitetext-more-mapbiz text-sm font-medium">
-                                                                    {image.icons.map((icon, index) => {
+                                                                <div key={index} className={`bg-darkgrey-mapbiz px-5 py-5 rounded-[25px] grid grid-cols-${content.cols} gap-[18px] text-whitetext-more-mapbiz text-sm font-medium`}>
+                                                                    {content.icons.map((icon, index) => {
                                                                         return (
                                                                             <div
                                                                                 key={index}
@@ -372,30 +384,44 @@ export default function DevelopUnits() {
                                                                                     src={icon.img}
                                                                                     alt="JavaScript"
                                                                                 />
-                                                                                <span>{icon.title}</span>
+                                                                                {icon.title && <span>{icon.title}</span>}
                                                                             </div>
                                                                         )
                                                                     })}
                                                                 </div>
                                                             )
-                                                        } else if (image.hybrid) {
-                                                            console.log(image.hybrid)
+                                                        } else if (content.acf_fc_layout == 'hybrid') {
+                                                            //movie_title: {text: 'подробнее', link: '/portfolio'}
+                                                            console.log('hybrid')
+                                                            // console.log(content.movie_title)
                                                             return (
-                                                                <div key={index} className="bg-darkgrey-mapbiz px-10 py-6 rounded-[25px] grid grid-cols-7 gap-[18px] text-whitetext-more-mapbiz text-sm font-medium">
-                                                                    {image.icons.map((icon, index) => {
-                                                                        return (
-                                                                            <div
-                                                                                key={index}
-                                                                                className="develop-skills-techno__el flex flex-col items-center gap-y-3">
-                                                                                <img
-                                                                                    className="w-[73px] h-[80px]"
-                                                                                    src={icon.img}
-                                                                                    alt="JavaScript"
-                                                                                />
-                                                                                <span>{icon.title}</span>
+                                                                <div key={index} className="grid grid-cols-2 gap-8">
+
+                                                                    {playStatus ?
+                                                                        <div>
+                                                                            <div className={'relative'}>
+                                                                                <Image onClick={() => setPlayStatus(false)} className={'z-20 absolute right-3 top-3 cursor-pointer'} height={30} width={30} src={'/img/close.svg'} alt={'посмотреть видео кнопка'}></Image>
+                                                                                <video className={`video h-${content.height}g w-full object-cover rounded-[10px]`} autoPlay loop muted playsInline>
+                                                                                    <source src={content.movie} type="video/mp4"/>
+                                                                                </video>
                                                                             </div>
-                                                                        )
-                                                                    })}
+                                                                            { content.movie_title && <Link className="text-sm font-light underline hover:no-underline" href={content.movie_title.link}>{content.movie_title.text}</Link> }
+                                                                        </div>
+                                                                        :
+                                                                        <div>
+                                                                            <div className={'relative'}>
+                                                                                <Image onClick={() => setPlayStatus(true)} className={'absolute bottom-0 left-0 top-0 right-0 m-auto cursor-pointer'} height={60} width={60} src={'/img/play.svg'} alt={'посмотреть видео кнопка'}></Image>
+                                                                                <Image className={` h-${content.height}g w-full object-cover rounded-[10px]`} height={230} width={1280} src={content.movie_img}
+                                                                                       alt={'Видео о MapBiz - создание и продвжиение сайтов'}></Image>
+                                                                            </div>
+                                                                            { content.movie_title && <Link className="text-sm font-light underline hover:no-underline" href={content.movie_title.link}>{content.movie_title.text}</Link> }
+                                                                        </div>
+                                                                    }
+
+                                                                    <div className="bg-center bg-cover bg-no-repeat rounded-[10px]" style={{backgroundImage: `url(${content.img})`}}>
+
+                                                                    </div>
+
                                                                 </div>
                                                             )
                                                         }
@@ -406,18 +432,18 @@ export default function DevelopUnits() {
                                                 {dataPopup.length === index + 1 && <div
                                                     className="develop-step-btns flex justify-end gap-6 font-grotesk font-light text-xs"
                                                 >
-                                                    <a
-                                                        href="#"
-                                                        className="develop-step-portfolio btn-white px-8 py-3 text-darkgrey-mapbiz rounded-[24px] border border-darkgrey-mapbiz"
+                                                    <Link
+                                                        href="/portfolio"
+                                                        className="develop-step-portfolio btn-white py-3 text-darkgrey-mapbiz underline hover:no-underline"
                                                     >
                                                         Смотрите портфолио
-                                                    </a>
-                                                    <a
+                                                    </Link>
+                                                    <Link
                                                         href="#"
-                                                        className="develop-step-talk btn-white px-8 py-3 rounded-[24px] bg-darkgrey-mapbiz text-white shadow-interface-mapbiz"
+                                                        className="develop-step-talk btn-white px-8 py-3 rounded-[24px] border border-darkgrey-mapbiz hover:bg-darkgrey-mapbiz text-darkgrey-mapbiz hover:text-white hover:shadow-interface-mapbiz transition-all duration-300"
                                                     >
                                                         Обсудить проект
-                                                    </a>
+                                                    </Link>
                                                 </div>}
                                             </div>
                                         </SwiperSlide>
