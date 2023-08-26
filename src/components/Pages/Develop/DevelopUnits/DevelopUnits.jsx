@@ -24,7 +24,9 @@ export default function DevelopUnits() {
         currentDescriptionButton,
         setDataDescriptionButton,
         isShow,
-        setShow
+        setShow,
+        isQuizActive,
+        setQuiz
     } = useContext(DataDevelopContext);
 
     // стейт менеджеры контента
@@ -61,6 +63,18 @@ export default function DevelopUnits() {
         setShow(false)
         setDataDescriptionButton(0)
     }
+
+    // quiz
+
+    function handleQuiz () {
+        setQuiz(prevState => !prevState)
+    }
+
+    // const handleQuizClose = () => {
+    //     setQuiz(false)
+    // }
+
+    // end quiz
 
 
     async function getData(link) {
@@ -439,6 +453,7 @@ export default function DevelopUnits() {
                                                     </Link>
                                                     <Link
                                                         href="#"
+                                                        onClick={handleQuiz}
                                                         className="develop-step-talk btn-white px-8 py-3 rounded-[24px] border border-darkgrey-mapbiz hover:bg-darkgrey-mapbiz text-darkgrey-mapbiz hover:text-white hover:shadow-interface-mapbiz transition-all duration-300"
                                                     >
                                                         Обсудить проект

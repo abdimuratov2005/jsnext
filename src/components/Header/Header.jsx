@@ -15,7 +15,7 @@ import Quiz from "@/components/Quiz/Quiz";
 
 function Header(props) {
 
-    const {language, isLanguage} = useContext(DataDevelopContext);
+    const {language, isLanguage, isQuizActive, setQuiz} = useContext(DataDevelopContext);
     const [isLogo, setIsLogo] = useState(false)
     const [openBurger, setOpenBurger] = useState(false)
     const [isScroll, setIsScroll] = useState(false)
@@ -41,11 +41,11 @@ function Header(props) {
     const [quizOpen, setQuizOpen] = useState(false)
 
     function handleQuiz () {
-        setQuizOpen(prevState => !prevState)
+        setQuiz(prevState => !prevState)
     }
 
     const handleQuizClose = () => {
-        setQuizOpen(false)
+        setQuiz(false)
     }
 
     //квиз енд
@@ -175,7 +175,7 @@ function Header(props) {
                 </div>
                 <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
             </motion.header>
-            <Quiz isClose={handleQuizClose} isOpenQuiz={quizOpen}></Quiz>
+            <Quiz isClose={handleQuizClose} isOpenQuiz={isQuizActive}></Quiz>
         </>
     );
 }
