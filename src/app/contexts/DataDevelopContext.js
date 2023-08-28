@@ -20,6 +20,9 @@ const DataDevelopProvider = ({children}) => {
     // квиз
     const [isQuizActive, setIsQuizActive] = useState(false)
 
+    // popup (кроме popup на странице Develop)
+    const [isPopupActive, setIsPopupActive] = useState(false)
+
     const setDataButton = (el) => {
         setButtonsMenu(el);
     };
@@ -38,10 +41,21 @@ const DataDevelopProvider = ({children}) => {
         setIsQuizActive(status)
     }
 
+    const setPopup = (status) => {
+        setIsPopupActive(status)
+    }
+
     // Передаем значения контекста в Provider
     return (
         <DataDevelopContext.Provider
-            value={{language, isLanguage, buttonsMenu, setDataButton, currentDescriptionButton, setDataDescriptionButton, isShow, setShow, isQuizActive, setQuiz}}>
+            value={{
+                language, isLanguage,
+                buttonsMenu, setDataButton,
+                currentDescriptionButton, setDataDescriptionButton,
+                isShow, setShow,
+                isQuizActive, setQuiz,
+                isPopupActive, setPopup
+            }}>
             {children}
         </DataDevelopContext.Provider>
     );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from './portfolio.module.scss'
 import NextPage from "@/components/NextPage/NextPage";
 import PortfolioItems from "@/components/Pages/Portfolio/PortfolioItems";
+import Popup from "@/components/Popup/Popup";
 
 async function getPortfolio() {
     const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/porfolio/';
@@ -18,6 +19,18 @@ async function getPortfolio() {
     }
 }
 
+async function getPartners() {
+    const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/porfolio/partners/';
+    try {
+        const res = await axios.get(url);
+        return res.data.fields.portfolio_table;
+
+    } catch (error) {
+        console.log(error);
+        return []; // или возвратите пустой массив в случае ошибки
+    }
+}
+
 export const metadata = {
     title: 'MapBiz - Portfolio',
     description: 'MapBiz - Portfolio',
@@ -25,6 +38,8 @@ export const metadata = {
 
 export default async function Portfolio() {
     const data = await getPortfolio();
+    const dataPartners = await getPartners();
+    // console.log(dataPartners)
     return (
         <section className={styles.container}>
             <div
@@ -52,7 +67,34 @@ export default async function Portfolio() {
             <div className={styles.wrapper}>
                 <PortfolioItems data={data} />
             </div>
-            <NextPage url={'/contact'}></NextPage>
+            <NextPage url={'/contact'} image={`/img/portfolio/next-portfolio.webp`}></NextPage>
+            <Popup>
+                <h2 className="text-2xl font-medium">
+                    Работали разное, работали много, у каждого проекта
+                    свой бюджет и задача.
+                </h2>
+                <p className="text-xl w-[70%]">
+                    Представленый перечень не исчерпывающий, тут только те
+                    кто запечатлен в нашем пергаменте истории) Некоторые
+                    работы, к сожалению были преданы забвению.
+                </p>
+                <div className="h-[60%] overflow-auto">
+                    <table className="border-collapse w-full select-none">
+
+                            {dataPartners && dataPartners.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td className="px-4 py-2 border-2 border-redbright-mapbiz">{ item.date }</td>
+                                        <td className="px-4 py-2 border-2 border-redbright-mapbiz">{ item.service }</td>
+                                        <td className="px-4 py-2 border-2 border-redbright-mapbiz">{ item.title }</td>
+                                    </tr>
+                                )
+                            })}
+
+                    </table>
+                </div>
+
+            </Popup>
         </section>
     );
 }
