@@ -15,7 +15,7 @@ async function getPortfolio() {
 
     } catch (error) {
         console.log(error);
-        return []; // или возвратите пустой массив в случае ошибки
+        return []; // или возвратите пустой массив в случае ошибки ..
     }
 }
 
