@@ -70,10 +70,6 @@ export default function DevelopUnits() {
         setQuiz(prevState => !prevState)
     }
 
-    // const handleQuizClose = () => {
-    //     setQuiz(false)
-    // }
-
     // end quiz
 
 

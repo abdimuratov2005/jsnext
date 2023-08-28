@@ -1,5 +1,5 @@
 'use client'
-
+import './develop.css'
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
 import {block} from './develop';
@@ -7,7 +7,7 @@ import {block} from './develop';
 // import required modules
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import dynamic from "next/dynamic";
-
+import Link from "next/link";
 
 const DynamicScrollbars = dynamic(() => import('react-custom-scrollbars-2'), {
     loading: () => <p>Loading...</p>,
@@ -15,13 +15,17 @@ const DynamicScrollbars = dynamic(() => import('react-custom-scrollbars-2'), {
 });
 export default function DevelopSkills() {
 
-    const { buttonsMenu, setDataButton} = useContext(DataDevelopContext);
+    const { buttonsMenu, setDataButton, isQuizActive, setQuiz} = useContext(DataDevelopContext);
 
     const [technoContent, setTechnoContent] = useState([])
     const [expertContent, setExpertContent] = useState([])
 
     const buttonsMenuChange = (el) => {
         setDataButton(el)
+    }
+
+    function handleQuiz () {
+        setQuiz(prevState => !prevState)
     }
 
     async function getData(link, type) {
@@ -99,102 +103,110 @@ export default function DevelopSkills() {
                             className="skills-content-nav py-10 w-[80%] mx-auto flex justify-evenly text-sm text-whitetext-more-mapbiz uppercase">
 
                             {block.map((item) => {
-                                // console.log(buttonsMenu);
-                                // if(buttonsMenu === item.el){
-                                //
-                                // }
+                                // console.log('ButtonsMenu значение: ' + buttonsMenu)
+                                // console.log('Item.key значение: ' + item.el)
                                 return (
 
                                     <button
                                         onClick={() => buttonsMenuChange(item.el)}
                                         key={item.id}
-                                        className={`${buttonsMenu === item.id ? 'text-red-100' : ''} develop-skills-nav__el relative px-10 pb-5`}
+                                        className={`${buttonsMenu === item.el ? '' : ''} develop-skills-nav__el relative px-10 pb-5`}
+                                        style={ buttonsMenu === item.el ?
+                                            {color: "rgba(255, 255, 255, 0.6)", textShadow: "0px 0px 2px #00FFE5"} : {}
+                                        }
                                     >
                                         <span className="transition-all duration-300">{item.title}</span>
                                         <div className="absolute left-0 right-0 mx-auto bottom-0">
-                                            <svg
-                                                className="base absolute bottom-0 w-full h-auto transition-all duration-300"
-                                                width={137}
-                                                height={7}
-                                                viewBox="0 0 137 7"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M1 6L3.59615 1H30.7115L32.4423 3.22222H127.923L129.077 1H136V6H1Z"
-                                                    stroke="#808080"
-                                                    strokeOpacity="0.8"
-                                                />
-                                            </svg>
-                                            <svg
-                                                className="active absolute -bottom-0.5 w-full h-auto hidden transition-all duration-300"
-                                                width={193}
-                                                height={19}
-                                                viewBox="0 0 193 19"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <g filter="url(#filter0_d_644_823)">
+                                            {buttonsMenu === item.el ?
+                                                <svg
+                                                    className="active absolute -bottom-[0.25rem] w-full h-auto transition-all duration-300"
+                                                    width={193}
+                                                    height={19}
+                                                    viewBox="0 0 193 19"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <g filter="url(#filter0_d_644_823)">
+                                                        <path
+                                                            d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                            fill="#DCF1EB"
+                                                            shapeRendering="crispEdges"
+                                                        />
+                                                        <path
+                                                            d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
+                                                            stroke="url(#paint0_linear_644_823)"
+                                                            shapeRendering="crispEdges"
+                                                        />
+                                                    </g>
+                                                    <defs>
+                                                        <filter
+                                                            id="filter0_d_644_823"
+                                                            x="0.0488281"
+                                                            y="0.5"
+                                                            width="192.451"
+                                                            height={18}
+                                                            filterUnits="userSpaceOnUse"
+                                                            colorInterpolationFilters="sRGB"
+                                                        >
+                                                            <feFlood floodOpacity={0} result="BackgroundImageFix"/>
+                                                            <feColorMatrix
+                                                                in="SourceAlpha"
+                                                                type="matrix"
+                                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                                result="hardAlpha"
+                                                            />
+                                                            <feOffset/>
+                                                            <feGaussianBlur stdDeviation={3}/>
+                                                            <feComposite in2="hardAlpha" operator="out"/>
+                                                            <feColorMatrix
+                                                                type="matrix"
+                                                                values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
+                                                            />
+                                                            <feBlend
+                                                                mode="normal"
+                                                                in2="BackgroundImageFix"
+                                                                result="effect1_dropShadow_644_823"
+                                                            />
+                                                            <feBlend
+                                                                mode="normal"
+                                                                in="SourceGraphic"
+                                                                in2="effect1_dropShadow_644_823"
+                                                                result="shape"
+                                                            />
+                                                        </filter>
+                                                        <linearGradient
+                                                            id="paint0_linear_644_823"
+                                                            x1="80.6943"
+                                                            y1="12.6855"
+                                                            x2="80.6282"
+                                                            y2="6.98246"
+                                                            gradientUnits="userSpaceOnUse"
+                                                        >
+                                                            <stop stopColor="#00FFE5"/>
+                                                            <stop offset={1} stopOpacity="0.02"/>
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
+
+                                                :
+
+                                                <svg
+                                                    className="base absolute bottom-0 w-full h-auto transition-all duration-300"
+                                                    width={137}
+                                                    height={7}
+                                                    viewBox="0 0 137 7"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
                                                     <path
-                                                        d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
-                                                        fill="#DCF1EB"
-                                                        shapeRendering="crispEdges"
+                                                        d="M1 6L3.59615 1H30.7115L32.4423 3.22222H127.923L129.077 1H136V6H1Z"
+                                                        stroke="#808080"
+                                                        strokeOpacity="0.8"
                                                     />
-                                                    <path
-                                                        d="M7 12L10.4423 7H46.3953L49.0726 10.3333H175.291L176.821 7H186V12H7Z"
-                                                        stroke="url(#paint0_linear_644_823)"
-                                                        shapeRendering="crispEdges"
-                                                    />
-                                                </g>
-                                                <defs>
-                                                    <filter
-                                                        id="filter0_d_644_823"
-                                                        x="0.0488281"
-                                                        y="0.5"
-                                                        width="192.451"
-                                                        height={18}
-                                                        filterUnits="userSpaceOnUse"
-                                                        colorInterpolationFilters="sRGB"
-                                                    >
-                                                        <feFlood floodOpacity={0} result="BackgroundImageFix"/>
-                                                        <feColorMatrix
-                                                            in="SourceAlpha"
-                                                            type="matrix"
-                                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                                            result="hardAlpha"
-                                                        />
-                                                        <feOffset/>
-                                                        <feGaussianBlur stdDeviation={3}/>
-                                                        <feComposite in2="hardAlpha" operator="out"/>
-                                                        <feColorMatrix
-                                                            type="matrix"
-                                                            values="0 0 0 0 0 0 0 0 0 1 0 0 0 0 0.897059 0 0 0 1 0"
-                                                        />
-                                                        <feBlend
-                                                            mode="normal"
-                                                            in2="BackgroundImageFix"
-                                                            result="effect1_dropShadow_644_823"
-                                                        />
-                                                        <feBlend
-                                                            mode="normal"
-                                                            in="SourceGraphic"
-                                                            in2="effect1_dropShadow_644_823"
-                                                            result="shape"
-                                                        />
-                                                    </filter>
-                                                    <linearGradient
-                                                        id="paint0_linear_644_823"
-                                                        x1="80.6943"
-                                                        y1="12.6855"
-                                                        x2="80.6282"
-                                                        y2="6.98246"
-                                                        gradientUnits="userSpaceOnUse"
-                                                    >
-                                                        <stop stopColor="#00FFE5"/>
-                                                        <stop offset={1} stopOpacity="0.02"/>
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
+                                                </svg>
+
+                                            }
+
                                         </div>
                                     </button>
 
@@ -240,7 +252,7 @@ export default function DevelopSkills() {
                                     </div>
                                     <DynamicScrollbars
                                         autoHeight autoHeightMin={0} autoHeightMax={'355px'}
-                                        className="develop-skills-techno__wrapper  overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
+                                        className="develop-skills-techno__wrapper overflow-auto font-grotesk-medium text-whitetext-more-mapbiz text-sm text-center">
                                         <div
                                             className="develop-skills-techno__els pb-8"
                                         >
@@ -344,41 +356,41 @@ export default function DevelopSkills() {
                             </div>
                         </div>
                         <div className="skills-content-btns w-[65%] flex gap-8 mt-14 text-whitetext-more-mapbiz">
-                            <div className="skills-content-btn w-auto inline-block">
-                                <a className="block relative" href="#">
+                            <div className="skills-content-btn group w-auto inline-block">
+                                <Link className="block relative" href="/portfolio">
                                     <img
-                                        className="base"
-                                        src="assets/images/develop/develop-skills-btns.svg"
+                                        className="base group-hover:hidden"
+                                        src="img/develop/develop-skills-btns.svg"
                                         alt=""
                                     />
                                     <img
-                                        className="hover hidden"
-                                        src="assets/images/develop/develop-skills-btns-active.svg"
+                                        className="hover hidden group-hover:block"
+                                        src="img/develop/develop-skills-btns-active.svg"
                                         alt=""
                                     />
                                     <span
                                         className="absolute w-full top-0 bottom-0 my-auto flex items-center justify-center text-center">
                 Смотреть портфолио
               </span>
-                                </a>
+                                </Link>
                             </div>
-                            <div className="skills-content-btn w-auto inline-block">
-                                <a className="block relative" href="#">
+                            <div className="skills-content-btn group w-auto inline-block">
+                                <button className="block relative" onClick={handleQuiz}>
                                     <img
-                                        className="base"
-                                        src="assets/images/develop/develop-skills-btns.svg"
+                                        className="base group-hover:hidden"
+                                        src="img/develop/develop-skills-btns.svg"
                                         alt=""
                                     />
                                     <img
-                                        className="hover hidden"
-                                        src="assets/images/develop/develop-skills-btns-active.svg"
+                                        className="hover hidden group-hover:block"
+                                        src="img/develop/develop-skills-btns-active.svg"
                                         alt=""
                                     />
                                     <span
                                         className="absolute w-full top-0 bottom-0 my-auto flex items-center justify-center text-center">
                 Начать работу
               </span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
