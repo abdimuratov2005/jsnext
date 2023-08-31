@@ -2,16 +2,32 @@
 import styles from "@/app/portfolio/portfolio.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
-import {useContext} from "react";
+import axios from "axios";
+import {useEffect, useState} from "react";
+import {block} from "@/components/Pages/Develop/DevelopSkills/develop";
 
-export default function PortfolioItems({data}) {
+export default function PortfolioItems() {
 
-    const { setPopup } = useContext(DataDevelopContext);
+    const [data, setData] = useState([]);
 
-    function handlePopup () {
-        setPopup(prevState => !prevState)
+    async function getPortfolio() {
+        const url = 'https://xn----8sbb1agckqokro3icn.xn--p1ai/wp-json/mapbiz/v1/porfolio/';
+        try {
+            const res = await axios.get(url);
+            setData(res.data.fields.content[0].els);
+            return res.data.fields.content[0].els.map((link) => {
+                return link
+            });
+
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
+
+    useEffect(() => {
+        getPortfolio()
+    }, [])
 
     return (
         <div className={styles.wrapper}>
@@ -19,6 +35,7 @@ export default function PortfolioItems({data}) {
             <div className='flex justify-center'>
                 <div className={`${styles.portfolio} justify-center`}>{data.map((item) => {
                     return (
+                        //href={`/portfolio/${item.link}`}
                         <Link href={`/portfolio/${item.link}`} className={`${styles.portfolio__item} `}
                               key={item.link}>
                             <Image width={290} height={217} className={styles.portfolio__image} src={item.img} alt=""/>
@@ -31,9 +48,7 @@ export default function PortfolioItems({data}) {
                 })}
                 </div>
             </div>
-            <div className="flex justify-end mt-[190px] mb-1.5 text-white underline hover:no-underline">
-                <button onClick={handlePopup}>Весь список работ</button>
-            </div>
+
         </div>
     );
 }

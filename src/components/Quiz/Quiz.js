@@ -33,7 +33,7 @@ export default function Quiz({isOpenQuiz, isClose}) {
         const fetchData = async () => {
             const data = await getData(route);
             setCurrentData(data); // Сохраняем полученные данные в состояние
-            console.log(data)
+            // console.log(data)
         };
 
         fetchData(); // Вызываем асинхронную функцию внутри useEffect

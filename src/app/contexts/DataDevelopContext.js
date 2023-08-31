@@ -54,7 +54,7 @@ const DataDevelopProvider = ({children}) => {
                 currentDescriptionButton, setDataDescriptionButton,
                 isShow, setShow,
                 isQuizActive, setQuiz,
-                isPopupActive, setPopup
+                isPopupActive, setPopup,
             }}>
             {children}
         </DataDevelopContext.Provider>
