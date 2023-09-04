@@ -10,10 +10,7 @@ import {useContext} from "react";
 import PortfolioPopup from "@/components/Pages/Portfolio/PortfolioPopup";
 import {useSpring, animated, useChain, useSpringRef, useTransition, useSprings} from '@react-spring/web';
 
-export const metadata = {
-    title: 'MapBiz - Portfolio',
-    description: 'MapBiz - Portfolio',
-}
+
 
 export default function Portfolio() {
 
