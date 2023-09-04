@@ -51,7 +51,7 @@ export default function Portfolio() {
         animatedProps.length,
         animatedProps.map((animatedProp) => animatedProp)
     );
-
+    //sdf
     const propsContent = useSpring({
         from: { y: 0, opacity: 1 },
         to: { y: 100, opacity: 0 },
