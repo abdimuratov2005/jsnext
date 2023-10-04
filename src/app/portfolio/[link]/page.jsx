@@ -13,6 +13,7 @@ export const getStaticPaths = async () => {
             return link.link
         })
     });
+
     const paths = res.map((item) => ({
         params: {link: item},
     }));
