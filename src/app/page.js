@@ -1,7 +1,6 @@
 import HomePageMain from "@/components/Pages/HomePage/HomePageMain/HomePageMain";
 import Services from "@/components/Pages/HomePage/Services/Services";
 import RunTimeLine from "@/components/RunTimeLine/RunTimeLine";
-
 import AboutUs from "@/components/Pages/HomePage/AboutUs/AboutUs";
 import InTouch from "@/components/InTouch/InTouch";
 import API from "@/Api/Api";
@@ -9,10 +8,11 @@ import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
 import Team from "@/components/Pages/HomePage/Team/Team";
 import Video from "@/components/Video/Video";
-import {useContext} from "react";
-import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import NextPage from "@/components/NextPage/NextPage";
+import Canvas from "@/components/Canvas/Canvas";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 
 async function getData() {
 
@@ -39,8 +39,11 @@ export default async function Page() {
 
     return (
         <>
+            <Header />
             <HomePageMain/>
-            <Video />
+            <Video/>
+
+
             <Services/>
             <RunTimeLine
                 text={runLineTexts[0]}/>
@@ -55,6 +58,9 @@ export default async function Page() {
             <FeedBackForm/>
             <NextPage url="/services" image="/img/home/from-home-to-services.webp"></NextPage>
             <InTouch/>
+            <Footer />
+
+
         </>
     )
 }

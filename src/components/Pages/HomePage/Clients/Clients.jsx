@@ -56,7 +56,7 @@ export default function Clients({posts}) {
     const hoverBtnChange = () => setHoverBtn(!hoverBtn);
 
     return (
-        <div className="clients max-w-screen-xl mx-auto pt-64 pb-52 flex justify-end font-grotesk">
+        <div className="clients max-w-screen-xl mx-auto pt-24 pb-52 flex justify-end font-grotesk">
             <div className="w-full gap-y-12">
                 <div className="flex w-[100%] justify-end">
                     <h2 className="w-11/12 text-6xl leading-[5.5rem] text-white opacity-90">

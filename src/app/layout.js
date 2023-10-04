@@ -45,9 +45,7 @@ export default function RootLayout({ children }) {
       <body>
 
       <DataDevelopProvider>
-          <Header />
               {children}
-          <Footer />
       </DataDevelopProvider>
 
       </body>
