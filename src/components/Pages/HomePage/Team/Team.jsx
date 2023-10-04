@@ -13,7 +13,7 @@ export default function Team(props) {
                 <h2 className="text-6xl max-w-screen-xl mx-auto leading-[5.5rem] text-white opacity-90">Команда</h2>
                 <div className="team__els w-full h-screen mt-28">
                     <iframe
-                        src="http://localhost:3000/canvas"
+                        src="https://jsnext.vercel.app/canvas"
                         name="myIFrame"
                         scrolling="no"
                         width="100%"
