@@ -5,6 +5,7 @@ import Image from "next/image";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {useContext} from "react";
 
+
 export default function PortfolioItems({data}) {
 
     const { isPopupActive, setPopup } = useContext(DataDevelopContext);
