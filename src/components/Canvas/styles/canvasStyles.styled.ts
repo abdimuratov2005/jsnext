@@ -2,8 +2,8 @@ import {createGlobalStyle} from "styled-components";
 import {sharedValues} from "../shared/utils/sharedValues";
 
 export const CanvasStylesStyled = createGlobalStyle `
-  body {
-    position: fixed;
+ .team__els {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

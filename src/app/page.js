@@ -51,7 +51,7 @@ export default async function Page() {
             <RunTimeLine
                 text={runLineTexts[1]}/>
             <AboutUs/>
-            <Team/>
+            {/*<Team/>*/}
             <Clients/>
             <RunTimeLine
                 text={runLineTexts[2]}/>

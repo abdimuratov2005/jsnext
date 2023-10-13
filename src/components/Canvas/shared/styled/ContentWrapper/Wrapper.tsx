@@ -2,7 +2,7 @@ import styled from "styled-components"
 import {media} from "../../utils/breakpoints";
 
 const ContentWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 50%;
   left: 50%;

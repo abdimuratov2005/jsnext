@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const WrapperSharedContent = styled.div`
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   pointer-events: none;
