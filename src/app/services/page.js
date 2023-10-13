@@ -8,7 +8,7 @@ import {Parallax, ParallaxLayer} from "@react-spring/parallax";
 export default function Services() {
     return (
             <Parallax  className={`  `} pages={3}>
-                <ParallaxLayer offset={0} speed={0.5}>
+                <ParallaxLayer offset={0} speed={0.1}>
                     <ServicesMain/>
                 </ParallaxLayer>
                 <ParallaxLayer offset={1} speed={1}>
