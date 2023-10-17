@@ -89,9 +89,9 @@ export default function DevelopUnits() {
 
     return (
         <motion.section
-            initial={{opacity: 0, x: 500, y: 500, transition: {delay: 0.3}}}
-            animate={{opacity: 1, x: 0, y:0,  transition: {delay: 0.3}}}
-            exit={{opacity: 0, x: 500, y:500, transition: {delay: 0.3}}}
+            // initial={{opacity: 0, x: 500, y: 500, transition: {delay: 0.3}}}
+            // animate={{opacity: 1, x: 0, y:0,  transition: {delay: 0.3}}}
+            // exit={{opacity: 0, x: 500, y:500, transition: {delay: 0.3}}}
             className='pt-44 pb-40 w-full'>
             <div>
                 <svg

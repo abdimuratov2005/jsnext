@@ -30,6 +30,8 @@ module.exports = {
       },
       cursor: {
         'next-mapbiz': 'url(/img/cursor.svg), pointer',
+        'mapbiz-pay': 'url(/img/playcursor.svg), pointer',
+        'mapbiz-stop': 'url(/img/stopplay.svg), pointer'
       },
       animation: {
         'marquee-base-mapbiz': 'marquee 13.5s infinite linear',

@@ -1,5 +1,5 @@
 'use client'
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
 import {AnimatePresence, useMotionValueEvent, useScroll} from "framer-motion"
@@ -27,14 +27,22 @@ function Header(props) {
 
     const {scrollY} = useScroll()
 
+
+
     useMotionValueEvent(scrollY, "change", (latest) => {
-        if (latest >= 100) {
+        console.log(latest)
+        if (latest >= 200) {
+            // setIsLogo(true)
             setIsScroll(true)
         } else {
             setIsLogo(false)
             setIsScroll(false)
         }
     })
+
+    useEffect(() => {
+
+    },[])
 
     // квиз
 
@@ -49,7 +57,6 @@ function Header(props) {
     }
 
     //квиз енд
-
 
     return (
         <>
@@ -72,9 +79,9 @@ function Header(props) {
                                 transition={{duration: 0.4}} // Длительность анимации
                                 onAnimationComplete={() => {
                                     if(scrollY.get() < 100) {
-                                        setIsLogo(false  );
+                                        setIsLogo(false);
                                     } else {
-                                        setIsLogo(prevState => !prevState  );
+                                        setIsLogo(true);
                                     }
                                 }}
                                 // style={{background: isScroll ? 'url(/img/mapLogo.svg) no-repeat center/contain' : '',}}

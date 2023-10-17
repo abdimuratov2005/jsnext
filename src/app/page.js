@@ -6,13 +6,12 @@ import InTouch from "@/components/InTouch/InTouch";
 import API from "@/Api/Api";
 import FeedBackForm from '../components/Pages/HomePage/FeedBackForm/FeedBackForm'
 import Clients from "@/components/Pages/HomePage/Clients/Clients";
-import Team from "@/components/Pages/HomePage/Team/Team";
 import Video from "@/components/Video/Video";
 import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import NextPage from "@/components/NextPage/NextPage";
-import Canvas from "@/components/Canvas/Canvas";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import Team from "@/components/Pages/HomePage/Team/Team";
 
 async function getData() {
 
@@ -42,8 +41,6 @@ export default async function Page() {
             <Header />
             <HomePageMain/>
             <Video/>
-
-
             <Services/>
             <RunTimeLine
                 text={runLineTexts[0]}/>
@@ -51,7 +48,7 @@ export default async function Page() {
             <RunTimeLine
                 text={runLineTexts[1]}/>
             <AboutUs/>
-            {/*<Team/>*/}
+            <Team/>
             <Clients/>
             <RunTimeLine
                 text={runLineTexts[2]}/>
@@ -59,8 +56,6 @@ export default async function Page() {
             <NextPage url="/services" image="/img/home/from-home-to-services.webp"></NextPage>
             <InTouch/>
             <Footer />
-
-
         </>
     )
 }

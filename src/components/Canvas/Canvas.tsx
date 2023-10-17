@@ -58,6 +58,7 @@ const Canvas = memo(() => {
 
   return (
     <>
+
       <CanvasStylesStyled />
       <Loading ref={loadingScreen}>
         <LoadingText ref={loadingText}>
@@ -105,6 +106,7 @@ const Canvas = memo(() => {
       </WrapperSharedContent>
 
       <GridHolder ref={gridHolder} />
+
     </>
   )
 })
