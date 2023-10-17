@@ -1,3 +1,4 @@
+'use client'
 import {memo, useEffect, useRef} from "react";
 import {data} from "./options";
 import {Separator} from "./shared/styled/MainText/Separator";
