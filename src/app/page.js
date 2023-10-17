@@ -48,7 +48,10 @@ export default async function Page() {
             <RunTimeLine
                 text={runLineTexts[1]}/>
             <AboutUs/>
-            <Team/>
+            <div className={'relative'}>
+                <Team/>
+            </div>
+
             <Clients/>
             <RunTimeLine
                 text={runLineTexts[2]}/>
