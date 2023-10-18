@@ -7,16 +7,17 @@ export default function ({children}) {
     console.log(pathName)
     return  (
      <AnimatePresence mode={"wait"}>
-         <motion.div  key={pathName}>
-             <motion.div
-                 initial={{ scaleX: 1 }}
-                 animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
-                 exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
-                 className="privacy-screen"
-             >
-                 {children}
-             </motion.div>
-         </motion.div>
+         {children}
+         {/*<motion.div  key={pathName}>*/}
+         {/*    <motion.div*/}
+         {/*        initial={{ scaleX: 1 }}*/}
+         {/*        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}*/}
+         {/*        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}*/}
+         {/*        className="privacy-screen"*/}
+         {/*    >*/}
+         {/*        {children}*/}
+         {/*    </motion.div>*/}
+         {/*</motion.div>*/}
      </AnimatePresence>
 
 
