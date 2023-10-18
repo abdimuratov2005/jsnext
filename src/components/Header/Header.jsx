@@ -97,16 +97,20 @@ function Header(props) {
                             </motion.div>
                         </Link>
                         <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">
-                            <img
+                            <Image
+                                width={55}
+                                height={55}
                                 className="h-[45px] w-auto"
-                                src="@/img/header/header-logo.png"
+                                src="/img/header-logo-white.png"
                                 alt=""
                             />
                         </div>
                         <div className="header-logo-mob 2xl:hidden">
-                            <img
+                            <Image
+                                width={55}
+                                height={55}
                                 className="h-[45px] w-auto"
-                                src="@/img/header/header-logo-white.png"
+                                src="/img/header-logo-white.png"
                                 alt=""
                             />
                         </div>
@@ -148,7 +152,7 @@ function Header(props) {
                                 </defs>
                             </svg>
                         </div>
-                        <div className="w-[60px] mr-4 2xl:mr-0 2xl:my-auto" ffcoder-lang="ru">
+                        <div className="w-[60px] mr-4 2xl:mr-0 2xl:my-auto" >
                             <button
                                 onClick={() => isLanguage('russian')}
                                 className={`select-none 

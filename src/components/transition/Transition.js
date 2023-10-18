@@ -4,20 +4,15 @@ import {usePathname} from "next/navigation";
 
 export default function TransitionCustom({children}) {
     const pathName = usePathname()
-    console.log(pathName)
     return  (
-     <AnimatePresence mode={"wait"}>
-         {children}
-         {/*<motion.div  key={pathName}>*/}
-         {/*    <motion.div*/}
-         {/*        initial={{ scaleX: 1 }}*/}
-         {/*        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}*/}
-         {/*        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}*/}
-         {/*        className="privacy-screen"*/}
-         {/*    >*/}
-         {/*        {children}*/}
-         {/*    </motion.div>*/}
-         {/*</motion.div>*/}
+     <AnimatePresence  mode={"wait"}>
+         <motion.div className={''} key={pathName}>
+             {children}
+
+
+         </motion.div>
+
+
      </AnimatePresence>
 
 

@@ -7,7 +7,7 @@ const WrapperSharedContent = styled.div`
   top: 0;
   pointer-events: none;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   user-select: none;
   z-index: 11;
 `;

@@ -34,7 +34,7 @@ export default function Video() {
                 <div  onMouseLeave={() => {
                     setOpen(!open)
                 }}
-                      onMouseEnter={() => setOpen(!open)} onClick={handleClick}  className={`m-auto relative ${isPlayed ? 'cursor-mapbiz-pay' : 'cursor-mapbiz-stop'}  ${!isPlayed && styles.video}`}>
+                      onMouseEnter={() => setOpen(!open)} onClick={handleClick}  className={`m-auto relative ${!isPlayed ? 'cursor-mapbiz-pay' : 'cursor-mapbiz-stop'}  ${!isPlayed && styles.video}`}>
                     <video ref={videoRef} className={`video w-screen h-full  `} autoPlay loop muted playsInline>
                         <source src='/video/banner.mp4' type="video/mp4"/>
                     </video>

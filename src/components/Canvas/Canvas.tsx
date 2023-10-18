@@ -57,7 +57,7 @@ const Canvas = memo(() => {
     }, [])
 
     return (
-        <>
+
             <TeamWrapper>
                 <CanvasStylesStyled/>
                 <Loading ref={loadingScreen}>
@@ -109,7 +109,7 @@ const Canvas = memo(() => {
 
                 <GridHolder ref={gridHolder}/>
             </TeamWrapper>
-        </>
+
     )
 })
 

@@ -12,6 +12,7 @@ import NextPage from "@/components/NextPage/NextPage";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Team from "@/components/Pages/HomePage/Team/Team";
+import Canvas from "@/components/Canvas/Canvas";
 
 async function getData() {
 
@@ -38,7 +39,7 @@ export default async function Page() {
 
     return (
         <>
-            <Header />
+            <Header/>
             <HomePageMain/>
             <Video/>
             <Services/>
@@ -48,17 +49,14 @@ export default async function Page() {
             <RunTimeLine
                 text={runLineTexts[1]}/>
             <AboutUs/>
-            <div className={'relative'}>
-                <Team/>
-            </div>
-
+            <Canvas />
             <Clients/>
             <RunTimeLine
                 text={runLineTexts[2]}/>
             <FeedBackForm/>
             <NextPage url="/services" image="/img/home/from-home-to-services.webp"></NextPage>
             <InTouch/>
-            <Footer />
+            <Footer/>
         </>
     )
 }

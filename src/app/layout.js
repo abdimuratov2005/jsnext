@@ -4,6 +4,7 @@ import {DataDevelopProvider} from "@/app/contexts/DataDevelopContext";
 import TransitionCustom from "@/components/transition/Transition";
 
 
+
 const cygrotesk = localFont({
     src: [
         {
@@ -38,17 +39,15 @@ export const metadata = {
 }
 
 
-export default function RootLayout({ children }) {
-  return (
-      <html className={`${cygrotesk.variable} font-sans`} lang="ru">
-      <body>
-      <DataDevelopProvider>
-          <TransitionCustom>
-              {children}
-          </TransitionCustom>
-      </DataDevelopProvider>
-      </body>
-      </html>
-  );
+export default function RootLayout({children}) {
+    return (
+        <html className={`${cygrotesk.variable} font-sans`} lang="ru">
+        <body>
+        <DataDevelopProvider>
+                {children}
+        </DataDevelopProvider>
+        </body>
+        </html>
+    );
 }
 
