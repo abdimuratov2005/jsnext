@@ -1,14 +1,13 @@
 'use client'
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import styles from './Burger.module.scss'
 import Link from "next/link";
 import {usePathname} from 'next/navigation';
-import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
-import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import {DataDevelopContext} from "../../app/contexts/DataDevelopContext";
 import {content, block} from '../Pages/Develop/DevelopUnits/develop'
 import Scrollbars from "react-custom-scrollbars-2";
-
+import Background from '../../../public/img/Menu/bacgroundBurger.jpg'
 
 function Burger({isOpen, setIsOpen}) {
     const {
@@ -71,7 +70,7 @@ function Burger({isOpen, setIsOpen}) {
                 // exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
                 // transition={{duration: 0.5}}
                 className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
-                <Image property={true} src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
+                <Image src={Background}  alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                     <div
