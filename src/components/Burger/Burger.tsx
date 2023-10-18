@@ -70,7 +70,7 @@ function Burger({isOpen, setIsOpen}) {
                 // exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
                 // transition={{duration: 0.5}}
                 className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
-                <Image src={Background}  alt={''}></Image>
+                <Image src={Background} fill={true}  alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                     <div
