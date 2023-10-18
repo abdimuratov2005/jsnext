@@ -65,12 +65,8 @@ function Burger({isOpen, setIsOpen}) {
     return (
         <div>
             {isOpen && <div
-                // initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                // animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
-                // exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                // transition={{duration: 0.5}}
-                className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
-                <Image src={Background} fill={true}  alt={''}></Image>
+                className={`${isOpen ? '' : 'hidden'} ${styles.overlay} bg-cover popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
+                <Image src={Background}  fill={true}  alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                     <div
@@ -125,7 +121,7 @@ function Burger({isOpen, setIsOpen}) {
 
                                 })}
                             </nav>
-                            <div className="popup-menu-services w-8/12 pl-10">
+                            <div className="popup-menu-services w-8/12 hidden pl-10">
                                 <div className="relative py-4">
                                     <div
                                         className={`${styles.header__title} popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none`}>

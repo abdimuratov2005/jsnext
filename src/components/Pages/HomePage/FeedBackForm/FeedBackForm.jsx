@@ -128,7 +128,7 @@ function FeedBackForm(props) {
 
 
     return (
-        <div className='w-[1024px] m-auto mt-[150px] mb-[180px]'>
+        <div className='max-w-[1024px] m-auto mt-[150px] mb-[180px]'>
             <form className={`max-w-[550px]`} onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="name" className='text-white text-[23px] flex flex-col'>
                     Начнем знакомство*

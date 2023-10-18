@@ -116,7 +116,7 @@ export default function Services(props) {
         <section
             className="services max-w-screen-xl mx-auto pt-9 pb-8 2xl:pt-48 2xl:pb-28 pl-6 2xl:pl-0 pr-4 2xl:pr-0 grid gap-y-8 2xl:gap-y-40">
             <div
-                className="services-nav flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white-text-new-mapbiz">
+                className="services-nav text-xl flex justify-start 2xl:justify-end font-grotesk text-[15px] 2xl:text-6xl 2xl:leading-[5.5rem] text-white-text-new-mapbiz">
                 <div className="w-6/12 grid gap-y-1.5 2xl:gap-y-6">
                     {links.map((item,index) => {
                         return (
@@ -172,16 +172,16 @@ export default function Services(props) {
                             Есть задача в WEB? - Обращайтесь.
                         </p>
                     </div>
-                    <div className="services-more__nav font-light flex flex-col items-end text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
+                    <div className="services-more__nav font-light flex flex-col items-start md:items-end text-[6.5px] leading-[0.5rem] 2xl:text-sm text-grey-mapbiz">
                         <div
-                            className="services-more__wrapper w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-2 gap-y-3 2xl:gap-y-4">
+                            className="services-more__wrapper  w-10/12 flex flex-wrap gap-x-2.5 2xl:gap-x-2 gap-y-3 2xl:gap-y-4">
                             {subLinks.map((item, index) => {
                                 return <Link onClick={() => {
                                     setShow(true)
                                     setDataDescriptionButton(item.id)
                                     setDataButton(item.data)
 
-                                }} key={index} className="services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={'/develop'}>{item.title}</Link>
+                                }} key={index} className="text-base services-more__el px-2.5 2xl:px-4 py-[0.3rem] 2xl:py-2 border border-greytransparent-mapbiz rounded-[24px] hover:bg-white hover:shadow-white-mapbiz transition duration-300" href={'/develop'}>{item.title}</Link>
                             })}
                         </div>
                     </div>

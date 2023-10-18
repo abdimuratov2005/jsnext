@@ -60,41 +60,22 @@ function Header(props) {
                 initial={{}}
                 animate={{backgroundColor: isScroll ? '#F5F9FF' : 'transparent'}} //цвет
                 transition={{duration: 2}} // Длительность анимации
-                className={`fixed h-[88px]  w-full z-20`}>
+                className={`fixed h-[88px] px-4 xl:px-0 w-full z-20`}>
                 <div
-                    className="header-wrapper max-w-screen-xl mx-auto 2xl:py-4 flex 2xl:items-center flex-wrap lg:flex-nowrap">
+                    className=" max-w-screen-xl mx-auto py-4 flex items-center 2xl:items-center w-full  lg:flex-nowrap justify-between">
                     <div
-                        className="header-logo w-2/12 xl:w-5/12 font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
+                        className="header-logo font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
                         <Link href={'/'}>
-                            <motion.div
-                                initial={{width: '100%', height: '66px'}} // Начальная высота шапки
-                                animate={
-                                    {
-                                        width: isScroll ? '90px' : '',
-                                    }}
-                                transition={{duration: 0.4}} // Длительность анимации
-                                onAnimationComplete={() => {
-                                    if (scrollY.get() < 100) {
-                                        setIsLogo(false);
-                                    } else {
-                                        setIsLogo(true);
-                                    }
-                                }}
-                                // style={{background: isScroll ? 'url(/img/mapLogo.svg) no-repeat center/contain' : '',}}
-                                className={`whitespace-nowrap header-logo-text  ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
-                                {isLogo ? <AnimatePresence
-                                    >
-                                        <motion.div
-                                            initial={{opacity: 0}}
-                                            animate={{opacity: 1}}
-                                            transition={{duration: 1}}
-                                            exit={{opacity: 0}}>
-                                            <Image height={66} width={74} className={'z-20'} src={'/img/mapLogo.svg'}
-                                                   alt='лого'></Image>
-                                        </motion.div>
-                                    </AnimatePresence>
-                                    : 'MaPbiz Group'}
-                            </motion.div>
+                            {isScroll ?
+                                <Image height={66} width={74} className={'z-20'} src={'/img/mapLogo.svg'}
+                                       alt='лого'></Image>
+                                :
+                                <p
+                                >
+                                    MapbizGroup
+                                </p>
+
+                            }
                         </Link>
                         <div className="header-logo-img  2xl:block overflow-hidden h-0 w-0">
                             <Image
@@ -105,21 +86,13 @@ function Header(props) {
                                 alt=""
                             />
                         </div>
-                        <div className="header-logo-mob 2xl:hidden">
-                            <Image
-                                width={55}
-                                height={55}
-                                className="h-[45px] w-auto"
-                                src="/img/header-logo-white.png"
-                                alt=""
-                            />
-                        </div>
+
                     </div>
                     <div className="w-6/12 2xl:w-3/12"/>
                     <div
                         className="header-els w-4/12 flex justify-end gap-x-6 font-grotesk-light text-xs text-greywhite-mapbiz">
                         <div
-                            className="header-volume  2xl:block m-auto select-none cursor-pointer"
+                            className="header-volume hidden md:block  2xl:block m-auto select-none cursor-pointer"
                             ffcoder-status="false"
                         >
                             <svg
@@ -152,7 +125,7 @@ function Header(props) {
                                 </defs>
                             </svg>
                         </div>
-                        <div className="w-[60px] mr-4 2xl:mr-0 2xl:my-auto" >
+                        <div className=" mr-4 mr-0 my-auto min-w-[70px]">
                             <button
                                 onClick={() => isLanguage('russian')}
                                 className={`select-none 
@@ -170,10 +143,10 @@ function Header(props) {
                         <button onClick={() => {
                             setOpenBurger(!openBurger)
                         }}
-                                className={`${isScroll ? styles.burger__white : ''} ${styles.burger} header-burger hidden 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
+                                className={`${isScroll ? styles.burger__white : ''} ${styles.burger} relative header-burger min-w-[55px] min-h-[55px] hidden md:block 2xl:block bg-center bg-no-repeat bg-contain w-14 h-12 cursor-pointer select-none hover:rotate-6 transition-all duration-300`}
                         ></button>
                         <button
-                            className={`${styles.header__callback} btn block py-3 px-8 border border-white rounded-[24px] text-white bg-center bg-cover bg-no-repeat`}
+                            className={`${styles.header__callback} min-w-[214px] hidden md:block btn block py-3 px-8 border border-white rounded-[24px] text-white bg-center bg-cover bg-no-repeat`}
                             onClick={handleQuiz}
                         >
                             Заказать проект
@@ -184,6 +157,14 @@ function Header(props) {
                 <Burger setIsOpen={handleOpen} isOpen={openBurger}></Burger>
             </motion.header>
             <Quiz isClose={handleQuizClose} isOpenQuiz={isQuizActive}></Quiz>
+            <nav className={'fixed sm:hidden bottom-0 bg-black w-full h-[48px] z-50 flex justify-between'}>
+                <p className={'text-white'}>123</p>
+                <button onClick={() => {
+                    setOpenBurger(!openBurger)
+                }}
+                        className={`${styles.burger} w-[40px] bg-cover h-[40px]`}
+                ></button>
+            </nav>
         </>
     );
 }
