@@ -2,7 +2,7 @@
 import {AnimatePresence, motion} from "framer-motion";
 import {usePathname} from "next/navigation";
 
-export default function ({children}) {
+export default function TransitionCustom({children}) {
     const pathName = usePathname()
     console.log(pathName)
     return  (
