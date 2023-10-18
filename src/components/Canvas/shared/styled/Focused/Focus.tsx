@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { media } from "../../utils/breakpoints";
 
 const FocusHolder = styled.div`
-  position: static;
+  position: relative;
   top: auto;
   left: auto;
-  width: 120%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   transform: scale(1.6) translateY(20%) translateX(-17%);
  
   ${media.tablet} {

@@ -64,15 +64,14 @@ function Burger({isOpen, setIsOpen}) {
     }
     const {language, isLanguage} = useContext(DataDevelopContext);
     return (
-        <AnimatePresence mode={"wait"}>
-            {isOpen && <motion.div
-                initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
-                exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
-                transition={{duration: 0.5}}
+        <div>
+            {isOpen && <div
+                // initial={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                // animate={{opacity: 1, clipPath: 'circle(100% at 50% 50%)'}}
+                // exit={{opacity: 0, clipPath: 'circle(0% at 50% 50%)'}}
+                // transition={{duration: 0.5}}
                 className={`${isOpen ? '' : 'hidden'} ${styles.overlay} popup-menu-overlay h-screen w-screen fixed top-0 left-0 z-60 overflow-hidden`}>
-                <Image
-                       src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
+                <Image property={true} src={'/img/Menu/bacgroundBurger.jpg'} fill={true} style={{objectFit: "cover"}} alt={''}></Image>
                 <div
                     className="popup popup-menu absolute max-w-screen-xl h-[700px] top-0 bottom-0 left-0 right-0 m-auto flex justify-center">
                     <div
@@ -102,46 +101,7 @@ function Burger({isOpen, setIsOpen}) {
                                 MaPbiz Group
                             </div>
                             <div className="popup-menu-lang absolute right-6 top-4">
-                                <svg
-                                    width={76}
-                                    height={19}
-                                    viewBox="0 0 76 19"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect
-                                        x="0.504101"
-                                        y="0.499983"
-                                        width={74}
-                                        height={18}
-                                        rx={9}
-                                        transform="matrix(1 0 0.00820296 0.999966 -0.00410134 -0.000959755)"
-                                        fill="#41555E"
-                                        fillOpacity="0.3"
-                                    />
-                                    <rect
-                                        x="0.504101"
-                                        y="0.499983"
-                                        width={74}
-                                        height={18}
-                                        rx={9}
-                                        transform="matrix(1 0 0.00820296 0.999966 -0.00410134 -0.000959755)"
-                                        stroke="url(#paint0_radial_459_715)"
-                                    />
-                                    <defs>
-                                        <radialGradient
-                                            id="paint0_radial_459_715"
-                                            cx={0}
-                                            cy={0}
-                                            r={1}
-                                            gradientUnits="userSpaceOnUse"
-                                            gradientTransform="translate(33.4437 4.24465) rotate(65.5472) scale(62.3945 455.698)"
-                                        >
-                                            <stop stopColor="#00FFE5"/>
-                                            <stop offset={1} stopOpacity={0}/>
-                                        </radialGradient>
-                                    </defs>
-                                </svg>
+                                <Image src={'/burgerFiles/burgerLang.svg'} width={90}  height={20} alt={'mapbiz language'} />
                                 <div
                                     className="absolute top-0 left-0 right-0 bottom-0 m-auto text-center flex justify-center items-center font-grotesk-light text-xs text-white">
                                     <button   onClick={() => isLanguage('russian')} className={`select-none  ${language === 'russian' ? 'font-bold' : ''}`}>Ru</button>
@@ -394,8 +354,8 @@ function Burger({isOpen, setIsOpen}) {
                         </div>
                     </div>
                 </div>
-            </motion.div>}
-        </AnimatePresence>
+            </div>}
+        </div>
     );
 }
 

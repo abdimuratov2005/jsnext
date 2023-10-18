@@ -71,7 +71,7 @@ const Canvas = memo(() => {
                 <WrapperSharedContent>
                     <Container ref={gridTitleWrapper}>
                         <Title>
-                            Lorem
+                            123
                             <br/>
                             ipsum. dolor.
                         </Title>

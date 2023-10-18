@@ -3,6 +3,7 @@ import {media} from "../../utils/breakpoints";
 
 const ContentWrapper = styled.div`
   position: absolute;
+  overflow: hidden;
   z-index: 1;
   top: 50%;
   left: 50%;

@@ -28,11 +28,10 @@ function Header(props) {
     const {scrollY} = useScroll()
 
 
-
     useMotionValueEvent(scrollY, "change", (latest) => {
         console.log(latest)
         if (latest >= 200) {
-            // setIsLogo(true)
+
             setIsScroll(true)
         } else {
             setIsLogo(false)
@@ -40,15 +39,12 @@ function Header(props) {
         }
     })
 
-    useEffect(() => {
-
-    },[])
 
     // квиз
 
     const [quizOpen, setQuizOpen] = useState(false)
 
-    function handleQuiz () {
+    function handleQuiz() {
         setQuiz(prevState => !prevState)
     }
 
@@ -78,7 +74,7 @@ function Header(props) {
                                     }}
                                 transition={{duration: 0.4}} // Длительность анимации
                                 onAnimationComplete={() => {
-                                    if(scrollY.get() < 100) {
+                                    if (scrollY.get() < 100) {
                                         setIsLogo(false);
                                     } else {
                                         setIsLogo(true);
@@ -88,14 +84,15 @@ function Header(props) {
                                 className={`whitespace-nowrap header-logo-text  ${isScroll ? styles.header__text : ''} 2xl:block overflow-hidden`}>
                                 {isLogo ? <AnimatePresence
                                     >
-                                    <motion.div
-                                        initial={{opacity: 0}}
-                                        animate={{opacity: 1}}
-                                        transition={{duration: 1}}
-                                        exit={{opacity: 0}}>
-                                        <Image height={66} width={74} className={'z-20'} src={'/img/mapLogo.svg'} alt='лого'></Image>
-                                    </motion.div>
-                                </AnimatePresence>
+                                        <motion.div
+                                            initial={{opacity: 0}}
+                                            animate={{opacity: 1}}
+                                            transition={{duration: 1}}
+                                            exit={{opacity: 0}}>
+                                            <Image height={66} width={74} className={'z-20'} src={'/img/mapLogo.svg'}
+                                                   alt='лого'></Image>
+                                        </motion.div>
+                                    </AnimatePresence>
                                     : 'MaPbiz Group'}
                             </motion.div>
                         </Link>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const TeamWrapper = styled.div `
   overflow: hidden;
+  
   position: absolute;
   left: 0;
   top: 0;
