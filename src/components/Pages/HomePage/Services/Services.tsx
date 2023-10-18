@@ -1,5 +1,5 @@
 'use client'
-import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
+import {DataDevelopContext} from "../../../../app/contexts/DataDevelopContext";
 import React, {useContext} from 'react';
 import Link from "next/link";
 

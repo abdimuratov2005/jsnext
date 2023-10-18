@@ -1,8 +1,7 @@
 import './globals.css';
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 import localFont from 'next/font/local'
 import {DataDevelopContext, DataDevelopProvider} from "@/app/contexts/DataDevelopContext";
+import Transition from "@/components/transition/Transition";
 
 
 const cygrotesk = localFont({
@@ -43,11 +42,11 @@ export default function RootLayout({ children }) {
   return (
       <html className={`${cygrotesk.variable} font-sans`} lang="ru">
       <body>
-
       <DataDevelopProvider>
-              {children}
-      </DataDevelopProvider>
+          <Transition children={children}>
 
+          </Transition>
+      </DataDevelopProvider>
       </body>
       </html>
   );
