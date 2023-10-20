@@ -121,7 +121,7 @@ function Burger({isOpen, setIsOpen}) {
 
                                 })}
                             </nav>
-                            <div className="popup-menu-services w-8/12 hidden pl-10">
+                            <div className="popup-menu-services w-8/12  pl-10">
                                 <div className="relative py-4">
                                     <div
                                         className={`${styles.header__title} popup-menu-services__header absolute w-[95%] -top-10 left-0 font-grotesk text-2xl text-white select-none`}>

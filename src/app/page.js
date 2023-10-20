@@ -11,8 +11,8 @@ import CareClients from "@/components/Pages/HomePage/CareClients/CareClients";
 import NextPage from "@/components/NextPage/NextPage";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import Team from "@/components/Pages/HomePage/Team/Team";
 import Canvas from "@/components/Canvas/Canvas";
+
 
 async function getData() {
 
@@ -49,7 +49,7 @@ export default async function Page() {
             <RunTimeLine
                 text={runLineTexts[1]}/>
             <AboutUs/>
-            <Canvas />
+            <Canvas/>
             <Clients/>
             <RunTimeLine
                 text={runLineTexts[2]}/>

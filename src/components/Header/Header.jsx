@@ -1,8 +1,8 @@
 'use client'
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Header.module.scss'
 import Link from "next/link";
-import {AnimatePresence, useMotionValueEvent, useScroll} from "framer-motion"
+import {useMotionValueEvent, useScroll} from "framer-motion"
 import Burger from "@/components/Burger/Burger";
 import {DataDevelopContext} from "@/app/contexts/DataDevelopContext";
 import {
@@ -29,7 +29,6 @@ function Header(props) {
 
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-        console.log(latest)
         if (latest >= 200) {
 
             setIsScroll(true)
@@ -60,9 +59,9 @@ function Header(props) {
                 initial={{}}
                 animate={{backgroundColor: isScroll ? '#F5F9FF' : 'transparent'}} //цвет
                 transition={{duration: 2}} // Длительность анимации
-                className={`fixed h-[88px] px-4 xl:px-0 w-full z-20`}>
+                className={`fixed flex h-[80px] px-4 xl:px-0 w-full z-20`}>
                 <div
-                    className=" max-w-screen-xl mx-auto py-4 flex items-center 2xl:items-center w-full  lg:flex-nowrap justify-between">
+                    className=" max-w-screen-xl mx-auto  flex items-center 2xl:items-center w-full  lg:flex-nowrap justify-between">
                     <div
                         className="header-logo font-grotesk-bold text-2xl md:text-4xl 2xl:text-[3rem] md:leading-[2rem] 2xl:leading-[3rem] font-bold text-white">
                         <Link href={'/'}>

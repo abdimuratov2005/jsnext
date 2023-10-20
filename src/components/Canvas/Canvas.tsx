@@ -70,12 +70,12 @@ const Canvas = memo(() => {
       <WrapperSharedContent>
         <Container ref={gridTitleWrapper}>
           <Title>
-            123
+            Commandos
             <br />
-            ipsum. dolor.
+            Digital Heroes
           </Title>
           <Separator />
-          <MainText>Avatars</MainText>
+          <MainText>MaPbiz Group</MainText>
         </Container>
         <ContentWrapper>
           <FocusHolder ref={focusedHolder} />
@@ -97,7 +97,7 @@ const Canvas = memo(() => {
                   data-animation="paragraph"
                   data-avatarname={`${avatar.name}`}
                 >
-                  Avatars
+                  Должность
                 </SmallTitle>
                 <AvatarTitle data-avatar="title" data-animation="paragraph">
                   {avatar.name}

@@ -13,7 +13,7 @@ import {useRouter} from "next/navigation";
 
 export default  function PortfolioMain({ data }) {
     const router = useRouter()
-    console.log(router)
+
     const [click, setClick] = useState(false);
     const controls = useAnimation();
 
