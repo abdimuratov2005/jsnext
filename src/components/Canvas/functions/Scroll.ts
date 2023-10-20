@@ -2,8 +2,6 @@ import normalizeWheel from "normalize-wheel";
 import { EventDispatcher } from "three";
 import { options } from "../options";
 import { EventProps } from "../shared/types/EventProps.interface";
-import { UpdateProps } from "../shared/types/UpdateEvent.interface";
-import { Coordinates } from "../shared/types/Coordinates.interface";
 
 export default class Scroll extends EventDispatcher {
   static _instance: boolean | Scroll;

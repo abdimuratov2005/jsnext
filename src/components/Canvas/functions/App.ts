@@ -1,29 +1,30 @@
+/// <reference path="../shared/types/index.d.ts" />
+
 import Avatars from "./Avatars";
 import Preloader from "./Preloader";
 import {EventDispatcher, PerspectiveCamera, Texture, WebGLRenderer} from 'three';
 import {LoadedAssetsProps} from "../shared/types/Options.interface";
-import {LoadingProgress} from "../shared/types/LoadingProgress.interface";
 import {data, options, particleMask} from "../options";
 import {AssetsLoadedProps} from "../shared/types/AssetsLoaded.interface";
 import {resizeDebounced} from "../shared/utils/resizeDebounced";
 
 export class App extends EventDispatcher {
-  _rafId: number;
-  _isResumed: boolean;
-  _lastFrameTime: number;
-  _preloader: Preloader;
-  _pixelRatio: number;
-  _onVisibilityChange: () => void;
-  _onAssetsLoaded: (event: AssetsLoadedProps) => void;
-  _rendererEl: HTMLElement;
-  _renderer: WebGLRenderer;
-  _experienceScene: Avatars;
-  _onPreloaderProgress: (event: AssetsLoadedProps) => void;
-  _renderOnFrame: (e: number) => void;
-  _canvas: HTMLCanvasElement;
-  _camera: PerspectiveCamera;
+  private _rafId: number;
+  private _isResumed: boolean;
+  private _lastFrameTime: number;
+  private _preloader: Preloader;
+  private _pixelRatio: number;
+  private _onVisibilityChange: () => void;
+  private _onAssetsLoaded: (event: AssetsLoadedProps) => void;
+  private _rendererEl: HTMLElement;
+  private _renderer: WebGLRenderer;
+  private _experienceScene: Avatars;
+  private _onPreloaderProgress: (event: AssetsLoadedProps) => void;
+  private _renderOnFrame: (e: number) => void;
+  private _canvas: HTMLCanvasElement;
+  private _camera: PerspectiveCamera;
 
-  constructor({ rendererEl }: any) {
+  constructor({ rendererEl }: AppOptions) {
     super();
     this._rafId = null!;
     this._isResumed = true;
@@ -125,13 +126,13 @@ export class App extends EventDispatcher {
   }
 
 
-  _onResize() {
+  private _onResize() {
     const rect = this._rendererEl.getBoundingClientRect();
     const camaraAspectRatio = rect.width / rect.height;
 
     this._camera.aspect = camaraAspectRatio;
     this._camera.position.z = 1000;
-    this._camera.fov = (2 * Math.atan(rect.height / 2 / this._camera.position.z)) * (180 / Math.PI);
+    this._camera.fov = 2 * Math.atan(rect.height / 2 / this._camera.position.z) * (180 / Math.PI);
 
     this._renderer.setSize(rect.width, rect.height);
     this._pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -142,21 +143,28 @@ export class App extends EventDispatcher {
     this._experienceScene.setStageSize(rect);
   }
 
-  _addListeners() {
+  // _onResize() {
+  //   this._camera.aspect = window.innerWidth / window.innerHeight;
+  //   this._camera.updateProjectionMatrix();
+
+  //   this._renderer.setSize( window.innerWidth, window.innerHeight );
+  // }
+
+  private _addListeners() {
     window.addEventListener("resize", resizeDebounced(this._onResize.bind(this)));
     window.addEventListener("visibilitychange", this._onVisibilityChange.bind(this));
     this._preloader.addEventListener("loaded", this._onAssetsLoaded);
     this._preloader.addEventListener("progress", this._onPreloaderProgress);
   }
 
-  _removeListeners() {
+  private _removeListeners() {
     window.removeEventListener("resize", resizeDebounced(this._onResize.bind(this)));
     window.removeEventListener("visibilitychange", this._onVisibilityChange.bind(this));
     this._preloader.removeEventListener("loaded", this._onAssetsLoaded);
     this._preloader.removeEventListener("progress", this._onPreloaderProgress);
   }
 
-  _resumeApp() {
+  private _resumeApp() {
     this._isResumed = true;
 
     if (!this._rafId) {
@@ -164,14 +172,14 @@ export class App extends EventDispatcher {
     }
   }
 
-  _stopApp() {
+  private _stopApp() {
     if (this._rafId) {
       window.cancelAnimationFrame(this._rafId);
       this._rafId = null!;
     }
   }
 
-  destroy() {
+  public destroy() {
     this._canvas.parentNode!.removeChild(this._canvas);
     this._stopApp()
     this._removeListeners();

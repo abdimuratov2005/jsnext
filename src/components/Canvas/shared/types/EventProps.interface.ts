@@ -1,11 +1,8 @@
-import MouseMove from "canvas/functions/MouseMove";
+import MouseMove from "../../functions/MouseMove";
 
 export interface EventProps {
   type?: EventTypes;
   target?: MouseMove
   x?: number;
   y?: number;
-
 }
-
-type EventTypes = "mousemove" | "touchmove" | "wheel" | "click"

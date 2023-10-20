@@ -1,5 +1,5 @@
-import { LoadedAssetsProps } from 'canvas/shared/types/Options.interface';
-import Grid from 'canvas/functions/Grid';
+import { LoadedAssetsProps } from '../types/Options.interface';
+import Grid from '../../functions/Grid';
 
 export interface EventTargetProps {
   loadedAssets?: LoadedAssetsProps;

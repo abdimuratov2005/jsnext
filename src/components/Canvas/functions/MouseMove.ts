@@ -1,5 +1,4 @@
 import { EventDispatcher } from 'three';
-import { Coordinates } from 'canvas/shared/types/Coordinates.interface';
 
 export default class MouseMove extends EventDispatcher {
   static _canCreate: boolean;

@@ -1,4 +1,4 @@
-import { Data, AvatarOptions, Config, Options, ParticleMask } from "canvas/shared/types/Options.interface";
+import { Data, AvatarOptions, Config, Options, ParticleMask } from "../shared/types/Options.interface";
 import { PlaneGeometry } from "three";
 import asset1 from '/public/1.webp';
 import asset1Blur from '/public/1_blur.webp';

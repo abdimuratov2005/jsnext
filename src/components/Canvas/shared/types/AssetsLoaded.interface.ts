@@ -1,4 +1,4 @@
-import Preloader from "canvas/functions/Preloader";
+import Preloader from "../../functions/Preloader";
 
 export interface AssetsLoadedProps {
   target?: Preloader

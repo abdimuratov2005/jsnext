@@ -1,4 +1,4 @@
-import {LoadedAssetsProps} from "canvas/shared/types/Options.interface";
+import {LoadedAssetsProps} from "../types/Options.interface";
 
 export interface SetLoadedAssetsProps {
   particleMask?: LoadedAssetsProps;

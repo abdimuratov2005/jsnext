@@ -1,4 +1,4 @@
-import TextObserver from "canvas/functions/TextObserver";
+import TextObserver from "../../functions/TextObserver";
 
 export interface AvatarTexts {
   avatarName?: string | undefined;
