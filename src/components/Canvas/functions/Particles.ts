@@ -3,13 +3,11 @@ import particleFragmentShader from "../shaders/particle/fragment.glsl";
 // @ts-ignore
 import particleVertexShader from "../shaders/particle/vertex.glsl";
 import CustomObject from "./CustomObject";
-import { Sizes } from "../shared/types/Size.interface";
 import { NormalBufferAttributes, ShaderMaterial, Points, BufferGeometry, FrontSide, BufferAttribute } from 'three'
 import { defaultConfig } from "../options";
 import { generateVertices } from "../shared/utils/generateVertices";
 import { getRandomNumberInRange } from "../shared/utils/getRandomNumberInRange";
 import { LoadedAssetsProps } from "../shared/types/Options.interface";
-import { UpdateProps } from "../shared/types/UpdateEvent.interface";
 
 export default class Particles extends CustomObject {
   static disappearOffset: number;

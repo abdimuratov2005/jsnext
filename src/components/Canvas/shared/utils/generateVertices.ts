@@ -1,4 +1,4 @@
-import { Config } from "canvas/shared/types/Options.interface";
+import { Config } from "../types/Options.interface";
 /**
  * Generate Vertices 
  * @param config

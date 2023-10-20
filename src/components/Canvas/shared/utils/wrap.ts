@@ -2,7 +2,7 @@
  * 
  * @param min MINIMAL VALUE
  * @param max MAXIMAL VALUE
- * @param v
+ * @param v 
  * @returns 
  */
 

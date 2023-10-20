@@ -1,7 +1,6 @@
-import {App} from "canvas/functions/App";
+import {App} from "../../functions/App";
 import {PlaneGeometry, Texture} from "three";
 import {StaticImageData} from "next/image";
-import {Coordinates} from "canvas/shared/types/Coordinates.interface";
 
 type ScrollValuesDirection = "left" | "up" | "right" | "down"
 

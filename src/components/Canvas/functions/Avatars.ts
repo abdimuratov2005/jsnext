@@ -5,14 +5,9 @@ import TextObserver from './TextObserver';
 import CustomScene from "./CustomScene";
 // @ts-ignore
 import { Easing, Tween, update as updateTween } from '@tweenjs/tween.js';
-import { AnimationProps } from "../shared/types/AnimationProps";
-import { Holder } from "../shared/types/Holder.interface";
 import { avatarOptions, data } from "../options";
-import { AvatarsProps, Data, CreateAvatarAssetsProps } from "../shared/types/Options.interface";
-import { Coordinates } from "../shared/types/Coordinates.interface";
+import { Data, CreateAvatarAssetsProps } from "../shared/types/Options.interface";
 import { lerp } from "../shared/utils/lerp";
-import { UpdateProps } from "../shared/types/UpdateEvent.interface";
-import { Sizes } from '../shared/types/Size.interface';
 import { EventTargetProps } from '../shared/types/EventTargetProps.interface';
 import { AvatarTexts } from '../shared/types/AvatarTextProps.interface';
 import { SetLoadedAssetsProps, SetLoadedNames } from "../shared/types/SetLoadedAssets.interface";
@@ -446,7 +441,6 @@ export default class Avatars extends CustomScene {
         avatarText.titleParagraph!.onResize();
         avatarText.avatarTag!.onResize();
       });
-
       if (data.isFocused === 1) {
         const activeAvatarName = data.avatarsArray![this._activeIndexFocused.current].name;
         this._animateAvatarTextsIn(activeAvatarName);
@@ -470,6 +464,7 @@ export default class Avatars extends CustomScene {
     data.isTouchDevice = "ontouchstart" in window || "ontouchstart" in document.documentElement || navigator.maxTouchPoints > 0;
     this._floor3D.setStageSize(e);
     this._resetScrollValues();
+    this._sizeRef();
     this._sizeAvatars();
 
     if (this._snapFocusedTimeoutId) {

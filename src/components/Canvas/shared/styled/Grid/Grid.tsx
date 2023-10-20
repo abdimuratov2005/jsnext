@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { media } from "../../utils/breakpoints";
 
 const GridHolder = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 5;
   left: 0;
   transform: translateY(-50%);
   opacity: 0;
-  top: calc(56vh + 100px);
+  top: calc(56% + 100px);
   width: 450px;
-  height: 38vh;
+  height: 38%;
 
   
   ${media.tablet} {

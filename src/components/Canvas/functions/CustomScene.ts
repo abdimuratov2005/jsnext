@@ -3,11 +3,7 @@ import CustomObject from './CustomObject';
 import MouseMove from './MouseMove';
 import Grid from './Grid';
 import { Scene, Raycaster, PerspectiveCamera } from 'three';
-import { UpdateProps } from '../shared/types/UpdateEvent.interface';
 import { data, options } from '../options';
-import { Sizes } from '../shared/types/Size.interface';
-import { Coordinates } from '../shared/types/Coordinates.interface';
-import { RaycasterProps } from '../shared/types/Raycaster.interface';
 import { lerp } from '../shared/utils/lerp';
 import { EventProps } from "../shared/types/EventProps.interface";
 

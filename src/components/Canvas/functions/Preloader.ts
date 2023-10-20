@@ -1,5 +1,4 @@
 import { EventDispatcher, TextureLoader, Texture } from 'three';
-import { AssetsToPreloadProps } from '../shared/types/AssetToPreloadProps.interface';
 import { options } from '../options';
 import { AssetInfo, LoadedAssetsProps } from '../shared/types/Options.interface';
 

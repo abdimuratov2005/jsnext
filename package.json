@@ -36,6 +36,7 @@
     "react-hook-form": "^7.45.1",
     "react-i18next": "^13.0.3",
     "react-input-mask": "^2.0.4",
+    "react-intersection-observer": "^9.5.2",
     "react-modal-image": "^2.6.0",
     "react-phone-input-2": "^2.15.1",
     "react-phone-number-input": "^3.3.0",
